@@ -11,3 +11,10 @@ done
 
 echo "Ip: $target"
 echo "Port: $port"
+
+final_method(){
+
+	echo "=== RECON REPORT ==="
+}
+
+final_method
