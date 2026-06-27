@@ -1,20 +1,24 @@
 #!/usr/bin/env bash
 
-
-while getopts "t:p:" opt
-do
-	case $opt in
-		t) target="$OPTARG" ;;
-		p) port="$OPTARG" ;;
-	 esac
-done
-
-echo "Ip: $target"
-echo "Port: $port"
+start=time.time()
 
 final_method(){
 
+	end=time.time()
 	echo "=== RECON REPORT ==="
+	echo "Target	: $1"
+	echo "Date	: $(date +"%Y-%m-%d")"
+	echo "Duration	: $((end-start))"
 }
 
-final_method
+
+while getopts "t:p:" opt
+do
+        case $opt in
+                t) target="$OPTARG" ;;
+         esac
+done
+
+target="$1"
+
+final_method $target 
