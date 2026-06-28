@@ -22,10 +22,10 @@ validation(){
 
 	if [[ "$2" = true ]]; then
 
-		if [[ -z "$target" ]]; then
-        	echo "[!] input error: -t option missing for target ip"
-        	exit 1
-		fi
+#		if [[ -z "$target" ]]; then
+#        	echo "[!] input error: -t option missing for target ip"
+#       	exit 1
+#		fi
 
 		if [[ ! "$target" =~ ^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$ ]]; then
 	        echo "[!] ip error: enter valid ip address 255.255.255.0" 
@@ -38,12 +38,12 @@ validation(){
 
 	if [[ "$4" = true ]]; then
 
-		if [[ -z "$port" ]]; then
-		echo "[!] input error: -p option missing for port"
-		exit 1
-		fi
+#		if [[ -z "$port" ]]; then
+#		echo "[!] input error: -p option missing for port"
+#		exit 1
+#		fi
 
-		if [[ ! "$port" =~ ^[0-9]+$ ]]; then
+		if [[ ! "$port" =~ ^-?[0-9]+$ ]]; then
 		echo "[!] input error: only integers are allowed for port!"
 		exit 1
 		fi
@@ -59,17 +59,17 @@ validation(){
 
 	if [[ "$6" = true ]]; then
 
-		if [[ -z "$5" ]]; then
-		echo "[!] input error: -o option missing for port"
-		exit 1
-		fi
+#		if [[ -z "$5" ]]; then
+#		echo "[!] input error: -o option missing for port"
+#		exit 1
+#		fi
 
 		if [[ "$5" == "*/*" ]]; then
 		echo "[!] No path allowed! only current directory files"
 		exit 1
 		fi
 
-		mkdir "$5"
+		touch "$5"
 	fi
 }
 
