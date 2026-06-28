@@ -76,7 +76,7 @@ do
          esac
 done
 
-	
+echo "$target_given"	
 validation "$target" "$target_given" "$port" "$port_given" "$op_dir" "$op_dir_given"
 
 #final_method $target 
