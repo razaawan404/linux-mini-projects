@@ -56,6 +56,21 @@ validation(){
 		echo "[!] input error: you did'nt pass -p option value"
 		exit 1
 	fi
+
+	if [[ "$6" = true ]]; then
+
+		if [[ -z "$5" ]]; then
+		echo "[!] input error: -o option missing for port"
+		exit 1
+		fi
+
+		if [[ "$5" == "*/*" ]]; then
+		echo "[!] No path allowed! only current directory files"
+		exit 1
+		fi
+
+		mkdir "$5"
+	fi
 }
 
 
@@ -76,7 +91,7 @@ do
          esac
 done
 
-echo "$target_given"	
+
 validation "$target" "$target_given" "$port" "$port_given" "$op_dir" "$op_dir_given"
 
 #final_method $target 
