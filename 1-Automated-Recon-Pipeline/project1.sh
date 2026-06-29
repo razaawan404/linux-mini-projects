@@ -3,6 +3,8 @@
 
 SECONDS=0
 
+
+
 final_method(){
 
 	mins=$(( SECONDS / 60 ))
@@ -65,8 +67,16 @@ validation(){
 
 		touch "$5"
 	fi
+
+	dns_method "$1"
 }
 
+dns_method(){
+
+	echo -e "\n"
+	echo "[DNS]"
+	dig "$1" | awk 'NR==12'
+}
 
 while getopts "t:p:o:" opt
 do
