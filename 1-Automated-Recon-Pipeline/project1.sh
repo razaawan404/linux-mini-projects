@@ -70,6 +70,7 @@ validation(){
 
 	dns_method "$1"
 	open_port "$1"
+	banners "$1"
 }
 
 dns_method(){
@@ -83,6 +84,12 @@ open_port(){
 	echo -e "\n"
 	echo "[OPEN PORTS]"
 	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk -F/ '{print $1}'
+}
+banners(){
+
+	echo -e "\n"
+	echo "[SERVICE BANNERS]"
+	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk '{print $3}'
 }
 while getopts "t:p:o:" opt
 do
