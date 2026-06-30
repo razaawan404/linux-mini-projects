@@ -4,18 +4,6 @@
 SECONDS=0
 
 
-
-final_method(){
-
-	mins=$(( SECONDS / 60 ))
-	secs=$(( SECONDS % 60 ))
-
-	echo "=== RECON REPORT ==="
-	echo "Target	: $1"
-	echo "Date	: $(date +"%Y-%m-%d")"
-	echo "Duration	: ${mins}m ${secs}s"
-}
-
 validation(){
 
 	target="$1"
@@ -75,10 +63,10 @@ validation(){
 
 dns_method(){
 
-	echo -e "\n"
-	echo "[DNS]"
-	dig "$1" | awk 'NR==12'
-	whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}'
+	dns=$(dig "$1" | awk 'NR==12')
+	rname=$(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')
+	flags "$dns" "$rname"
+
 }
 open_port(){
 
@@ -99,12 +87,13 @@ flags(){
 
 
  	echo "=== RECON REPORT ==="
-	echo "Target	: $(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')"
+	printf "%-10s : %s\n" "Target" "$(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')`"
 	echo "Date      : $(date +"%Y-%m-%d")"
         echo "Duration  : ${mins}m ${secs}s"
 
 	echo -e "\n"
 	echo "[FLAGS]"
+	echo "$2"
 	
 }
 while getopts "t:p:o:" opt
