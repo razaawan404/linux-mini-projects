@@ -78,6 +78,7 @@ dns_method(){
 	echo -e "\n"
 	echo "[DNS]"
 	dig "$1" | awk 'NR==12'
+	whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}'
 }
 open_port(){
 
@@ -90,6 +91,21 @@ banners(){
 	echo -e "\n"
 	echo "[SERVICE BANNERS]"
 	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk '{print $3}'
+}
+flags(){
+
+	mins=$(( SECONDS / 60 ))
+        secs=$(( SECONDS % 60 ))
+
+
+ 	echo "=== RECON REPORT ==="
+	echo "Target	: $(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')"
+	echo "Date      : $(date +"%Y-%m-%d")"
+        echo "Duration  : ${mins}m ${secs}s"
+
+	echo -e "\n"
+	echo "[FLAGS]"
+	
 }
 while getopts "t:p:o:" opt
 do
