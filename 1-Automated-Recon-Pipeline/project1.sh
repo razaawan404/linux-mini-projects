@@ -69,6 +69,7 @@ validation(){
 	fi
 
 	dns_method "$1"
+	open_port "$1"
 }
 
 dns_method(){
@@ -77,7 +78,12 @@ dns_method(){
 	echo "[DNS]"
 	dig "$1" | awk 'NR==12'
 }
+open_port(){
 
+	echo -e "\n"
+	echo "[OPEN PORTS]"
+	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk -F/ '{print $1}'
+}
 while getopts "t:p:o:" opt
 do
         case $opt in
