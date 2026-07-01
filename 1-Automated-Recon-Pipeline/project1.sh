@@ -56,45 +56,43 @@ validation(){
 		touch "$5"
 	fi
 
-	dns_method "$1"
-	open_port "$1"
-	banners "$1"
+	op_method "$1"
 }
 
-dns_method(){
+op_method(){
 
 	dns=$(dig "$1" | awk 'NR==12')
-	rname=$(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')
-	flags "$dns" "$rname"
 
-}
-open_port(){
+	ports=$(nmap "$1" 2>/dev/null | grep -E -i 'open' | awk -F/ '{print $1}')
+	
+	servs=$(nmap "$1" 2>/dev/null | grep -E -i 'open' | awk '{print $3}')
 
-	echo -e "\n"
-	echo "[OPEN PORTS]"
-	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk -F/ '{print $1}'
-}
-banners(){
+	flags "$1" "$dns" "$ports" "$servs"
 
-	echo -e "\n"
-	echo "[SERVICE BANNERS]"
-	nmap "$1" 2>/dev/null | grep -E -i 'open' | awk '{print $3}'
 }
 flags(){
 
 	mins=$(( SECONDS / 60 ))
         secs=$(( SECONDS % 60 ))
 
+	
 
  	echo "=== RECON REPORT ==="
-	printf "%-10s : %s\n" "Target" "$(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')`"
+	printf "%-10s : %s\n" "Target" "$(whois "$1" | grep -i netname | awk -F: '{ gsub(/[ ]/, "", $2); print $2}')"
 	echo "Date      : $(date +"%Y-%m-%d")"
         echo "Duration  : ${mins}m ${secs}s"
 
 	echo -e "\n"
-	echo "[FLAGS]"
+	echo "[DNS]"
 	echo "$2"
-	
+
+	echo -e "\n"
+	echo "[OPEN PORTS]"
+	echo "$3"
+
+	echo -e "\n"
+	echo "[SERVICES]"
+	echo "$4"
 }
 while getopts "t:p:o:" opt
 do
