@@ -8,5 +8,8 @@ do
     esac
 done
 
-echo "Urls: ${urls[@]}"
+while IFS= read -r url; 
+do
+	echo "$url"
+done < "$urls"
 echo "Output file: $op_file"
