@@ -67,6 +67,7 @@ op_method(){
 	
 	servs=$(nmap "$1" 2>/dev/null | grep -E -i 'open' | awk '{print $3}')
 
+
 	flags "$1" "$dns" "$ports" "$servs"
 
 }
@@ -93,6 +94,13 @@ flags(){
 	echo -e "\n"
 	echo "[SERVICES]"
 	echo "$4"
+
+	echo -e "\n"
+	echo "[FLAGS]"
+	if [[ "$3" = *21* ]]; then echo "[HIGH] Port 21 open - test anonymous FTP"
+	elif [[ "$3" = *3306* ]]; then echo "[HIGH] Port 3306 open - flag exposed mysql"
+	fi
+
 }
 while getopts "t:p:o:" opt
 do
