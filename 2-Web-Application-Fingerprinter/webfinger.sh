@@ -4,13 +4,19 @@ validation(){
 
         local -n url="$1"
         local -n file="$3"
+	filter=""
+	unfilter=""
 
         while IFS= read -r u; 
         do
                 if [[ ! "$u" =~ ^(https?) ]]; then
-		echo "$u"
+		    filter+="http://$u"
+		else
+		    unfilter+="$u"
 		fi
         done < "$url"
+
+	cat "Filter: $filter"
 
 }
 
