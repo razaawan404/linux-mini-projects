@@ -9,15 +9,15 @@ validation(){
 
         while IFS= read -r u; 
         do
-                if [[ ! "$u" =~ ^(https?) ]]; then
-		    filter+="http://$u"
+                if [[ ! "$u" =~ ^https?:// ]]; then
+		    filter+="http://$u"$'\n'
 		else
-		    unfilter+="$u"
+		    unfilter+="$u"$'\n'
 		fi
         done < "$url"
 
-	cat "Filter: $filter"
-
+	correct_urls="$filter$unfilter"
+	printf "%s" "$correct_urls"
 }
 
 
