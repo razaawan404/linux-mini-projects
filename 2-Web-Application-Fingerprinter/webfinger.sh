@@ -1,15 +1,30 @@
 #!/usr/bin/env bash
 
+validation(){
+
+        local -n url="$1"
+        local -n file="$3"
+
+        while IFS= read -r u; 
+        do
+                if [[ ! "$u" =~ ^(https?) ]]; then
+		echo "$u"
+		fi
+        done < "$url"
+
+}
+
+
+
 while getopts "l:o:" opt
 do
-    case "$opt" in
-        l) urls="$OPTARG" ;;
-        o) op_file="$OPTARG" ;;
-    esac
-done
+    	case "$opt" in
+       		l) urls="$OPTARG"
+		   url_given=true ;;
+        	o) op_file="$OPTARG"
+		   file_given=true ;;
+    	esac
+	done
 
-while IFS= read -r url; 
-do
-	echo "$url"
-done < "$urls"
-echo "Output file: $op_file"
+validation "urls" "$url_give" "op_file" "$file_give"
+
