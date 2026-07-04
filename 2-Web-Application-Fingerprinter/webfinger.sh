@@ -10,21 +10,17 @@ validation(){
         while IFS= read -r u; 
         do
                 if [[ ! "$u" =~ ^https?:// ]]; then
-		    filter+="http://$u"$'\n'
+		    echo "[$u]"
+		    curl -s -I -L "http://$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location'
+		echo -e "\n"
 		else
-		    unfilter+="$u"$'\n'
+		    echo "[$u]"
+		    curl -s -I -L "$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location'
+		echo -e "\n"
 		fi
         done < "$url"
-
-	correct_urls="$filter$unfilter"
-	header_grabber correct_urls
 }
 
-header_grabber(){
-
-	local -n urls="$1"
-	printf "%s" "$urls"
-}
 
 while getopts "l:o:" opt
 do
