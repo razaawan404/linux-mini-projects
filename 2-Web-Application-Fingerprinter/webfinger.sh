@@ -10,12 +10,25 @@ validation(){
         while IFS= read -r u; 
         do
                 if [[ ! "$u" =~ ^https?:// ]]; then
-		    echo "[$u]"
-		    curl -s -I -L "http://$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location'
+		    echo "[http://$u]"
+		    result=$(curl -s -I -L "http://$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location')
+
+		   if [[ -z "$result" ]]; then
+		   	echo "No Result"
+		   else
+			echo "$result"
+		   fi
+
 		echo -e "\n"
 		else
 		    echo "[$u]"
-		    curl -s -I -L "$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location'
+		    result=$(curl -s -I -L "//$u" --max-time 5 | grep -E 'Server|X-Powered-By|Set-Cookie|Location')
+
+		    if [[ -z "$result" ]]; then
+			echo "No Result"
+		    else
+			echo "$result"
+		    fi
 		echo -e "\n"
 		fi
         done < "$url"
