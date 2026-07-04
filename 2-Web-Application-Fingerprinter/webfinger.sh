@@ -17,10 +17,14 @@ validation(){
         done < "$url"
 
 	correct_urls="$filter$unfilter"
-	printf "%s" "$correct_urls"
+	header_grabber correct_urls
 }
 
+header_grabber(){
 
+	local -n urls="$1"
+	printf "%s" "$urls"
+}
 
 while getopts "l:o:" opt
 do
