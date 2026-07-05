@@ -15,5 +15,10 @@ do
 		esac
 done
 
-echo -e "Target: $target $t_given\nOutput file: $output_file $o_given\nBase: $base $b_given" 
+validation "$t_given" "$target" "$o_given" "$output_file" "$b_given" "$base"
+
+validation(){
+
+	if [[ "$1" = true ]]; then
+} 
 
