@@ -4,7 +4,14 @@ validation(){
 
         if [[ "$1" = true ]]; then
 		if [[ -z "$2" ]]; then
-			echo "[!] Empty input! "
+			echo "[!] Error! missing -t option value"
+		else
+			echo "[+] $2"
+		fi
+	fi
+	if [[ "$3" = true ]]; then
+		if [[ -z "$4" ]]; then
+			echo "[!] Error! missing -o option value"
 		else
 			echo "[+] $2"
 		fi
