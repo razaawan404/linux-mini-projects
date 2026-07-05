@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 
 
-#inputs(){
-
-	while getopts "t:o:w" opt
-	do
+while getopts "t:o:w:" opt
+do
 		case "$opt" in
 			t) target="$OPTARG" 
 			   t_given=true ;;
@@ -15,9 +13,7 @@
 			w) base="$OPTARG"
 			   b_given=true ;;
 		esac
-	done
+done
 
-	echo -e "Target: $target $t_given\nOutput file: $output_file $o_given\nBase: $base $b_given" 
-#}
+echo -e "Target: $target $t_given\nOutput file: $output_file $o_given\nBase: $base $b_given" 
 
-#inputs
