@@ -16,12 +16,11 @@ validation(){
 	if [[ "$3" = true ]]; then
 		if [[ -z "$4" ]]; then
 			echo "[!] Error! missing -o option value"
-		else
-			echo "[+] $2"
 		fi
 	fi
 
 	echo "$p_url"
+	echo "$3"
 }
 
 
@@ -36,6 +35,9 @@ do
 
 			w) base="$OPTARG"
 			   b_given=true ;;
+
+		       \?) echo "Unknown option: -$OPTARG"
+			   exit 1 ;;
 		esac
 done
 
