@@ -2,11 +2,15 @@
 
 validation(){
 
+	p_url="$2"
+
         if [[ "$1" = true ]]; then
 		if [[ -z "$2" ]]; then
 			echo "[!] Error! missing -t option value"
 		else
-			echo "[+] $2"
+			if [[ ! "$2" =~ ^https?:// ]]; then
+				p_url="http://$2"
+			fi
 		fi
 	fi
 	if [[ "$3" = true ]]; then
@@ -16,6 +20,8 @@ validation(){
 			echo "[+] $2"
 		fi
 	fi
+
+	echo "$p_url"
 }
 
 
