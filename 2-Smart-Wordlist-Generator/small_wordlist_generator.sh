@@ -19,10 +19,13 @@ validation(){
 		fi
 	fi
 
-	echo "$p_url"
-	echo "$3"
+	extraction "$p_url"
 }
 
+extraction(){
+
+	curl -s -I "$1"
+}
 
 while getopts "t:o:w:" opt
 do
