@@ -24,7 +24,7 @@ validation(){
 
 extraction(){
 
-	curl -s -I "$1"
+	curl -s "$1"
 }
 
 while getopts "t:o:w:" opt
