@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 
 validation(){
@@ -24,7 +25,7 @@ validation(){
 
 extraction(){
 
-	curl -s "$1" | sed 's/[</>;:(),{}=-\"!-.]//g'
+	curl -s "$1" | sed 's/[</>;:(),{}=-\"!-.0-9]+//g'
 }
 
 while getopts "t:o:w:" opt
