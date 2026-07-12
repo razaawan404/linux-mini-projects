@@ -24,7 +24,7 @@ validation(){
 
 extraction(){
 
-	curl -s "$1" | sed 's/[</>;:(),{}=-\"!-.]+//g'
+	curl -s "$1" | sed 's/[</>;:(),{}=-\"!-.]//g'
 }
 
 while getopts "t:o:w:" opt
