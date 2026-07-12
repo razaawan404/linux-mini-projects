@@ -24,7 +24,9 @@ validation(){
 
 extraction(){
 
-	curl -s "$1" | sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | grep -Eo '[a-zA-Z]+' | sort | uniq -u
+	output=$(curl -s "$1" | sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | grep -Eo '[a-zA-Z]+' | sort | uniq -u)
+	echo "${output,,}"
+
 }
 
 while getopts "t:o:w:" opt
