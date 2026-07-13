@@ -24,11 +24,11 @@ validation(){
 
 extraction(){
 
-	curl -s "$1" |  sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | \
+	output=$(curl -s "$1" |  sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | \
                                    grep -Eo '[a-zA-Z]+' | \
-				   grep -Eiv 'doctype|charset' | \
-                                   awk 'length($1) > 3 {print $1}' | \
-				   sort | uniq -u 
+				   grep -Eiv 'doctype|charset')
+
+	echo "${output,,}" | awk '{print $1}' | sort | uniq -u
 
 
 }
