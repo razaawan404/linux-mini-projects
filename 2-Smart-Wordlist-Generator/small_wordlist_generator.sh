@@ -24,8 +24,12 @@ validation(){
 
 extraction(){
 
-	output=$(curl -s "$1" | sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | grep -Eo '[a-zA-Z]+' | grep -v '(doctype|charset)' | sort | uniq -u)
-	echo "${output,,}"
+	curl -s "$1" |  sed -E 's/[</>"!-=0-9]/ /g; /style/,/style/d; /script/,/script/d' | \
+                                   grep -Eo '[a-zA-Z]+' | \
+				   grep -Eiv 'doctype|charset' | \
+                                   awk 'length($1) > 3 {print $1}' | \
+				   sort | uniq -u 
+
 
 }
 
