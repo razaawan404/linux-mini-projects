@@ -28,7 +28,7 @@ extraction(){
                                    grep -Eo '[a-zA-Z]+' | \
 				   grep -Eiv 'doctype|charset')
 
-	echo "${output,,}" | awk '{print $1}' | sort | uniq -u
+	echo "${output,,}" | sort | uniq
 
 
 }
