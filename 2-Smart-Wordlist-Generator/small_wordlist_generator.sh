@@ -24,7 +24,7 @@ validation(){
 
 extraction(){
 
-	output=$(curl -s "$1" |  sed -E 's/<[a-zA-Z0-9 -="]+>//g; s/<\/[a-zA-Z0-9]+>//g')
+	output=$(curl -s "$1" |  sed -E '/<style>/,/<\/style>/d; /<script>/,/<\/script>/d; s/<[a-zA-Z0-9 -="]+>//g; s/<\/[a-zA-Z0-9]+>//g')
 
 	echo "${output,,}" | sort | uniq
 
