@@ -26,7 +26,7 @@ extraction(){
 
 	output=$(curl -s "$1" |  sed -E '/<style>/,/<\/style>/d; /<script>/,/<\/script>/d; s/<[a-zA-Z0-9 -="]+>//g; s/<\/[a-zA-Z0-9]+>//g')
 
-	echo "$output" #| awk 'gsub(" ", "", $0)'
+	echo "$output" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//; /^$/d' | tr ' ' '\n' | sort | uniq -u
 }
 
 while getopts "t:o:w:" opt
