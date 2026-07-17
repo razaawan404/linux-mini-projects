@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 
 
-RED="\e[31m"
+log_info(){
 
-echo "${RED}" 
+}
+
+log_success(){
+}
+
+log_warn(){
+
+}
+
+log_error(){
+
+} 
