@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
 
-
-
 validation(){
 
-	echo "In validation"
+	echo "[-] Validtion..."	
+
+	if [[ -f "$1" ]]; then
+
 	echo "$1"
+
+	else
+
+	echo "File Doesnt Exist"
+	exit 1
+	fi
 }
 
 
@@ -19,4 +26,8 @@ do
 	esac
 done
 
+if [[ -z "$file" ]]; then
+exit 1
+else
 validation "$file"
+fi
