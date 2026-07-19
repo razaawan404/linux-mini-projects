@@ -14,6 +14,11 @@ validation(){
 	echo "File Doesnt Exist"
 	exit 1
 	fi
+
+	while read -r line;
+	do
+		echo "$line"
+	done < "$1"
 }
 
 
