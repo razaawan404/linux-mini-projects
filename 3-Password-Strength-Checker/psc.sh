@@ -23,10 +23,16 @@ read_passwds(){
 	while read -r line;
 	do
 		((count++))
+		strength_rules "$line"
 		printf "%s %-3s : %s\n" "[*]" "$count" "$line"
 	done < "$1"
 }
+strength_rules(){
 
+	weak_pass=()
+	med_pass=()
+        strong_pass=()
+}
 
 
 while getopts "f:" opts
