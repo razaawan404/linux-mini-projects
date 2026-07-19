@@ -3,8 +3,6 @@
 
 validation(){
 
-	echo "[-] Validtion..."	
-
 	if [[ -f "$1" ]]; then
 
 	echo "$1"
@@ -15,9 +13,17 @@ validation(){
 	exit 1
 	fi
 
+	read_passwds "$1"
+}
+read_passwds(){
+
+	count=0
+	echo "[*] Reading Passwords"
+
 	while read -r line;
 	do
-		echo "$line"
+		((count++))
+		printf "%s %-3s : %s\n" "[*]" "$count" "$line"
 	done < "$1"
 }
 
