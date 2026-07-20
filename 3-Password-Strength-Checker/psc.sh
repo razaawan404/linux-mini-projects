@@ -32,6 +32,25 @@ strength_rules(){
 	weak_pass=()
 	med_pass=()
         strong_pass=()
+	point=0
+
+	if [[ "${#1}" -ge 8 ]]; then
+		((point += 1))
+
+	else if [[ "$1" =~ A-Z ]]; then
+		((point += 1))
+
+	else if [[ "$1" =~ a-z ]]; then
+		((point += 1))
+
+	else if [[ "$1" =~ 0-9 ]]; then
+		((point += 1))
+
+	else if [[ "$1" =~ [!@#$%^&*] ]]; then
+		((point += 1))
+	fi
+
+	echo "[*] $1 : Point ($point)"
 }
 
 
