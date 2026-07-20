@@ -37,16 +37,16 @@ strength_rules(){
 	if [[ "${#1}" -ge 8 ]]; then
 		((point += 1))
 
-	else if [[ "$1" =~ A-Z ]]; then
+	elif [[ "$1" =~ A-Z ]]; then
 		((point += 1))
 
-	else if [[ "$1" =~ a-z ]]; then
+	elif [[ "$1" =~ a-z ]]; then
 		((point += 1))
 
-	else if [[ "$1" =~ 0-9 ]]; then
+	elif [[ "$1" =~ 0-9 ]]; then
 		((point += 1))
 
-	else if [[ "$1" =~ [!@#$%^&*] ]]; then
+	elif [[ "$1" =~ '!@#$%^&*' ]]; then
 		((point += 1))
 	fi
 
