@@ -23,6 +23,8 @@ read_passwds(){
 	echo "[*] Reading Passwords $2..."
 	echo "[*] $(wc -l $2 | awk '{print $1}') passwords found"
 	echo -e "\nChecking passwords...\n"
+	sleep 3
+
 	while read -r line;
 	do
 		strength_rules "$line"
@@ -30,9 +32,6 @@ read_passwds(){
 }
 strength_rules(){
 
-	weak_pass=()
-	med_pass=()
-        strong_pass=()
 	point=0
 
 	if [[ "${#1}" -ge 8 && "${#1}" -lt 12 ]]; then
@@ -66,13 +65,31 @@ strength_rules(){
 }
 categories(){
 
+	passes=()
 	weak_pass=()
-        med_pass=()
-        strong_pass=()
-        point=0
+	med_pass=()
+	strong_pass=()
 
 	if [[ "$2" -ge 0 && "$2" -le 2 ]]; then
-		weak_pass+="$1"
+
+		formatted=$(printf '%-15s -> [WEAK]' "$1")
+		passes+=("$formatted")
+
+	elif [[ "$2" -ge 3 && "$2" -le 4 ]]; then
+
+		formatted=$(printf '%-15s -> [MEDIUM]' "$1")
+                passes+=("$formatted")
+
+	elif [[ "$2" -ge 5 && "$2" -le 6 ]]; then
+
+		formatted=$(printf '%-15s -> [STRONG]' "$1")
+                passes+=("$formatted")
+	fi
+
+	for pass in "${passes}"
+	do
+		echo "$pass"
+	done
 }
 
 while getopts "f:" opts
