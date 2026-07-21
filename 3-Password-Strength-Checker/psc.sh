@@ -3,31 +3,29 @@
 
 validation(){
 
+	echo  "==============================="
+        echo  "   Password Strength Checker"
+        echo  "==============================="
+        echo -e "\n"
+
 	if [[ -f "$1" ]]; then
 
-	echo "$1"
+	read_passwds "$1" "$2"
 
 	else
 
 	echo "File Doesnt Exist"
 	exit 1
 	fi
-
-	read_passwds "$1" "$2"
 }
 read_passwds(){
 
-	echo  "=============================="
-   	echo    "Password Strength Checker"
-	echo  "=============================="
-
-	echo "[*] Reading Passwords $2"
-
+	echo "[*] Reading Passwords $2..."
+	echo "[*] $(wc -l $2 | awk '{print $1}') passwords found"
+	echo -e "\nChecking passwords...\n"
 	while read -r line;
 	do
-		((count++))
 		strength_rules "$line"
-		printf "%s %-3s : %s\n" "[*]" "$count" "$line" 
 	done < "$1"
 }
 strength_rules(){
@@ -73,7 +71,8 @@ categories(){
         strong_pass=()
         point=0
 
-
+	if [[ "$2" -ge 0 && "$2" -le 2 ]]; then
+		weak_pass+="$1"
 }
 
 while getopts "f:" opts
