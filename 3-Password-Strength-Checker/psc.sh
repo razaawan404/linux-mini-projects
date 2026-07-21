@@ -13,13 +13,15 @@ validation(){
 	exit 1
 	fi
 
-	read_passwds "$1"
+	read_passwds "$1" "$2"
 }
 read_passwds(){
 
-	count=0
+	echo  "=============================="
+   	echo    "Password Strength Checker"
+	echo  "=============================="
 
-	echo "[*] Reading Passwords"
+	echo "[*] Reading Passwords $2"
 
 	while read -r line;
 	do
@@ -62,14 +64,23 @@ strength_rules(){
 		((point += 1))
 	fi
 
-	echo "[*] $1 : Point ($point)"
+	categories "$1" "$point"
 }
+categories(){
 
+	weak_pass=()
+        med_pass=()
+        strong_pass=()
+        point=0
+
+
+}
 
 while getopts "f:" opts
 do
 	case $opts in
 		f) file="$OPTARG"
+		   filename="$OPTARG"
 		;;
 	esac
 done
@@ -77,5 +88,5 @@ done
 if [[ -z "$file" ]]; then
 exit 1
 else
-validation "$file"
+validation "$file" "$filename"
 fi
