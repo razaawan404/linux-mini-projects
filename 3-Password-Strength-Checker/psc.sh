@@ -18,13 +18,14 @@ validation(){
 read_passwds(){
 
 	count=0
+
 	echo "[*] Reading Passwords"
 
 	while read -r line;
 	do
 		((count++))
 		strength_rules "$line"
-		printf "%s %-3s : %s\n" "[*]" "$count" "$line"
+		printf "%s %-3s : %s\n" "[*]" "$count" "$line" 
 	done < "$1"
 }
 strength_rules(){
@@ -34,19 +35,30 @@ strength_rules(){
         strong_pass=()
 	point=0
 
-	if [[ "${#1}" -ge 8 ]]; then
+	if [[ "${#1}" -ge 8 && "${#1}" -lt 12 ]]; then
 		((point += 1))
 
-	elif [[ "$1" =~ A-Z ]]; then
+	fi
+
+	if [[ "${#1}" -ge 12 ]]; then
+		((point += 1))
+	fi
+
+	if [[ "$1" =~ [A-Z] ]]; then
+		((point += 1))
+	fi
+
+	if [[ "$1" =~ [a-z] ]]; then
 		((point += 1))
 
-	elif [[ "$1" =~ a-z ]]; then
+	fi
+
+	if [[ "$1" =~ [0-9] ]]; then
 		((point += 1))
 
-	elif [[ "$1" =~ 0-9 ]]; then
-		((point += 1))
+	fi
 
-	elif [[ "$1" =~ '!@#$%^&*' ]]; then
+	if [[ "$1" =~ [!@#$%^\&*] ]]; then
 		((point += 1))
 	fi
 
