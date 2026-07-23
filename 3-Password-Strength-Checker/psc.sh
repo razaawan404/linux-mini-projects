@@ -72,26 +72,44 @@ categories(){
 
 	if [[ "$2" -ge 0 && "$2" -le 2 ]]; then
 
-		formatted=$(printf '%-15s -> [WEAK]' "$1")
-		passes+=("$formatted")
+		printf '%-15s -> [WEAK]\n' "$1"
+		weak_pass+=("$1")
 
 	elif [[ "$2" -ge 3 && "$2" -le 4 ]]; then
 
-		formatted=$(printf '%-15s -> [MEDIUM]' "$1")
-                passes+=("$formatted")
+		printf '%-15s -> [MEDIUM]\n' "$1"
+		med_pass+=("$1")
 
 	elif [[ "$2" -ge 5 && "$2" -le 6 ]]; then
 
-		formatted=$(printf '%-15s -> [STRONG]' "$1")
-                passes+=("$formatted")
+		printf '%-15s -> [STRONG]\n' "$1"
+		strong_pass+=("$1")
 	fi
 
-	for pass in "${passes}"
-	do
-		echo "$pass"
-	done
-}
+#	echo -e "\n=======================================\n"
 
+#	echo "[WEAK]"
+#	for pass in "${weak_pass}"
+#	do
+#		echo "- $pass"
+#	done
+
+#	echo -e "\n"
+
+#	echo "[MEDIUM]"
+#	for pass in "${med_pass}"
+#	do
+#		echo "- $pass"
+#	done
+
+#	echo -e "\n"
+
+#	echo "[STRONG]"
+#	for pass in "${strong_pass}"
+#	do
+#		echo "- $pass"
+#	done
+}
 while getopts "f:" opts
 do
 	case $opts in
