@@ -15,6 +15,8 @@ validation(){
 	if [[ -f "$1" ]]; then
 
 	read_passwds "$1" "$2"
+	show_cat
+	summary
 
 	else
 
@@ -115,6 +117,22 @@ show_cat()
 		echo "	- $pass"
 	done
 }
+summary(){
+
+	echo -e "\n==============================================="
+	echo 	"	Summary"
+	echo 	"==============================================="
+
+	echo "Weak	: ${#weak_pass[@]}"
+	echo "Medium	: ${#med_pass[@]}"
+	echo "Strong	: ${#strong_pass[@]}"
+
+	total=$(("${#weak_pass[@]}" + "${#med_pass[@]}" + "${#strong_pass[@]}"))
+
+	echo "Total	: $total"
+
+	echo -e "\n[*] Done...."
+}
 while getopts "f:" opts
 do
 	case $opts in
@@ -128,5 +146,4 @@ if [[ -z "$file" ]]; then
 exit 1
 else
 validation "$file" "$filename"
-show_cat
 fi
