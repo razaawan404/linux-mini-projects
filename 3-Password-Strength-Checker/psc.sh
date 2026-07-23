@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 
+weak_pass=()
+med_pass=()
+strong_pass=()
+
 validation(){
 
 	echo  "==============================="
@@ -66,9 +70,6 @@ strength_rules(){
 categories(){
 
 	passes=()
-	weak_pass=()
-	med_pass=()
-	strong_pass=()
 
 	if [[ "$2" -ge 0 && "$2" -le 2 ]]; then
 
@@ -86,29 +87,33 @@ categories(){
 		strong_pass+=("$1")
 	fi
 
-#	echo -e "\n=======================================\n"
+}
 
-#	echo "[WEAK]"
-#	for pass in "${weak_pass}"
-#	do
-#		echo "- $pass"
-#	done
+show_cat()
+{
+	echo -e "\n======================================="
 
-#	echo -e "\n"
+	echo "[WEAK]"
+	for pass in "${weak_pass[@]}"
+	do
+		echo "	- $pass"
+	done
 
-#	echo "[MEDIUM]"
-#	for pass in "${med_pass}"
-#	do
-#		echo "- $pass"
-#	done
+	echo -e "\n"
 
-#	echo -e "\n"
+	echo "[MEDIUM]"
+	for pass in "${med_pass[@]}"
+	do
+		echo "	- $pass"
+	done
 
-#	echo "[STRONG]"
-#	for pass in "${strong_pass}"
-#	do
-#		echo "- $pass"
-#	done
+	echo -e "\n"
+
+	echo "[STRONG]"
+	for pass in "${strong_pass[@]}"
+	do
+		echo "	- $pass"
+	done
 }
 while getopts "f:" opts
 do
@@ -123,4 +128,5 @@ if [[ -z "$file" ]]; then
 exit 1
 else
 validation "$file" "$filename"
+show_cat
 fi
