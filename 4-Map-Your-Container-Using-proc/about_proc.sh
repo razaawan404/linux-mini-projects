@@ -11,3 +11,6 @@ echo -e "\n[IP ADDRESS]"
 hostname -I | awk '{print $1}'
 
 echo -e "\n[LISTINING PORTS]"
+ports=$(cat /proc/net/tcp | awk '{print $2, $4}' | grep -E '0A$' | awk -F: '{print $2}' | awk '{print $1}')
+
+printf "<%s>\n" "$ports"
