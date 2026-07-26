@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#!/bin/bash
-
 declare -A PORTS=(
     [20]="FTP-DATA"
     [21]="FTP"
@@ -91,3 +89,9 @@ do
 done
 
 
+echo "[RUNNING PROCESSES]"
+
+for file in /proc/*/status
+do
+        awk '/Name|^Pid|Uid|State/ {print $0}' "$file"
+done
