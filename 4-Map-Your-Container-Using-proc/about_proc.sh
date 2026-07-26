@@ -93,5 +93,5 @@ echo "[RUNNING PROCESSES]"
 
 for file in /proc/*/status
 do
-        awk '/Name|^Pid|Uid|State/ {print $0}' "$file"
+        awk '/^[[:space:]]*Name:|^[[:space:]]*Pid:|^[[:space:]]*Uid|^[[:space:]]*State/ {print $0}' "$file"
 done
