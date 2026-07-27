@@ -90,7 +90,7 @@ done
 
 
 echo -e "\n[RUNNING PROCESSES]"
-printf "%-10s %-10s %s\n" "PID" "NAME" "UID"
+printf "%-15s %-15s %s\n" "PID" "NAME" "UID"
 
 for file in /proc/*/status
 do
@@ -113,6 +113,8 @@ do
 END{
 
 	if (state == "R")
-		printf "%-10s %-10s %s\n", pid, name, uid
+		printf "%-15s %-15s %s\n", pid, name, uid
 }' "$file"
 done
+
+echo -e "\n[NETWORK]"
