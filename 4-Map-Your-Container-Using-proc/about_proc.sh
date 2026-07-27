@@ -112,7 +112,7 @@ do
 }
 END{
 
-#	if (state == "R")
-		printf "%-10s  %s\n", pid, state
+	if (state == "R")
+		printf "%-10s %-10s %s\n", pid, name, uid
 }' "$file"
 done
