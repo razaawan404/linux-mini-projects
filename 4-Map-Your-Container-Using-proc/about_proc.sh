@@ -91,6 +91,7 @@ done
 
 echo "[RUNNING PROCESSES]"
 
+printf "%-5s %-5s %s\n" "PID" "NAME" "UID"
 for file in /proc/*/status
 do
         awk '/^[[:space:]]*Name:|^[[:space:]]*Pid:|^[[:space:]]*Uid|^[[:space:]]*State/ {
@@ -99,6 +100,12 @@ do
 				name="$2"
 			fi
 
-			if [[ "$
+			if [[ "$0" = "$Pid" ]]; then
+				pid="$2"
+			fi
+}
+END{
+
+	printf "%-5s %-5s\n", name, pid
 }' "$file"
 done
