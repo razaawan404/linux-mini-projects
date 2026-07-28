@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
 
-echo "========================="
-echo "	Mini Gobuster"
-echo "========================="
+while getotps "u:w:c" opts
+
+	case "$opts"
+		u) url="$OPTARG";;
+		w) wordlist="$OPTARG";;
+		c) filter_status="$OPTARG";;
+	esac
+done
+
+echo "$url"
+echo "$wordlist"
+echo "$filter_status" 
