@@ -1,15 +1,41 @@
 #!/usr/bin/env bash
 
+validation(){
 
-while getopts "u:w:c:" opts
+	if [[ "$1" = true || "$3" = true ]]; then
+		if [[ "$1" = true ]]; then
+
+        		if [[ "$3" = true ]]; then
+
+                		echo "Nothing"
+
+        		else
+                		echo "Wordlist not given"
+                		exit 1
+        		fi
+
+		else
+        		echo ""
+        		exit 1
+		fi
+	else 
+		echo "Input Error! uses -u for url -w for wordlist"
+		exit 1
+	fi
+
+
+}
+
+while getopts ":u:w:c:" opts
 do
 	case "$opts" in
-		u) url="$OPTARG";;
-		w) wordlist="$OPTARG";;
-		c) filter_status="$OPTARG";;
+		u) url="$OPTARG"
+		   u_give=true;;
+		w) wordlist="$OPTARG"
+		   w_give=true;;
+		c) filter_status="$OPTARG"
+		   c_give=true;;
 	esac
 done
 
-echo "$url"
-echo "$wordlist"
-echo "$filter_status" 
+validation "$u_give" "$url" "$w_give" "$wordlist"
