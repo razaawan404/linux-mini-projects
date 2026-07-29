@@ -3,7 +3,10 @@
 validation(){
 
 	if [[ "$1" = true || "$3" = true ]]; then
+
 		if [[ "$1" = true ]]; then
+
+			if [[ ! "$2" =~ https?://[a-zA-Z0-9.]+ ]]
 
         		if [[ "$3" = true ]]; then
 
