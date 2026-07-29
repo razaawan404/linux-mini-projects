@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 
-while getotps "u:w:c" opts
-
-	case "$opts"
+while getopts "u:w:c:" opts
+do
+	case "$opts" in
 		u) url="$OPTARG";;
 		w) wordlist="$OPTARG";;
 		c) filter_status="$OPTARG";;
