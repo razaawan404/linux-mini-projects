@@ -50,7 +50,26 @@ Starting_point(){
 
 	while read -r line
 	do
-		echo "$line"
+		status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
+
+		if [[ "$status" = 200 ]]; then
+
+			echo "[+] $status → /$line"
+
+		elif [[ "$status" = 301 ]]; then
+
+			echo "[+] $status → /$line"
+
+		elif [[ "$status" = 403 ]]; then
+
+			echo "[+] $status → /$line"
+
+		elif [[ "$status" = 404 ]]; then
+
+			printf "[-] %s → /%-20s %s\n" "$status" "$line" "(hidden, only shows with -v)"
+
+		fi
+
 	done < "$2"
 }
 while getopts ":u:w:c:" opts
