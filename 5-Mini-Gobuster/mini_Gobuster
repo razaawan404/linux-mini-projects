@@ -14,7 +14,13 @@ validation(){
 
         			if [[ "$3" = true ]]; then
 
-                			echo "Nothing"
+                			if [[ -f "$4" ]]; then
+
+						Starting_point "$2" "$4"
+					else
+						echo "File not found"
+						exit 1
+					fi
 
         			else
                 			echo "Wordlist not given"
@@ -32,7 +38,14 @@ validation(){
 
 
 }
+Starting_point(){
 
+	echo "=============================="
+	echo "	Mini Gobuster"
+	echo "	Target	:	$1"
+	echo "=============================="
+
+}
 while getopts ":u:w:c:" opts
 do
 	case "$opts" in
