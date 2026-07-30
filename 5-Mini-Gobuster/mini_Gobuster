@@ -46,6 +46,7 @@ Starting_point(){
 	echo "	Words	:  $(wc -w $2 | awk '{print $1}')"
 	echo "	Date	:  $(date +"%Y-%m-%d %H:%m")"
 	echo "===================================================="
+	echo -e "\n"
 
 	while read -r line
 	do
