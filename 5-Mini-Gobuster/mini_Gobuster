@@ -31,7 +31,7 @@ validation(){
         		echo ""
         		exit 1
 		fi
-	else 
+	else
 		echo "Input Error! uses -u for url -w for wordlist"
 		exit 1
 	fi
@@ -40,10 +40,13 @@ validation(){
 }
 Starting_point(){
 
+	ok_status=0
+	word_count=$(wc -w "$2" | awk '{print $1}')
+
 	echo "==================================================="
 	echo "	Mini Gobuster"
 	echo "	Target	:  $1"
-	echo "	Words	:  $(wc -w $2 | awk '{print $1}')"
+	echo "	Words	:  $word_count"
 	echo "	Date	:  $(date +"%Y-%m-%d %H:%m")"
 	echo "===================================================="
 	echo -e "\n"
@@ -55,6 +58,7 @@ Starting_point(){
 		if [[ "$status" = 200 ]]; then
 
 			echo "[+] $status → /$line"
+			((ok_status++))
 
 		elif [[ "$status" = 301 ]]; then
 
@@ -71,6 +75,18 @@ Starting_point(){
 		fi
 
 	done < "$2"
+
+	final_report $ok_status $word_count
+}
+final_report(){
+
+	echo -e "\n"
+	echo "====================================="
+
+	printf "[*] %-10s : %s\n" "Found" "$1"
+	printf "[*] %-10s : %s\n" "Tested" "$2"
+
+	echo "====================================="
 }
 while getopts ":u:w:c:" opts
 do
