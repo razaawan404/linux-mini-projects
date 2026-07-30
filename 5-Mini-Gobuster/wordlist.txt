@@ -1,0 +1,17 @@
+mov
+lea
+push
+pop
+call
+ret
+cmp
+test
+jmp
+je
+jne
+jg
+jl
+add
+sub
+imul
+xor
