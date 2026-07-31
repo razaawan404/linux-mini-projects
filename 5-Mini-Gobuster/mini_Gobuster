@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+filtering(){
+
+	for val in "$1"
+	do
+		if [[ ! "$val" =~ ^(200|201|204|301|302|307|308|401|403)$ ]]; then 
+			return 1
+		else
+			return 0
+		fi
+	done
+}
+
 validation(){
 
 	if [[ "$1" = true || "$3" = true ]]; then
@@ -114,4 +126,15 @@ do
 	esac
 done
 
-validation "$u_give" "$url" "$w_give" "$wordlist"
+if [[ "$c_give" = true ]]; then
+
+	if filtering "$filter_status"; then
+		echo "Yes"
+	else 
+		echo "Invalid status code"
+		exit 1
+	fi
+fi
+#	validation "$u_give" "$url" "$w_give" "$wordlist"  "$c_give" "$filter_status"
+
+
