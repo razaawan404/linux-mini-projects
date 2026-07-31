@@ -86,14 +86,14 @@ final_report(){
 
 	local -n endpoint="$3"
 	echo -e "\n"
-	echo "===================================="
-
+	echo -e "====================================\n"
+	echo -e "\n[FOUND ENDPOINTS]\n"
 		for valid in "${endpoint[@]}"
 		do
 			echo "[+] $valid"
 		done
 
-	echo "====================================="
+	echo -e "\n====================================="
 	echo -e "\n"
 	echo "====================================="
 

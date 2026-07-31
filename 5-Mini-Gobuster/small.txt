@@ -187,6 +187,7 @@ changepw
 channel
 chart
 chat
+cgi-cde
 class
 classes
 classic
