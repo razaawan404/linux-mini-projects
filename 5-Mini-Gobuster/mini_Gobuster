@@ -42,6 +42,7 @@ Starting_point(){
 
 	ok_status=0
 	word_count=$(wc -w "$2" | awk '{print $1}')
+	valid_status=()
 
 	echo "==================================================="
 	echo "	Mini Gobuster"
@@ -59,14 +60,17 @@ Starting_point(){
 
 			echo "[+] $status → /$line"
 			((ok_status++))
+			valid_status+=("/$line")
 
 		elif [[ "$status" = 301 ]]; then
 
 			echo "[+] $status → /$line"
+			valid_status+=("/$line")
 
 		elif [[ "$status" = 403 ]]; then
 
 			echo "[+] $status → /$line"
+			valid_status+=("/$line")
 
 		elif [[ "$status" = 404 ]]; then
 
@@ -76,10 +80,20 @@ Starting_point(){
 
 	done < "$2"
 
-	final_report $ok_status $word_count
+	final_report $ok_status $word_count "$valid_status"
 }
 final_report(){
 
+	local -n endpoint="$3"
+	echo -e "\n"
+	echo "===================================="
+
+		for valid in "${endpoint[@]}"
+		do
+			echo "$valid"
+		done
+
+	echo "==================================="
 	echo -e "\n"
 	echo "====================================="
 
