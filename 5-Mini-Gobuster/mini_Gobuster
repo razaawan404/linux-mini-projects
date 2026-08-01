@@ -2,14 +2,12 @@
 
 filtering(){
 
-	for val in "$1"
-	do
-		if [[ ! "$val" =~ ^(200|201|204|301|302|307|308|401|403)$ ]]; then 
-			return 1
-		else
-			return 0
-		fi
-	done
+	if [[ ! "$1" =~ ^(200|201|204|301|302|307|308|401|403)$ ]]; then 
+
+		return 1
+	else
+		return 0
+	fi
 }
 
 validation(){
