@@ -26,7 +26,7 @@ validation(){
 
                 			if [[ -f "$4" ]]; then
 
-						Starting_point "$2" "$4"
+						Starting_point "$2" "$4" "$5"
 					else
 						echo "File not found"
 						exit 1
@@ -126,13 +126,13 @@ done
 
 if [[ "$c_give" = true ]]; then
 
-	if filtering "$filter_status"; then
-		echo "Yes"
+	if [[ ! "$filter_status" =~ ^[0-9,]+$ ]]; then
+		echo "Status filter or matcher -c: invalid value"
+		exit 1 
 	else 
-		echo "Invalid status code"
-		exit 1
+		echo "$filter_status"
 	fi
 fi
-#	validation "$u_give" "$url" "$w_give" "$wordlist"  "$c_give" "$filter_status"
+validation "$u_give" "$url" "$w_give" "$wordlist" 
 
 
