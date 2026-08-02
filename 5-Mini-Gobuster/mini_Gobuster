@@ -10,6 +10,21 @@ filtering(){
 	fi
 }
 
+validating_url(){
+
+}
+
+validating_wordlist(){
+
+
+
+}
+
+validating_filter_status(){
+
+
+}
+
 
 Starting_point(){
 
