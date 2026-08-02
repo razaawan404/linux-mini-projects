@@ -10,17 +10,17 @@ filtering(){
 	fi
 }
 
-validating_url(){
+validating_flag_u(){
 
 }
 
-validating_wordlist(){
+validating_flag_w(){
 
 
 
 }
 
-validating_filter_status(){
+validating_flag_c(){
 
 
 }
@@ -102,15 +102,6 @@ do
 	esac
 done
 
-if [[ "$c_give" = true ]]; then
-
-	if [[ ! "$filter_status" =~ ^[0-9,]+$ ]]; then
-		echo "Status filter or matcher -c: invalid value"
-		exit 1 
-	else 
-		echo "$filter_status"
-	fi
-fi
-validation "$u_give" "$url" "$w_give" "$wordlist" 
-
-
+validate_flag_u "$u_give" "$url"
+validate_flag_w "$w_give" "$wordlist"
+validate_flag_c "$c_give" "$filter_status"
