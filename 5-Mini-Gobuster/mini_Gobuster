@@ -2,6 +2,8 @@
 
 filtering(){
 
+	
+
 	if [[ ! "$1" =~ ^(200|201|204|301|302|307|308|401|403)$ ]]; then 
 
 		return 1
@@ -30,7 +32,22 @@ validate_flag_w(){
 
 	echo "$1"
 }
+validate_c(){
 
+	if [[ "$1" == true ]]; then
+
+		if [[ ! "$2" =~ ^[0-9,]+$ ]]; then
+
+			echo "Error! wrong status code"
+			exit 1
+		fi
+	else
+		echo "./mini_Gobuster: option requires an argument -- c"
+		exit 1
+	fi
+
+	echo "$2"
+}
 
 Starting_point(){
 
