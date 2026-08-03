@@ -16,15 +16,17 @@ validate_flag_u(){
 		echo "Invalid Url! enter correct url"
 		exit 1
 	fi
+
+	echo "$1"
 }
 
 validate_flag_w(){
 
-	echo "$1"
+	if [[ -f "$1" ]];  then
 
-}
-
-validate_flag_c(){
+		echo "Error! File Not Exist"
+		exit 1
+	fi
 
 	echo "$1"
 }
