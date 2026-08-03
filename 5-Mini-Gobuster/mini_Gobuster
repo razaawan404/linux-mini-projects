@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
+v_url=""
+v_wlist=""
+v_codes=""
+filter_check=1
+
 filtering(){
 
-	
 
 	if [[ ! "$1" =~ ^(200|201|204|301|302|307|308|401|403)$ ]]; then 
 
@@ -46,7 +50,17 @@ validate_flag_c(){
 	echo "$2"
 }
 
-Starting_point(){
+main(){
+
+	v_url=$(validate_flag_u "$url")
+	v_wlist=$(validate_flag_w "$wordlist")
+	v_codes=$(validate_flag_c "$c_give" "$filter_status")
+
+	scan v_url "$v_wlist" v_codes
+}
+
+
+scan(){
 
 	ok_status=0
 	word_count=$(wc -w "$2" | awk '{print $1}')
@@ -134,6 +148,5 @@ if [[ ! "$w_give" = true ]]; then
 	exit
 fi
 
-validate_flag_u "$url"
-validate_flag_w "$wordlist"
-validate_flag_c "$c_give" "$filter_status"
+filter_check="$c_give"
+main
