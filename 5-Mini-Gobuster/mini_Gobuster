@@ -66,28 +66,42 @@ scan(){
 	word_count=$(wc -w "$2" | awk '{print $1}')
 	ok_endpoints=()
 
+	if [[ $filter_check == true ]]; then
 	echo "==================================================="
 	echo "	Mini Gobuster"
 	echo "	Target	:  $1"
 	echo "	Words	:  $word_count"
 	echo "	Date	:  $(date +"%Y-%m-%d %H:%m")"
+	echo "	Filter	:  $3"
 	echo "===================================================="
 	echo -e "\n"
+
+		
+	else
+
+	echo "==================================================="
+        echo "  Mini Gobuster"
+        echo "  Target  :  $1"
+        echo "  Words   :  $word_count"
+        echo "  Date    :  $(date +"%Y-%m-%d %H:%m")"
+        echo "===================================================="
+        echo -e "\n"
+	fi
 
 	while read -r line
 	do
 		status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
 
-		if [[ $filter_check == true ]]; then
-
-			if filtering $status "$3"; then
-
-				echo "Status $status exits"
-			fi
-		else
-			echo "No exits"
-			exit
-		fi
+#		if [[ $filter_check == true ]]; then
+#
+#			if filtering $status "$3"; then
+#
+#				echo "Status $status exits"
+#			fi
+#		else
+#			echo "No exits"
+#			exit
+#		fi
 
 
 
