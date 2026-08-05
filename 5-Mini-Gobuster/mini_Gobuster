@@ -7,7 +7,15 @@ filter_check=1
 
 filtering(){
 
-	echo "in filtering"
+	code="$1"
+	code_list="$2"
+
+	if [[ "$code_list" = *"$code"* ]]; then
+
+	echo "Yes $code in the $code_list"
+	else
+	echo "No $code not in $code_list"
+	fi
 
 }
 
