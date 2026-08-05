@@ -10,11 +10,11 @@ filtering(){
 	code="$1"
 	code_list="$2"
 
-	if [[ "$code_list" = *"$code"* ]]; then
+	if [[ ",$2," = *,"$1",* ]]; then
 
-	echo "Yes $code in the $code_list"
+	echo "Yes $1 in the $2"
 	else
-	echo "No $code not in $code_list"
+	echo "No $1 not in $2"
 	fi
 
 }
