@@ -7,17 +7,8 @@ filter_check=1
 
 filtering(){
 
-#	echo "$1" "$2"
+	echo "in filtering"
 
-	str_status="$1"
-	str_check_status="$2"
-
-	if [[ "*$str_status*" = "$str_check_status" ]]; then
-
-		echo "Yes $1 exist in $2"
-	else
-		echo "No $1 did not exist in $2"
-	fi
 }
 
 validate_flag_u(){
