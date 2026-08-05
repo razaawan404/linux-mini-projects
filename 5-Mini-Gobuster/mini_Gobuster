@@ -64,7 +64,7 @@ main(){
 scan(){
 
 	ok_status=0
-	word_count=$(wc -w "$2" | awk '{print $1}')
+	word_count=$(wc -l "$2" | awk '{print $1}')
 	ok_endpoints=()
 
 	if [[ $filter_check == true ]]; then
@@ -153,7 +153,7 @@ final_report(){
 
 	echo "====================================="
 
-	exit 1
+	exit 0
 }
 while getopts ":u:w:c:" opts
 do
