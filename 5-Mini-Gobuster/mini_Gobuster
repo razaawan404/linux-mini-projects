@@ -7,14 +7,12 @@ filter_check=1
 
 filtering(){
 
-	code="$1"
-	code_list="$2"
 
-	if [[ ",$2," = *,"$1",* ]]; then
+	if [[ ",$2," = *",$1,"* ]]; then
 
-	echo "Yes $1 in the $2"
+		return 0
 	else
-	echo "No $1 not in $2"
+		return 1
 	fi
 
 }
@@ -79,14 +77,20 @@ scan(){
 	echo "===================================================="
 	echo -e "\n"
 
-#		while read -r line
-#		do
+		while read -r line
+		do
 
-			status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
+			st_code=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
 
-			filtering "200" "$3"
- 
-#		done < "$2"
+			if ! filtering "$st_code" "$3"; then 
+
+ 				echo "[+] $st_code → /$line"
+				 ((ok_status++))
+                        	ok_endpoints+=("/$line")
+			fi
+		done < "$2"
+
+		  final_report $ok_status $word_count ok_endpoints
 	else
 
 	echo "==================================================="
@@ -98,47 +102,34 @@ scan(){
         echo -e "\n"
 	fi
 
-#	while read -r line
-#	do
+	while read -r line
+	do
 		status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
 
-#		if [[ $filter_check == true ]]; then
-#
-#			if filtering $status "$3"; then
-#
-#				echo "Status $status exits"
-#			fi
-#		else
-#			echo "No exits"
-#			exit
-#		fi
 
+		if [[ "$status" = 200 ]]; then
 
+			echo "[+] $status → /$line"
+			((ok_status++))
+			ok_endpoints+=("/$line")
 
+		elif [[ "$status" = 301 ]]; then
 
-#		if [[ "$status" = 200 ]]; then
+			echo "[+] $status → /$line"
+			ok_endpoints+=("/$line")
 
-#			echo "[+] $status → /$line"
-#			((ok_status++))
-#			ok_endpoints+=("/$line")
+		elif [[ "$status" = 403 ]]; then
 
-#		elif [[ "$status" = 301 ]]; then
+			echo "[+] $status → /$line"
+			ok_endpoints+=("/$line")
 
-#			echo "[+] $status → /$line"
-#			ok_endpoints+=("/$line")
+		elif [[ "$status" = 404 ]]; then
 
-#		elif [[ "$status" = 403 ]]; then
+			printf "[-] %s → /%-20s %s\n" "$status" "$line" "(hidden, only shows with -v)"
 
-#			echo "[+] $status → /$line"
-#			ok_endpoints+=("/$line")
+		fi
 
-#		elif [[ "$status" = 404 ]]; then
-
-#			printf "[-] %s → /%-20s %s\n" "$status" "$line" "(hidden, only shows with -v)"
-
-#		fi
-
-#	done < "$2"
+	done < "$2"
 
 	final_report $ok_status $word_count ok_endpoints
 }
@@ -161,6 +152,8 @@ final_report(){
 	printf "[*] %-10s : %s\n" "Tested" "$2"
 
 	echo "====================================="
+
+	exit 1
 }
 while getopts ":u:w:c:" opts
 do
