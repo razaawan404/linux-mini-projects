@@ -7,12 +7,16 @@ filter_check=1
 
 filtering(){
 
+#	echo "$1" "$2"
 
-	if [[ ! "*$1*" == "$2" ]]; then 
+	str_status="$1"
+	str_check_status="$2"
 
-		return 0
+	if [[ "*$str_status*" = "$str_check_status" ]]; then
+
+		echo "Yes $1 exist in $2"
 	else
-		return 1
+		echo "No $1 did not exist in $2"
 	fi
 }
 
@@ -76,7 +80,14 @@ scan(){
 	echo "===================================================="
 	echo -e "\n"
 
-		
+#		while read -r line
+#		do
+
+			status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
+
+			filtering "200" "$3"
+ 
+#		done < "$2"
 	else
 
 	echo "==================================================="
@@ -88,8 +99,8 @@ scan(){
         echo -e "\n"
 	fi
 
-	while read -r line
-	do
+#	while read -r line
+#	do
 		status=$(curl -sI "$1"/"$line"/ | awk ' NR==1 {print $2}')
 
 #		if [[ $filter_check == true ]]; then
@@ -128,7 +139,7 @@ scan(){
 
 #		fi
 
-	done < "$2"
+#	done < "$2"
 
 	final_report $ok_status $word_count ok_endpoints
 }
