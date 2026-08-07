@@ -2,17 +2,22 @@
 
 validate_flag_m(){
 
-
+	echo "$1"
 }
 validate_flag_u(){
 
+	echo "$1"
 }
 
 vlidate_flag_d(){
 
+	echo "$1"
 }
 main(){
 
+	validate_flag_m
+	validate_flag_m
+	validate_flag_m
 
 }
 while getopts "m:u:d:" opts
