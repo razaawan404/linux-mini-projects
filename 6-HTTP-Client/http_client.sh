@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 
+validate_flag_m(){
 
+
+}
+validate_flag_u(){
+
+}
+
+vlidate_flag_d(){
+
+}
 main(){
 
 
@@ -19,8 +29,3 @@ do
 		   d_flag_given=true;;
 	esac
 done
-
-
-echo "$method"
-echo "$url"
-echo "$data"
