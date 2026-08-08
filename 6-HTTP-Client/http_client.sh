@@ -26,7 +26,7 @@ validate_flag_u(){
 }
 validate_flag_d(){
 
-	if [[ "user|pass" != "*$1*" ]]; then 
+	if [[ ! "$1" =~ ^'user=[a-zA-Z0-9]+&pass=[a-zA-Z0-9]+' ]]; then 
 
 		echo "Error! $1 invalid data, no user or pass added"
 		exit 0
@@ -42,6 +42,8 @@ main(){
 	v_dta=$(validate_flag_d "$data")
 
 	echo "$v_mtd"
+	echo "$v_url"
+	echo "$v_dta"
 }
 while getopts ":m:u:d:" opts
 do
