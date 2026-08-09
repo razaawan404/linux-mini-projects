@@ -12,11 +12,11 @@ validate_flag_m(){
 		exit 0
 	fi
 
-	return 1
+	echo "$1"
 }
 validate_flag_u(){
 
-	if [[ ! "$1" =~ ^https?://127.0.0.1 ]]; then
+	if [[ ! "$1" =~ ^https?://127.0.0.1/[a-zA-Z0-9]+.[a-zA-Z0-9]+ ]]; then
 
 		echo "Error! $1 url is not valid"
 		exit 0
@@ -49,8 +49,8 @@ tcp_connection(){
 	echo "	Bash HTTP Client"
 	echo "	Method	:	$1"
 	echo "	Host	:	$2"
-	echo "	Path	:	$(cat $2 | awk -F/ '{print $4}')"
-	echo "	Port	:	$(cat $2 | awk -F: '{print $3}' | awk -F/ '{print $1}')"
+	echo "	Path	:	$(echo $2 | awk -F/ '{print $4}')"
+	echo "	Port	:	$(echo $2 | awk -F: '{print $3}' | awk -F/ '{print $1}')"
 	echo "=================================="
 	echo -e "\n"
 
