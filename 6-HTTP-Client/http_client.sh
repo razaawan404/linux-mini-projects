@@ -9,10 +9,10 @@ validate_flag_m(){
 	if [[ ! "$1" =~ ^(GET|POST|get|post|Post|Get)$ ]]; then
 
 		echo "Error! $1 method does'nt exits"
-		exit 1
+		exit 0
 	fi
 
-	echo "$1"
+	return 1
 }
 validate_flag_u(){
 
@@ -41,9 +41,19 @@ main(){
 	v_url=$(validate_flag_u "$url")
 	v_dta=$(validate_flag_d "$data")
 
-	echo "$v_mtd"
-	echo "$v_url"
-	echo "$v_dta"
+	tcp_connection "$v_mtd" "$v_url" "$v_data"
+}
+tcp_connection(){
+
+	echo "=================================="
+	echo "	Bash HTTP Client"
+	echo "	Method	:	$1"
+	echo "	Host	:	$2"
+	echo "	Path	:	$(cat $2 | awk -F/ '{print $4}')"
+	echo "	Port	:	$(cat $2 | awk -F: '{print $3}' | awk -F/ '{print $1}')"
+	echo "=================================="
+	echo -e "\n"
+
 }
 while getopts ":m:u:d:" opts
 do
@@ -64,17 +74,14 @@ if [[ -z "$method" ]]; then
 
 	echo "./http_client: option requires an argument -- m"
 	exit 0
-fi
-
-if [[ -z "$url" ]]; then
+elif [[ -z "$url" ]]; then
 
 	echo "./http_client: option requires an argument -- u"
 	exit 0
-fi
-
-if [[ -z "$data" ]]; then
+elif [[ -z "$data" ]]; then
 
 	echo "./http_client: option requires an argument -- d"
 	exit 0
+else
+	main
 fi
-main
