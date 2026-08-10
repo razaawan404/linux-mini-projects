@@ -57,7 +57,7 @@ tcp_connection(){
 	echo "	Bash HTTP Client"
 	echo "	Method	:	$1"
 	echo "	Host	:	$2"
-	echo "	Path	:	$(echo $2 | awk -F/ '{print $4}')"
+	echo "	Path	:	$(echo $2 | awk -F/ '{for(i = 0; i <= NF, i++) printf "%s%s", $i, ($i < NF ? "/" : "\n" }')"
 	echo "	Port	:	$(echo $2 | awk -F: '{print $3}' | awk -F/ '{print $1}')"
 	echo "=================================="
 	echo -e "\n"
