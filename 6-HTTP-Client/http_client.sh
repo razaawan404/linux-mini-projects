@@ -8,18 +8,18 @@ validate_flag_m(){
 
 	if [[ ! "$1" =~ ^(GET|POST|get|post|Post|Get)$ ]]; then
 
-		echo "Error! $1 method does'nt exits"
-		exit 0
+		echo "Error! $1 method does'nt exits" >&2
+		return 1
 	fi
 
 	echo "$1"
 }
 validate_flag_u(){
 
-	if [[ ! "$1" =~ ^https?://127.0.0.1/[a-zA-Z0-9]+.[a-zA-Z0-9]+ ]]; then
+	if [[ ! "$1" =~ ^https?://127\.0\.0\.1:[0-9]+(/.*)?$ ]]; then
 
-		echo "Error! $1 url is not valid"
-		exit 0
+		echo "Error! $1 url is not valid" >&2
+		return 1
 	fi
 
 	echo "$1"
@@ -28,8 +28,8 @@ validate_flag_d(){
 
 	if [[ ! "$1" =~ ^user=[a-zA-Z0-9]+'&'pass=[a-zA-Z0-9]+$ ]]; then 
 
-		echo "Error! $1 invalid data, no user or pass added"
-		exit 0
+		echo "Error! $1 invalid data, no user or pass added" >&2
+		return 1
 
 	fi
 
@@ -37,9 +37,17 @@ validate_flag_d(){
 }
 main(){
 
-	v_mtd=$(validate_flag_m "$method")
-	v_url=$(validate_flag_u "$url")
-	v_dta=$(validate_flag_d "$data")
+	if ! v_mtd=$(validate_flag_m "$method"); then
+		exit 1
+	fi
+
+	if ! v_url=$(validate_flag_u "$url"); then
+		exit 1
+	fi
+
+	if ! v_dta=$(validate_flag_d "$data"); then
+		exit 1
+	fi
 
 	tcp_connection "$v_mtd" "$v_url" "$v_data"
 }
