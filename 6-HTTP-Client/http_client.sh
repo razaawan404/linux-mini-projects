@@ -49,7 +49,13 @@ main(){
 		exit 1
 	fi
 
-	tcp_connection "$v_mtd" "$v_url" "$v_data"
+	trimming "$v_mtd" "$v_url" "$v_data"
+}
+trimming(){
+
+	echo "Method: $1"
+	echo "Url: $2"
+	echo "Data: $3"
 }
 tcp_connection(){
 
