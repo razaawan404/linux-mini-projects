@@ -54,7 +54,7 @@ main(){
 trimming(){
 
 	echo "Method: $1"
-	echo "Url: $2"
+	url=$(echo $2 | awk -F/ '{for(i = 0; i <= NF, i++) printf "%s%s", $i, ($i < NF ? "/" : "\n" }
 	echo "Data: $3"
 }
 tcp_connection(){
