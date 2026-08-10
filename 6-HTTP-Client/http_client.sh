@@ -53,19 +53,21 @@ main(){
 }
 trimming(){
 
-	echo "Method: $1"
-	url=$(echo $2 | awk -F/ '{for(i = 0; i <= NF, i++) printf "%s%s", $i, ($i < NF ? "/" : "\n" }
-	echo "Data: $3"
+	path=$(echo "$2" | awk -F/ '{for(i = 4; i <= NF; i++) printf "%s%s", $i, (i<NF ? "/" : "\n") }')
+	port=$(echo "$2" | awk -F: '{print $3}' | awk -F/ '{print $1}')
+	host=$(echo "$2" | awk -F/ '{print $3}')
+
+	tcp_connection "$1" "$2" "$3" "$host" "$path" "$port"
 }
 tcp_connection(){
 
-	echo "=================================="
+	echo "==============================================="
 	echo "	Bash HTTP Client"
 	echo "	Method	:	$1"
-	echo "	Host	:	$2"
-	echo "	Path	:	$(echo $2 | awk -F/ '{for(i = 0; i <= NF, i++) printf "%s%s", $i, ($i < NF ? "/" : "\n" }')"
-	echo "	Port	:	$(echo $2 | awk -F: '{print $3}' | awk -F/ '{print $1}')"
-	echo "=================================="
+	echo "	Host	:	$4"
+	echo "	Path	:	$5"
+	echo "	Port	:	$6"
+	echo "==============================================="
 	echo -e "\n"
 
 }
