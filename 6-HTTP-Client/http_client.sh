@@ -16,7 +16,7 @@ validate_flag_m(){
 }
 validate_flag_u(){
 
-	if [[ ! "$1" =~ ^https?://127\.0\.0\.1:[0-9]+(/.*)?$ ]]; then
+	if [[ ! "$1" =~ ^https?://127\.0\.0\.1(/.*)?$ ]]; then
 
 		echo "Error! $1 url is not valid" >&2
 		return 1
