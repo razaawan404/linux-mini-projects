@@ -70,6 +70,10 @@ tcp_connection(){
 	echo "==============================================="
 	echo -e "\n"
 
+
+	echo "[RESPONSE HEADERS]"
+
+	exce 3<>/dev/tcp/$4/$6
 }
 while getopts ":m:u:d:" opts
 do
