@@ -71,10 +71,14 @@ tcp_connection(){
 	echo "==============================================="
 	echo -e "\n"
 
+	exec 3<>/dev/tcp/$4/$port
+	printf 'GET / HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n' >&3
+
 
 	echo "[RESPONSE HEADERS]"
 
-	exec 3<>/dev/tcp/$4/$port
+	cat <&3
+
 }
 while getopts ":m:u:d:" opts
 do
