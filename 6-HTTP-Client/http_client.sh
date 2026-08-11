@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+port=9000
 v_dta=""
 v_url=""
 v_mtd=""
@@ -54,10 +55,10 @@ main(){
 trimming(){
 
 	path=$(echo "$2" | awk -F/ '{for(i = 4; i <= NF; i++) printf "%s%s", $i, (i<NF ? "/" : "\n") }')
-	port=$(echo "$2" | awk -F: '{print $3}' | awk -F/ '{print $1}')
+#	port=$(echo "$2" | awk -F: '{print $3}' | awk -F/ '{print $1}')
 	host=$(echo "$2" | awk -F/ '{print $3}')
 
-	tcp_connection "$1" "$2" "$3" "$host" "$path" "$port"
+	tcp_connection "$1" "$2" "$3" "$host" "$path"
 }
 tcp_connection(){
 
@@ -66,14 +67,14 @@ tcp_connection(){
 	echo "	Method	:	$1"
 	echo "	Host	:	$4"
 	echo "	Path	:	$5"
-	echo "	Port	:	$6"
+	echo "	Port	:	$port"
 	echo "==============================================="
 	echo -e "\n"
 
 
 	echo "[RESPONSE HEADERS]"
 
-	exce 3<>/dev/tcp/$4/$6
+	exec 3<>/dev/tcp/$4/$port
 }
 while getopts ":m:u:d:" opts
 do
