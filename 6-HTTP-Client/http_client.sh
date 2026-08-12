@@ -88,9 +88,17 @@ tcp_connection(){
 
 	fi
 
-	awk '{print $0} END { printf "%s\n", "[RESPONSE HEADERS]" }' <&3
+	awk 'NF > 6{
 
-	echo "[RESPONSE BODY]"
+		print $0
+
+
+	}
+	END{
+
+		printf "%s\n", "[RESPONSE HEADERS]" 
+
+	}' <&3
 
 }
 while getopts ":m:u:d:" opts
