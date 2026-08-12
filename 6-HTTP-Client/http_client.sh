@@ -55,29 +55,44 @@ main(){
 trimming(){
 
 	path=$(echo "$2" | awk -F/ '{for(i = 4; i <= NF; i++) printf "%s%s", $i, (i<NF ? "/" : "\n") }')
-#	port=$(echo "$2" | awk -F: '{print $3}' | awk -F/ '{print $1}')
 	host=$(echo "$2" | awk -F/ '{print $3}')
 
-	tcp_connection "$1" "$2" "$3" "$host" "$path"
+
+	tcp_connection "${1^^}" "$3" "$host" "$path"
 }
 tcp_connection(){
 
+	method="$1"
+        data="$2"
+	host="$3"
+	path="$4"
+
 	echo "==============================================="
 	echo "	Bash HTTP Client"
-	echo "	Method	:	$1"
-	echo "	Host	:	$4"
-	echo "	Path	:	$5"
+	echo "	Method	:	$method"
+	echo "	Host	:	$host"
+	echo "	Path	:	$path"
 	echo "	Port	:	$port"
 	echo "==============================================="
 	echo -e "\n"
 
-	exec 3<>/dev/tcp/$4/$port
-	printf 'GET / HTTP/1.1\r\nHost: 127.0.0.1\r\n\r\n' >&3
+	if [[ "$1" == "GET" ]]; then
+		exec 3<>/dev/tcp/$host/$port
+		printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
+	#POST unsupported
+	elif [[ "$1" == "POST" ]]; then
+
+		exec 3<>/dev/tcp/$host/$port
+                printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
+
+	fi
 
 	echo "[RESPONSE HEADERS]"
 
 	cat <&3
+
+	echo "[RESPONSE BODY]"
 
 }
 while getopts ":m:u:d:" opts
