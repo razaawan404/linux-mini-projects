@@ -88,9 +88,7 @@ tcp_connection(){
 
 	fi
 
-	echo "[RESPONSE HEADERS]"
-
-	cat <&3
+	awk '{print $0} END { printf "%s\n", "[RESPONSE HEADERS]" }' <&3
 
 	echo "[RESPONSE BODY]"
 

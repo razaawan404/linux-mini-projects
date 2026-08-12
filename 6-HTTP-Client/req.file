@@ -1,0 +1,11 @@
+HTTP/1.0 200 OK
+Server: SimpleHTTP/0.6 Python/3.13.12
+Date: Wed, 12 Aug 2026 18:20:53 GMT
+Content-type: text/html
+Content-Length: 466
+Last-Modified: Wed, 12 Aug 2026 18:15:19 GMT
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
