@@ -88,15 +88,19 @@ tcp_connection(){
 
 	fi
 
-	awk 'NF > 6{
+	echo "[RESPONSE HEADERS]"
+	awk '{ count }{
+
 
 		print $0
+		if (NF != 0){
 
+			count += 1
 
-	}
-	END{
+			if (count == 7)
+				print "[RESPONSE BODY]"
 
-		printf "%s\n", "[RESPONSE HEADERS]" 
+		}
 
 	}' <&3
 
