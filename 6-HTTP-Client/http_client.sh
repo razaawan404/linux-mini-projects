@@ -66,6 +66,7 @@ tcp_connection(){
         data="$2"
 	host="$3"
 	path="$4"
+	rpns=""
 
 	echo "==============================================="
 	echo "	Bash HTTP Client"
@@ -89,21 +90,14 @@ tcp_connection(){
 	fi
 
 	echo "[RESPONSE HEADERS]"
-	awk '{ count }{
+	awk '{
+
+		if ($0 == "<!DOCTYPE html>")
+			print "[RESPONSE BODY]"
 
 
 		print $0
-		if (NF != 0){
-
-			count += 1
-
-			if (count == 7)
-				print "[RESPONSE BODY]"
-
-		}
-
 	}' <&3
-
 }
 while getopts ":m:u:d:" opts
 do
