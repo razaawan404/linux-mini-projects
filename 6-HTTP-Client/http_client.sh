@@ -104,7 +104,7 @@ GET_method(){
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
 	echo "[RESPONSE HEADERS]"
-        awk '{
+        timeout 5 awk '{
 
                 if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
@@ -125,7 +125,7 @@ POST_method(){
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
 
-	cat <&3
+	timout 5 cat <&3
 }
 PUT_method(){
 
@@ -139,7 +139,7 @@ PUT_method(){
 	printf "%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-urlencoded\r\n\r\n%s" "$method" "$path" "$host" "$data"
 
 	echo "[RESPONSE HEADERS]"
-        awk '{
+        timeout 5 awk '{
 
                 if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
@@ -152,6 +152,20 @@ PUT_method(){
 DELETE_method(){
 
 	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$path"	
+
+	 exec 3<>/dev/tcp/$host/$port
+
+	echo "[RESPONSE HEADERS]"
+        timeout 5 awk '{
+
+                if ($0 == "<!DOCTYPE html>")
+                        print "[RESPONSE BODY]"
+
+
+                print $0
+        }' <&3
+
+
 }
 while getopts ":m:u:d:" opts
 do
