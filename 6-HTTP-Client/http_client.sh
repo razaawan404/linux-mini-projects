@@ -134,14 +134,15 @@ PUT_method(){
 	host="$3"
 	body="$4"
 
-	exec 3<>/dev/tcp/$host/$post
+	exec 3<>/dev/tcp/$host/$port
 
-	printf "%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-urlencoded\r\n\r\n%s" "$method" "$path" "$host" "$data"
+	printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' \
+    		"$method" "$path" "$host" "$data" >&3
 
 	echo "[RESPONSE HEADERS]"
         timeout 5 awk '{
 
-                if ($0 == "<!DOCTYPE html>")
+                if ($0 == "<!DOCTYPE html>" || $0 == "<!DOCTYPE HTML>")
                         print "[RESPONSE BODY]"
 
 
