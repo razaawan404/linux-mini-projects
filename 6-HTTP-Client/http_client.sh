@@ -83,9 +83,14 @@ tcp_connection(){
 	#POST unsupported
 	elif [[ "$1" == "POST" ]]; then
 
-		exec 3<>/dev/tcp/$host/$port
-                printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
+		POST_method "$host" "$port"
 
+	elif [[ "$1" == "PUT" ]]; then
+
+		PUT_method
+
+	else
+		DELETE_method
 	fi
 
 }
@@ -108,6 +113,25 @@ GET_method(){
                 print $0
         }' <&3
 
+}
+
+POST_method(){
+
+	host="$1"
+	port="$2"
+
+	exec 3<>/dev/tcp/$host/$port
+        printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
+
+	cat <&3
+}
+PUT_method(){
+
+	echo "PUT Method"
+}
+DELETE_method(){
+
+	echo "DELETE Method"
 }
 while getopts ":m:u:d:" opts
 do
