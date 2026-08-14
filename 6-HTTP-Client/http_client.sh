@@ -7,7 +7,7 @@ v_mtd=""
 
 validate_flag_m(){
 
-	if [[ ! "$1" =~ ^(GET|POST|get|post|Post|Get)$ ]]; then
+	if [[ ! "$1" =~ ^(GET|POST|get|post|Post|Get|PUT|put|Put|DELETE|Delete|delete)$ ]]; then
 
 		echo "Error! $1 method does'nt exits" >&2
 		return 1
@@ -78,9 +78,8 @@ tcp_connection(){
 	echo -e "\n"
 
 	if [[ "$1" == "GET" ]]; then
-		exec 3<>/dev/tcp/$host/$port
-		printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
+		GET_method "$host" "$port"
 	#POST unsupported
 	elif [[ "$1" == "POST" ]]; then
 
@@ -89,15 +88,26 @@ tcp_connection(){
 
 	fi
 
+}
+
+GET_method(){
+
+	host="$1"
+	port="$2"
+
+	exec 3<>/dev/tcp/$host/$port
+        printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
+
 	echo "[RESPONSE HEADERS]"
-	awk '{
+        awk '{
 
-		if ($0 == "<!DOCTYPE html>")
-			print "[RESPONSE BODY]"
+                if ($0 == "<!DOCTYPE html>")
+                        print "[RESPONSE BODY]"
 
 
-		print $0
-	}' <&3
+                print $0
+        }' <&3
+
 }
 while getopts ":m:u:d:" opts
 do
