@@ -151,7 +151,7 @@ PUT_method(){
 }
 DELETE_method(){
 
-	
+	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$path"	
 }
 while getopts ":m:u:d:" opts
 do
