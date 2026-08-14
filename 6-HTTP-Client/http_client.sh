@@ -66,7 +66,6 @@ tcp_connection(){
         data="$2"
 	host="$3"
 	path="$4"
-	rpns=""
 
 	echo "==============================================="
 	echo "	Bash HTTP Client"
@@ -79,26 +78,27 @@ tcp_connection(){
 
 	if [[ "$1" == "GET" ]]; then
 
-		GET_method "$host" "$port"
+		GET_method "$method" "$path" "$host"
 	#POST unsupported
 	elif [[ "$1" == "POST" ]]; then
 
-		POST_method "$host" "$port"
+		POST_method "$method" "$path" "$host" "$data"
 
 	elif [[ "$1" == "PUT" ]]; then
 
-		PUT_method
+		PUT_method "$method" "$path" "$host" "$data"
 
 	else
-		DELETE_method
+		DELETE_method "$method" "$path" "$host" "$data"
 	fi
 
 }
 
 GET_method(){
 
-	host="$1"
-	port="$2"
+	method="$1"
+	path="$2"
+	host="$3"
 
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
@@ -117,8 +117,10 @@ GET_method(){
 
 POST_method(){
 
-	host="$1"
-	port="$2"
+	method="$1"
+	path="$2"
+	host="$3"
+	data="$4"
 
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
@@ -127,11 +129,29 @@ POST_method(){
 }
 PUT_method(){
 
-	echo "PUT Method"
+	method="$1"
+	path="$2"
+	host="$3"
+	body="$4"
+
+	exec 3<>/dev/tcp/$host/$post
+
+	printf "%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-urlencoded\r\n\r\n%s" "$method" "$path" "$host" "$data"
+
+	echo "[RESPONSE HEADERS]"
+        awk '{
+
+                if ($0 == "<!DOCTYPE html>")
+                        print "[RESPONSE BODY]"
+
+
+                print $0
+        }' <&3
+
 }
 DELETE_method(){
 
-	echo "DELETE Method"
+	
 }
 while getopts ":m:u:d:" opts
 do
