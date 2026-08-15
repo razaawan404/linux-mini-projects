@@ -100,6 +100,7 @@ GET_method(){
 	path="$2"
 	host="$3"
 
+	
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
@@ -109,9 +110,19 @@ GET_method(){
                 if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
 
-
+		if ($2 ~ /200|201|204|301|304|400|401|403|404|500|501|502|503/)
+			status=$2
                 print $0
-        }' <&3
+        }END{
+
+		printf "\n============================\n"
+
+		printf "[*] %-10s : %s\n", "Status", status
+		printf "[*] %-10s : %s\n", "Size", size
+		printf "[*] %-10s : %s\n", "Time", _time
+
+		printf "\n============================"
+	}' <&3
 
 }
 
