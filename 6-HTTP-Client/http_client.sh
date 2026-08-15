@@ -100,12 +100,12 @@ GET_method(){
 	path="$2"
 	host="$3"
 
-	
+	start=$(date +%s%N)
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
 	echo "[RESPONSE HEADERS]"
-        timeout 5 awk '{
+        timeout 5 awk -v start="$start" '{
 
                 if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
@@ -115,11 +115,14 @@ GET_method(){
                 print $0
         }END{
 
+		end=$(date +%s%N)
+		elapsed=$((end - start))
+
 		printf "\n============================\n"
 
 		printf "[*] %-10s : %s\n", "Status", status
 		printf "[*] %-10s : %s\n", "Size", size
-		printf "[*] %-10s : %s\n", "Time", _time
+		printf "[*] %-10s : %s\n", "Time", elapsed
 
 		printf "\n============================"
 	}' <&3
