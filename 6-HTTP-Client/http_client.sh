@@ -101,31 +101,43 @@ GET_method(){
 	host="$3"
 
 	start=$(date +%s%N)
+
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\n\r\n' "$method" "$path" "$host" >&3
 
 	echo "[RESPONSE HEADERS]"
         timeout 5 awk -v start="$start" '{
 
-                if ($0 == "<!DOCTYPE html>")
+		if ($1 ~ /^HTTP\//)
+			status = $2
+
+		if($1 == "Content-Length:")
+			size = $2
+
+		if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
 
-		if ($2 ~ /200|201|204|301|304|400|401|403|404|500|501|502|503/)
-			status=$2
-                print $0
-        }END{
+		print $0
 
-		end=$(date +%s%N)
-		elapsed=$((end - start))
+	}END{
 
-		printf "\n============================\n"
-
-		printf "[*] %-10s : %s\n", "Status", status
-		printf "[*] %-10s : %s\n", "Size", size
-		printf "[*] %-10s : %s\n", "Time", elapsed
-
-		printf "\n============================"
+		printf "%s\n", status > "/tmp/http_status"
+		printf "%s\n", size > "/tmp/http_size"
 	}' <&3
+
+	end=$(date +%s%N)
+
+	elapsed=$((end - start))
+
+	status=$(cat /tmp/http_status)
+	size=$(cat /tmp/http_size)
+	echo $elapsed
+	echo -e "\n====================================\n"
+	printf "[*] %-10s : %s\n" "Status" $status
+	printf "[*] %-10s : %s\n" "Size"   $size
+	printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
+
+	echo -e "\n====================================" 
 
 }
 
