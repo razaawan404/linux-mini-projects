@@ -88,7 +88,7 @@ tcp_connection(){
 
 		PUT_method "$method" "$path" "$host" "$data"
 
-	else
+	elif [[ "$1" == "DELETE" ]]; then
 		DELETE_method "$method" "$path" "$host" "$data"
 	fi
 
@@ -226,11 +226,16 @@ PUT_method(){
 }
 DELETE_method(){
 
+	method="$1"
+	path="$2"
+	host="$3"
+	data="$4"
+
 	start=$(date +%s%N)
 
-	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$path"	
+	exec 3<>/dev/tcp/$host/$port
 
-	 exec 3<>/dev/tcp/$host/$port
+	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$host" 
 
 	echo -e "\n[RESPONSE HEADERS]"
         timeout 5 awk '{
