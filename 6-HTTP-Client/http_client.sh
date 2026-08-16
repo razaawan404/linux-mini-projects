@@ -131,10 +131,10 @@ GET_method(){
 
 	status=$(cat /tmp/http_status)
 	size=$(cat /tmp/http_size)
-	echo $elapsed
+
 	echo -e "\n====================================\n"
-	printf "[*] %-10s : %s\n" "Status" ${status:-None}
-	printf "[*] %-10s : %s\n" "Size"   ${size:-None}
+	printf "[*] %-10s : %s\n" "Status" "${status:-None}"
+	printf "[*] %-10s : %s\n" "Size"   "${size:-None}"
 	printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
 	echo -e "\n====================================" 
@@ -161,10 +161,10 @@ POST_method(){
 
         status=$(cat /tmp/http_status)
         size=$(cat /tmp/http_size)
-        echo $elapsed
+
         echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" ${status:-None}
-        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
+        printf "[*] %-10s : %s\n" "Status" "${status:-None}"
+        printf "[*] %-10s : %s\n" "Size"   "${size:-None}"	
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
@@ -188,6 +188,12 @@ PUT_method(){
 	echo "[RESPONSE HEADERS]"
         timeout 5 awk '{
 
+		if ($1 ~ /^HTTP\//)
+                        status = $2
+
+                if($1 == "Content-Length:")
+                        size = $2
+
                 if ($0 == "<!DOCTYPE html>" || $0 == "<!DOCTYPE HTML>")
                         print "[RESPONSE BODY]"
 
@@ -208,10 +214,10 @@ PUT_method(){
 
         status=$(cat /tmp/http_status)
         size=$(cat /tmp/http_size)
-        echo $elapsed
-        echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" ${status:-None}
-        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
+
+	 echo -e "\n====================================\n"
+        printf "[*] %-10s : %s\n" "Status" "${status:-None}"
+        printf "[*] %-10s : %s\n" "Size"   "${size:-None}"
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
@@ -226,8 +232,14 @@ DELETE_method(){
 
 	 exec 3<>/dev/tcp/$host/$port
 
-	echo "[RESPONSE HEADERS]"
+	echo -e "\n[RESPONSE HEADERS]"
         timeout 5 awk '{
+
+		if ($1 ~ /^HTTP\//)
+                        status = $2
+
+                if($1 == "Content-Length:")
+                        size = $2
 
                 if ($0 == "<!DOCTYPE html>")
                         print "[RESPONSE BODY]"
@@ -246,10 +258,10 @@ DELETE_method(){
 
         status=$(cat /tmp/http_status)
         size=$(cat /tmp/http_size)
-        echo $elapsed
+
         echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" ${status:-None}
-        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
+        printf "[*] %-10s : %s\n" "Status" "${status:-None}"
+        printf "[*] %-10s : %s\n" "Size"   "${size:-None}"
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
