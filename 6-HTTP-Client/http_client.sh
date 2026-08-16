@@ -133,8 +133,8 @@ GET_method(){
 	size=$(cat /tmp/http_size)
 	echo $elapsed
 	echo -e "\n====================================\n"
-	printf "[*] %-10s : %s\n" "Status" $status
-	printf "[*] %-10s : %s\n" "Size"   $size
+	printf "[*] %-10s : %s\n" "Status" ${status:-None}
+	printf "[*] %-10s : %s\n" "Size"   ${size:-None}
 	printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
 	echo -e "\n====================================" 
@@ -163,8 +163,8 @@ POST_method(){
         size=$(cat /tmp/http_size)
         echo $elapsed
         echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" $status
-        printf "[*] %-10s : %s\n" "Size"   $size
+        printf "[*] %-10s : %s\n" "Status" ${status:-None}
+        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
@@ -210,8 +210,8 @@ PUT_method(){
         size=$(cat /tmp/http_size)
         echo $elapsed
         echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" $status
-        printf "[*] %-10s : %s\n" "Size"   $size
+        printf "[*] %-10s : %s\n" "Status" ${status:-None}
+        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
@@ -220,7 +220,7 @@ PUT_method(){
 }
 DELETE_method(){
 
-	start=$(date +%s%N
+	start=$(date +%s%N)
 
 	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$path"	
 
@@ -248,8 +248,8 @@ DELETE_method(){
         size=$(cat /tmp/http_size)
         echo $elapsed
         echo -e "\n====================================\n"
-        printf "[*] %-10s : %s\n" "Status" $status
-        printf "[*] %-10s : %s\n" "Size"   $size
+        printf "[*] %-10s : %s\n" "Status" ${status:-None}
+        printf "[*] %-10s : %s\n" "Size"   ${size:-None}
         printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
 
         echo -e "\n====================================" 
