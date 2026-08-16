@@ -148,10 +148,28 @@ POST_method(){
 	host="$3"
 	data="$4"
 
+        start=$(date +%s%N)
+
 	exec 3<>/dev/tcp/$host/$port
         printf '%s /%s HTTP/1.1\r\nHost: %s\r\nContent-Type: application/x-www-form-urlencoded\r\n\r\n%s' "$method" "$path" "$host" "$data" >&3
 
 	timout 5 cat <&3
+
+        end=$(date +%s%N)
+
+        elapsed=$((end - start))
+
+        status=$(cat /tmp/http_status)
+        size=$(cat /tmp/http_size)
+        echo $elapsed
+        echo -e "\n====================================\n"
+        printf "[*] %-10s : %s\n" "Status" $status
+        printf "[*] %-10s : %s\n" "Size"   $size
+        printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
+
+        echo -e "\n====================================" 
+
+
 }
 PUT_method(){
 
@@ -159,6 +177,8 @@ PUT_method(){
 	path="$2"
 	host="$3"
 	body="$4"
+
+        start=$(date +%s%N)
 
 	exec 3<>/dev/tcp/$host/$port
 
@@ -173,10 +193,34 @@ PUT_method(){
 
 
                 print $0
-        }' <&3
+
+	  }END{
+
+                printf "%s\n", status > "/tmp/http_status"
+                printf "%s\n", size > "/tmp/http_size"
+
+         }' <&3
+
+
+	        end=$(date +%s%N)
+
+        elapsed=$((end - start))
+
+        status=$(cat /tmp/http_status)
+        size=$(cat /tmp/http_size)
+        echo $elapsed
+        echo -e "\n====================================\n"
+        printf "[*] %-10s : %s\n" "Status" $status
+        printf "[*] %-10s : %s\n" "Size"   $size
+        printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
+
+        echo -e "\n====================================" 
+
 
 }
 DELETE_method(){
+
+	start=$(date +%s%N
 
 	printf "%s /%s HTTP/1.1\r\nHost: %s\r\n" "$method" "$path" "$path"	
 
@@ -190,7 +234,27 @@ DELETE_method(){
 
 
                 print $0
+          }END{
+
+                printf "%s\n", status > "/tmp/http_status"
+                printf "%s\n", size > "/tmp/http_size"
         }' <&3
+
+        end=$(date +%s%N)
+
+        elapsed=$((end - start))
+
+        status=$(cat /tmp/http_status)
+        size=$(cat /tmp/http_size)
+        echo $elapsed
+        echo -e "\n====================================\n"
+        printf "[*] %-10s : %s\n" "Status" $status
+        printf "[*] %-10s : %s\n" "Size"   $size
+        printf '[*] %-10s : %.3fs\n' "Time" "$(awk "BEGIN {printf $elapsed / 1000000000}")"
+
+        echo -e "\n====================================" 
+
+
 
 
 }
