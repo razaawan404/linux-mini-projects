@@ -1,6 +1,27 @@
 #!/usr/bin/env bash
 
 
+url_validation(){
+
+	echo "$1"
+}
+
+user_validation(){
+
+	echo "$1"
+}
+
+wordlist_validation(){
+
+	echo "$1"
+}
+
+main(){
+
+	url_validation "$1"
+	user_validation "$2"
+	wordlist_validation "$3"
+}
 while getopts "u:U:w:" opts
 do
 
@@ -17,4 +38,4 @@ do
 	esac
 done
 
-echo "$url $user $wordlist"
+main "$url" "$user" "$wordlist"
