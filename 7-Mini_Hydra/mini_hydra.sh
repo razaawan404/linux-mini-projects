@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+user_given=$user_given
 
 url_validation(){
 
@@ -8,7 +9,15 @@ url_validation(){
 
 user_validation(){
 
-	echo "$1"
+	username="$1"
+
+	if [[ -z "$username" ]]; then
+
+		echo "Error: username required"
+		exit 1
+	fi
+
+	echo username
 }
 
 wordlist_validation(){
