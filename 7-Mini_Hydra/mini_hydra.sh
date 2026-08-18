@@ -10,6 +10,11 @@ url_validation(){
 
 		echo "./mini_http: option requires an argument -- u"
 		exit 1
+
+	elif [[ ! "$url" =~ ^https?://[a-zA-Z0-9_.-]+(:[0-9]+)?(/.*)?$ ]]; then
+
+		echo "Error: Invalid url"
+		exit 1
 	fi
 
 	echo "$url"
