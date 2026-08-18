@@ -4,7 +4,15 @@ user_given=$user_given
 
 url_validation(){
 
-	echo "$1"
+	url="$1"
+
+	if [[ -z "$url" ]]; then
+
+		echo "./mini_http: option requires an argument -- u"
+		exit 1
+	fi
+
+	echo "$url"
 }
 
 user_validation(){
@@ -17,12 +25,20 @@ user_validation(){
 		exit 1
 	fi
 
-	echo username
+	echo "$username"
 }
 
 wordlist_validation(){
 
-	echo "$1"
+	word_list="$1"
+
+	if [[ -z "$word_list" ]]; then
+
+		echo "./mini_hydra: option requires an argument -- w"
+		exit 1
+	fi
+
+	echo "$word_list"
 }
 
 main(){
@@ -31,7 +47,7 @@ main(){
 	user_validation "$2"
 	wordlist_validation "$3"
 }
-while getopts "u:U:w:" opts
+while getopts ":u:U:w:" opts
 do
 
 	case "$opts" in
