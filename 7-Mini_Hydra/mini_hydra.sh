@@ -41,6 +41,11 @@ wordlist_validation(){
 
 		echo "./mini_hydra: option requires an argument -- w"
 		exit 1
+
+	elif [[ ! -f "$word_list" ]]; then
+
+		echo "File does'nt exists"
+		exit 1
 	fi
 
 	echo "$word_list"
@@ -48,9 +53,20 @@ wordlist_validation(){
 
 main(){
 
-	url_validation "$1"
-	user_validation "$2"
-	wordlist_validation "$3"
+	url=$(url_validation "$1")
+	user=$(user_validation "$2")
+	wl=$(wordlist_validation "$3")
+
+	begin "$url" "$user" "$wl"
+
+}
+begin(){
+
+	url="$1"
+
+	printf "\n==================================\n"
+	echo "	Mini Hydra"
+	echo "	Target	: $url"
 }
 while getopts ":u:U:w:" opts
 do
@@ -62,7 +78,7 @@ do
 	        U) user="$OPTARG"
 	           user_given=true ;;
 
-	        w) wordlist="$OPTARG" 
+	        w) wordlist="$OPTARG"
 	           w_given=true ;;
 
 	esac
