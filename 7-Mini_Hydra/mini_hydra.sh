@@ -77,17 +77,20 @@ begin(){
 	user="$2"
 	wl="$3"
 
+	words=$(wc -l $wl | awk '{print $1}')	
+
 	printf "\n==================================\n"
 	echo "	Mini Hydra"
 	echo "	Target	: $url"
+	echo "	User	: $user"
+	echo "	Words	: $words"
 
 
+	#while read -r line
+	#do
+	#     echo "$line"
 
-	while read -r line
-	do
-	     echo "$line"
-
-	done < "$wl"
+	#done < "$wl"
 }
 while getopts "u:U:w:" opts
 do
