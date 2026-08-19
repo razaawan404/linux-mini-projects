@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-user_given=$user_given
-
 url_validation(){
 
 	url="$1"
@@ -9,12 +7,12 @@ url_validation(){
 	if [[ -z "$url" ]]; then
 
 		echo "./mini_http: option requires an argument -- u"
-		exit 1
+		return 1
 
 	elif [[ ! "$url" =~ ^https?://[a-zA-Z0-9_.-]+(:[0-9]+)?(/.*)?$ ]]; then
 
 		echo "Error: Invalid url"
-		exit 1
+		return 1
 	fi
 
 	echo "$url"
@@ -27,7 +25,7 @@ user_validation(){
 	if [[ -z "$username" ]]; then
 
 		echo "Error: username required"
-		exit 1
+		return 1
 	fi
 
 	echo "$username"
@@ -40,12 +38,12 @@ wordlist_validation(){
 	if [[ -z "$word_list" ]]; then
 
 		echo "./mini_hydra: option requires an argument -- w"
-		exit 1
+		return 1
 
 	elif [[ ! -f "$word_list" ]]; then
 
 		echo "File does'nt exists"
-		exit 1
+		return 1
 	fi
 
 	echo "$word_list"
@@ -53,9 +51,22 @@ wordlist_validation(){
 
 main(){
 
-	url=$(url_validation "$1")
-	user=$(user_validation "$2")
-	wl=$(wordlist_validation "$3")
+	if ! url=$(url_validation "$1"); then
+		echo "$url"
+		exit 1
+	fi
+
+	if ! user=$(user_validation "$2"); then
+
+		echo "$user"
+		exit 1
+	fi
+
+	if ! wl=$(wordlist_validation "$3"); then
+
+		echo "$wl"
+		exit 1
+	fi
 
 	begin "$url" "$user" "$wl"
 
@@ -63,12 +74,22 @@ main(){
 begin(){
 
 	url="$1"
+	user="$2"
+	wl="$3"
 
 	printf "\n==================================\n"
 	echo "	Mini Hydra"
 	echo "	Target	: $url"
+
+
+
+	while read -r line
+	do
+	     echo "$line"
+
+	done < "$wl"
 }
-while getopts ":u:U:w:" opts
+while getopts "u:U:w:" opts
 do
 
 	case "$opts" in
