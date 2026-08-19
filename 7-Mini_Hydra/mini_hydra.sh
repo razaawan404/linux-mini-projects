@@ -78,13 +78,13 @@ begin(){
 	wl="$3"
 
 	words=$(wc -l $wl | awk '{print $1}')	
-
+	_date=$(date "+%Y-%m-%d %H:%m")
 	printf "\n==================================\n"
 	echo "	Mini Hydra"
 	echo "	Target	: $url"
 	echo "	User	: $user"
 	echo "	Words	: $words"
-
+	echo "	Date	: $_date"
 
 	#while read -r line
 	#do
