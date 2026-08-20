@@ -79,20 +79,22 @@ begin(){
 
 	words=$(wc -l $wl | awk '{print $1}')	
 	_date=$(date "+%Y-%m-%d %H:%m")
-	printf "\n==================================\n"
+	printf "\n=================================================\n"
 	echo "	Mini Hydra"
 	echo "	Target	: $url"
 	echo "	User	: $user"
 	echo "	Words	: $words"
 	echo "	Date	: $_date"
+	printf "===================================================\n\n"
 
-	#while read -r line
-	#do
-	#     echo "$line"
 
-	#done < "$wl"
+	while read -r line
+	do
+	     echo "[-] Trying: $line"
+
+	done < "$wl"
 }
-while getopts "u:U:w:" opts
+while getopts ":u:U:w:" opts
 do
 
 	case "$opts" in
