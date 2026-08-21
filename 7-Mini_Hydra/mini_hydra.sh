@@ -90,6 +90,7 @@ begin(){
 	attempts=0
 	start=$(date +%s%N)
 
+	echo "Working on asynchronase request"
 	while read -r pass
 	do
 
