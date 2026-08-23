@@ -90,7 +90,7 @@ begin(){
 	attempts=0
 	max_jobs=0
 	start=$(date +%s%N)
-
+	_pass=""
 
 	declare -A jobs
 	while read -r pass
@@ -115,19 +115,65 @@ begin(){
 
 		) &
 
-		pid=$!
+		 pid=$!
+    		 jobs["$pid"]="$pass"
 
-		if [[ "$response" == *success* ]]; then
+    		 if (( ${#jobs[@]} >= max_jobs )); then
 
-			end=$(date +%s%N)
+       			 wait -n -p finished_pid "${!jobs[@]}"
+        		 status=$?
 
-			elapsed=$((end - start))
-			in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+        		 finished_pass="${jobs[$finished_pid]}"
+        		 unset 'jobs[$finished_pid]'
 
-			echo "[+] FOUND → $user:$pass"
-			final_report "$pass" "$attempts" "$in_sec"
-		fi
+        		if (( status == 0 )); then
+            			echo "[+] FOUND → $user:$finished_pass"
+
+            			# Stop remaining workers
+           		 	kill "${!jobs[@]}" 2>/dev/null
+           	 		wait 2>/dev/null
+
+				end=$(date +%s%N)
+
+	                        elapsed=$((end - start))
+        	                in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+                	        final_report "$finished_pass" "$attempts" "$in_sec"
+
+            			exit 0
+        		fi
+    		fi
+
 	done < "$wl"
+
+	# Collect whatever requests are still running
+	while (( ${#jobs[@]} > 0 )); do
+
+
+   		 wait -n -p finished_pid "${!jobs[@]}"
+   		 status=$?
+
+    		finished_pass="${jobs[$finished_pid]}"
+    		unset 'jobs[$finished_pid]'
+
+    		if (( status == 0 )); then
+			 ((attempts++))
+        		echo "[+] FOUND → $user:$finished_pass"
+
+	       		kill "${!jobs[@]}" 2>/dev/null
+        		wait 2>/dev/null
+
+			 end=$(date +%s%N)
+
+         		elapsed=$((end - start))
+         		in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+         		final_report "$finished_pass" "$attempts" "$in_sec"
+
+        		exit 0
+    		fi
+
+	done
 }
 final_report(){
 
@@ -141,7 +187,6 @@ final_report(){
 	printf "[*] %-10s : %ss\n" "Time" "$_time"
 	printf "=========================================="
 
-	exit 1
 }
 while getopts ":u:U:w:" opts
 do
