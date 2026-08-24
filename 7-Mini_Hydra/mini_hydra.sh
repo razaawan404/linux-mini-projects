@@ -88,7 +88,7 @@ begin(){
 	printf "===================================================\n\n"
 
 	attempts=0
-	max_jobs=0
+	max_jobs=10
 	start=$(date +%s%N)
 	_pass=""
 
