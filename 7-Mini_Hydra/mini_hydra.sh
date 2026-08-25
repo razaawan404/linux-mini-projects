@@ -157,7 +157,7 @@ begin(){
     		unset 'jobs[$finished_pid]'
 
     		if (( status == 0 )); then
-			 ((attempts++))
+
         		echo "[+] FOUND → $user:$finished_pass"
 
 	       		kill "${!jobs[@]}" 2>/dev/null
@@ -174,6 +174,14 @@ begin(){
     		fi
 
 	done
+
+	end=$(date +%s%N)
+
+        elapsed=$((end - start))
+        in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+        final_report "" "$attempts" "$in_sec"
+
 }
 final_report(){
 
@@ -181,12 +189,21 @@ final_report(){
 	atmps="$2"
 	_time="$3"
 
-	printf "\n=======================================\n"
-	printf "[*] %-10s : %s\n" "Password" "$pass"
-	printf "[*] %-10s : %s\n" "Attempts" "$atmps"
-	printf "[*] %-10s : %ss\n" "Time" "$_time"
-	printf "=========================================="
+	if [[ ! -z "$pass" ]]; then
 
+		printf "\n=======================================\n"
+		printf "[*] %-10s : %s\n" "Password" "$pass"
+		printf "[*] %-10s : %s\n" "Attempts" "$atmps"
+		printf "[*] %-10s : %ss\n" "Time" "$_time"
+		printf "=========================================="
+	else
+
+		printf "\n=======================================\n"
+                printf "[*] %-10s : %s\n" "Password" "No Password Found"
+                printf "[*] %-10s : %s\n" "Attempts" "$atmps"
+                printf "[*] %-10s : %ss\n" "Time" "$_time"
+                printf "=========================================="
+	fi
 }
 while getopts ":u:U:w:" opts
 do
