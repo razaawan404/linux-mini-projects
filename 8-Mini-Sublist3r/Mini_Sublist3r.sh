@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
 
 
+validating_target(){
+
+	target="$1"
+
+	if [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){3} ]]; then
+
+		return 1
+	fi
+
+	return 0
+}
 main(){
 
 	target="$1"
 	wlist="$2"
 
+	if ! validating_target "$target"; then
+
+		exit 1
+	fi
+
 	echo "$target"
-	echo "$wlist"
 }
 while getopts ":d:w:" opts
 do
