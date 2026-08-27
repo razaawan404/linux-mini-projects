@@ -5,7 +5,7 @@ validating_target(){
 
 	target="$1"
 
-	if [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){3} ]]; then
+	if [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){2}[a-zA-Z0-9]+$ ]]; then
 
 		return 1
 	fi
