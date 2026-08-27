@@ -5,12 +5,36 @@ validating_target(){
 
 	target="$1"
 
-	if [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){2}[a-zA-Z0-9]+$ ]]; then
+	if [[ -z "$target" ]]; then
+
+        	echo "./Mini_Sublist3r.sh: option require an argument -- d"
+
+		return 1
+
+	elif [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){2}[a-zA-Z0-9]+$ ]]; then
 
 		return 1
 	fi
 
-	return 0
+	echo "$target"
+}
+validating_wlist(){
+
+	wlist="$2"
+
+	if [[ -z "$wlist" ]]; then
+
+        	echo "./Mini_Sublist3r.sh: option require an argument -- w"
+
+		return 1
+
+	elif [[ ! -f "$wlist" ]]; then
+
+		echo "File does'nt exist"
+		return 1
+	fi
+
+	echo "$wlist"
 }
 main(){
 
@@ -19,10 +43,16 @@ main(){
 
 	if ! validating_target "$target"; then
 
+		echo "$target"
+		exit 1
+
+	elif ! validating_wlist "$wlist" ; then
+
+		echo "$wlist"
 		exit 1
 	fi
 
-	echo "$target"
+	
 }
 while getopts ":d:w:" opts
 do
@@ -35,15 +65,5 @@ do
 	esac
 done
 
-if [[ -z "$target" ]]; then
 
-	echo "./Mini_Sublist3r.sh: option require an argument -- d"
-
-elif [[ -z "$wlist" ]]; then
-
-	echo "./Mini_Sublist3r.sh: option require an argument -- w"
-else
-
-	main "$target" "$wlist"
-fi
-
+main "$target" "$wlist"
