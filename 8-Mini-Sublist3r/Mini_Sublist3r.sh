@@ -52,7 +52,26 @@ main(){
 		exit 1
 	fi
 
-	
+	begin "$target" "$wlist"
+}
+begin(){
+
+	target="$1"
+	wlist="$2"
+
+	echo "=============================="
+	echo "	Mini Sublist3r"
+	echo "	Domain	: $target"
+	echo "	Words	: "
+	echo "	Date	: "
+	printf "==============================\n\n"
+	echo "Target: $target"
+
+	while read -r subs
+	do
+		echo "subs"
+
+	done < "$wlist"
 }
 while getopts ":d:w:" opts
 do
