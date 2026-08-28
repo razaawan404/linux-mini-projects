@@ -13,6 +13,7 @@ validating_target(){
 
 	elif [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){2}[a-zA-Z0-9]+$ ]]; then
 
+		echo "Error: invalid url"
 		return 1
 	fi
 
@@ -41,12 +42,12 @@ main(){
 	target="$1"
 	wlist="$2"
 
-	if ! validating_target "$target"; then
+	if ! target=$(validating_target "$target"); then
 
 		echo "$target"
 		exit 1
 
-	elif ! validating_wlist "$wlist" ; then
+	elif ! wlist=$(validating_wlist "$wlist") ; then
 
 		echo "$wlist"
 		exit 1
@@ -59,19 +60,22 @@ begin(){
 	target="$1"
 	wlist="$2"
 
-	echo "=============================="
+	domain=$(echo "$target" | awk -F. '{for (i = 2; i <= NF; i++) { if (i != NF) printf $i "."; else printf $i}}')
+	wrd_cnt=$(wc -l "$wlist" | awk '{print $1}')
+	_date=$(date "+%Y-%m-%d %H:%M")
+
+	echo "========================================="
 	echo "	Mini Sublist3r"
-	echo "	Domain	: $target"
-	echo "	Words	: "
-	echo "	Date	: "
-	printf "==============================\n\n"
-	echo "Target: $target"
+	echo "	Domain	: $domain"
+	echo "	Words	: $wrd_cnt"
+	echo "	Date	: $_date"
+	printf "======================================\n\n"
 
-	while read -r subs
-	do
-		echo "subs"
+#	while read -r subs
+#	do
+		#echo "$subs"
 
-	done < "$wlist"
+#	done < "$wlist"
 }
 while getopts ":d:w:" opts
 do
