@@ -20,7 +20,7 @@ validating_target(){
 }
 validating_wlist(){
 
-	wlist="$2"
+	wlist="$1"
 
 	if [[ -z "$wlist" ]]; then
 
