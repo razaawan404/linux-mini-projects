@@ -71,11 +71,24 @@ begin(){
 	echo "	Date	: $_date"
 	printf "======================================\n\n"
 
-#	while read -r subs
-#	do
-		#echo "$subs"
+	while read -r subs
+	do
+		echo "[-] Trying: $subs.$domain"
 
-#	done < "$wlist"
+	done < "$wlist"
+
+	final_report
+}
+final_report(){
+
+	found=""
+	tsted=""
+	_time=""
+
+	printf "\n======================================\n"
+	printf "[*] %-10s : %s\n" "Found"  "$found"
+	printf "[*] %-10s : %s\n" "Tested" "$tsted"
+	printf "[*] %-10s : %s\n" "Time"   "$_time"
 }
 while getopts ":d:w:" opts
 do
