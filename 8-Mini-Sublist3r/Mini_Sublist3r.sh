@@ -73,8 +73,15 @@ begin(){
 
 	while read -r subs
 	do
-		echo "[-] Trying: $subs.$domain"
+		echo "[-] Trying   :  $subs.$domain"
 
+		result=$(dig +short "$subs.$domain")
+
+		if [[ ! -z "$result" ]]; then
+
+			trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
+			echo "[+] Found   :   $subs.$domain → $trim"
+		fi
 	done < "$wlist"
 
 	final_report
