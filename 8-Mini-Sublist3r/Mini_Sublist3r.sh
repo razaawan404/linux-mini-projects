@@ -71,6 +71,10 @@ begin(){
 	echo "	Date	: $_date"
 	printf "======================================\n\n"
 
+
+	start=$(date +%s%N)
+	attempts=0
+
 	while read -r subs
 	do
 		echo "[-] Trying   :  $subs.$domain"
@@ -84,13 +88,16 @@ begin(){
 		fi
 	done < "$wlist"
 
-	final_report
+	end=$(date +%s%N)
+	elasped=$((end - start))
+
+	final_report "" "$attempts" "$elasped" 
 }
 final_report(){
 
-	found=""
-	tsted=""
-	_time=""
+	found="$1"
+	tsted="$2"
+	_time="$3"
 
 	printf "\n======================================\n"
 	printf "[*] %-10s : %s\n" "Found"  "$found"
