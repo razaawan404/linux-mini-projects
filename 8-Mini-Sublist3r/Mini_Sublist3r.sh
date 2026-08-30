@@ -76,6 +76,7 @@ begin(){
 	attempts=0
 	max_jobs=10
 	_sub=""
+	found=0
 
 	declare -A jobs
 
@@ -85,21 +86,47 @@ begin(){
 		[[ -z "$subs" ]] && continue
 
 		printf "[-] %-10s : %s\n" "Trying" "$subs.$domain"
+		((attempts++))
+
+		(
+
+			result=$(dig +short "$subs.$domain") 
+
+			if [[ ! -z "$result" ]]; then
+
+				exit 0
+			else
+				exit 1
+			fi
+		) &
+
+		pid=$!
+		jobs["$pid"]="$subs"
 
 
-		result=$(dig +short "$subs.$domain")
+		if (( "${#jobs[@]}" >= 10 )); then
 
-		if [[ ! -z "$result" ]]; then
+			wait -n -p finished_pid "${!jobs[@]}"
+			status=$?
 
-			trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
-			printf "[+] %-10s : %-20s %s \n" "Found" "$subs.$domain" " → $trim"
+			finished_sub="${jobs[$finished_pid]}"
+			unset 'jobs[$finished_pid]'
+
+				if (( status == 0 )); then
+
+					trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
+					printf "[+] %-10s : %-20s %s \n" "Found" "$finish_sub.$domain" " → $trim"
+					((found++))
+				fi
+
+
 		fi
 	done < "$wlist"
 
 	end=$(date +%s%N)
 	elasped=$((end - start))
 
-	final_report "" "$attempts" "$elasped" 
+	final_report "$found" "$attempts" "$elasped" 
 }
 final_report(){
 
