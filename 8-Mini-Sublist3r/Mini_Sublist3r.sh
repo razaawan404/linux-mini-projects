@@ -74,10 +74,18 @@ begin(){
 
 	start=$(date +%s%N)
 	attempts=0
+	max_jobs=10
+	_sub=""
+
+	declare -A jobs
 
 	while read -r subs
 	do
+
+		[[ -z "$subs" ]] && continue
+
 		printf "[-] %-10s : %s\n" "Trying" "$subs.$domain"
+
 
 		result=$(dig +short "$subs.$domain")
 
