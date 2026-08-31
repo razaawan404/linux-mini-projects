@@ -125,8 +125,8 @@ begin(){
 
 	end=$(date +%s%N)
 	elasped=$((end - start))
-
-	final_report "$found" "$attempts" "$elasped" 
+	in_sec=$(awk "BEGIN {printf \"%.2f\", elapsed / 1000000000")
+	final_report "$found" "$attempts" "$in_sec" 
 }
 final_report(){
 
@@ -137,7 +137,7 @@ final_report(){
 	printf "\n======================================\n"
 	printf "[*] %-10s : %s\n" "Found"  "$found"
 	printf "[*] %-10s : %s\n" "Tested" "$tsted"
-	printf "[*] %-10s : %s\n" "Time"   "$_time"
+	printf "[*] %-10s : %ss\n" "Time"   "$_time"
 }
 while getopts ":d:w:" opts
 do
