@@ -92,6 +92,8 @@ begin(){
 
 			result=$(dig +short "$subs.$domain") 
 
+			 printf '%s\n' "$result" > "/tmp/dig_$BASHPID"
+
 			if [[ ! -z "$result" ]]; then
 
 				exit 0
