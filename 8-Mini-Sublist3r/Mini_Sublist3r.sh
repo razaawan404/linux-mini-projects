@@ -92,7 +92,7 @@ begin(){
 
 			result=$(dig +short "$subs.$domain") 
 
-			 printf '%s\n' "$result" > "/tmp/dig_$BASHPID"
+			 printf '%s\n' "$result" > "/tmp/dig/dig_$BASHPID"
 
 			if [[ ! -z "$result" ]]; then
 
@@ -113,6 +113,7 @@ begin(){
 
 			finished_sub="${jobs[$finished_pid]}"
 			unset 'jobs[$finished_pid]'
+			result=$(cat "/tmp/dig/dig_$finished_sub")
 
 				if (( status == 0 )); then
 
