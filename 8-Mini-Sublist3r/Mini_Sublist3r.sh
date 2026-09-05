@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 validating_target(){
 
 	target="$1"
@@ -11,7 +10,7 @@ validating_target(){
 
 		return 1
 
-	elif [[ ! "$target" =~ ^([a-zA-Z0-9]+\.){2}[a-zA-Z0-9]+$ ]]; then
+	elif [[ ! "$target" =~ ^[a-zA-Z0-9]+\.[a-zA-Z0-9]+$ ]]; then
 
 		echo "Error: invalid url"
 		return 1
