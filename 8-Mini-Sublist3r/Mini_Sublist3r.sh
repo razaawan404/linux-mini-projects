@@ -112,7 +112,7 @@ begin(){
 
 			finished_sub="${jobs[$finished_pid]}"
 			unset 'jobs[$finished_pid]'
-			result=$(cat "/tmp/dig/dig_$finished_sub")
+			result=$(cat "/tmp/dig/dig_$finished_pid")
 
 				if (( status == 0 )); then
 
