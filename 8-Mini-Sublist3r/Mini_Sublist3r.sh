@@ -125,10 +125,26 @@ begin(){
 		fi
 	done < "$wlist"
 
-	while read -r subs
+	while (( ${#jobs[@]} > 0 ));
 	do
 
-		echo "$subs"
+		wait -n -p finished_pid "${!jobs[@]}"
+
+		status=$?
+
+		finished_subs="${jobs[$finished_pid]}"
+
+		unset 'jobs[$finished_pid]'
+
+		  if (( status == 0 )); then
+
+                          trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
+                          printf "[+] %-10s : %-20s %s \n" "Found" "$finish_sub.$domain" " → $trim"
+                          ((found++))
+                  fi
+
+
+
 	done
 
 	end=$(date +%s%N)
