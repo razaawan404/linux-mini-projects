@@ -125,6 +125,12 @@ begin(){
 		fi
 	done < "$wlist"
 
+	while read -r subs
+	do
+
+		echo "$subs"
+	done
+
 	end=$(date +%s%N)
 	elasped=$((end - start))
 	in_sec=$(awk "BEGIN {printf \"%.2f\", elapsed / 1000000000")
