@@ -132,13 +132,14 @@ begin(){
 
 		status=$?
 
-		finished_subs="${jobs[$finished_pid]}"
+		finish_sub="${jobs[$finished_pid]}"
 
 		unset 'jobs[$finished_pid]'
+		result=$(cat "/tmp/dig/dig_$finished_pid")
 
 		  if (( status == 0 )); then
 
-                          trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
+			  trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
                           printf "[+] %-10s : %-20s %s \n" "Found" "$finish_sub.$domain" " → $trim"
                           ((found++))
                   fi
@@ -149,7 +150,7 @@ begin(){
 
 	end=$(date +%s%N)
 	elasped=$((end - start))
-	in_sec=$(awk "BEGIN {printf \"%.2f\", elapsed / 1000000000")
+	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
 	final_report "$found" "$attempts" "$in_sec" 
 }
 final_report(){
