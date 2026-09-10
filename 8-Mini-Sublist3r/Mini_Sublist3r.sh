@@ -56,10 +56,10 @@ main(){
 }
 begin(){
 
-	target="$1"
+#	target="$1"
 	wlist="$2"
 
-	domain=$(echo "$target" | awk -F. '{for (i = 2; i <= NF; i++) { if (i != NF) printf $i "."; else printf $i}}')
+	domain="$1"
 	wrd_cnt=$(wc -l "$wlist" | awk '{print $1}')
 	_date=$(date "+%Y-%m-%d %H:%M")
 
@@ -105,7 +105,7 @@ begin(){
 		jobs["$pid"]="$subs"
 
 
-		if (( "${#jobs[@]}" >= 10 )); then
+		if (( "${#jobs[@]}" >= $max_jobs )); then
 
 			wait -n -p finished_pid "${!jobs[@]}"
 			status=$?
