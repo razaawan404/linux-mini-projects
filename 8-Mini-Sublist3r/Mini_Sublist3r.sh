@@ -89,7 +89,7 @@ begin(){
 
 		(
 
-			result=$(dig +short "$subs.$domain") 
+			result=$(dig +short +time=1 +tries=1 "$subs.$domain") 
 
 			 printf '%s\n' "$result" > "/tmp/dig/dig_$BASHPID"
 
@@ -117,8 +117,10 @@ begin(){
 				if (( status == 0 )); then
 
 					trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
-					printf "[+] %-10s : %-20s %s \n" "Found" "$finished_sub.$domain" " → $trim"
-					((found++))
+					   if [[ ! -z "$trim" && "$trim" != ";;" ]]; then 
+	                 	               printf "[+] %-10s : %-35s %s \n" "Found" "$finished_sub.$domain" " → $trim"
+        		                       ((found++))
+					   fi
 				fi
 
 
@@ -140,9 +142,12 @@ begin(){
 		  if (( status == 0 )); then
 
 			  trim=$(echo "$result" |   awk '/[0-9]{1,3}(\.[0-9]{1,3}){3}/ {print $1; exit}')
-                          printf "[+] %-10s : %-20s %s \n" "Found" "$finished_sub.$domain" " → $trim"
-                          ((found++))
-                  fi
+
+			if [[ ! -z "$trim" && "$trim" != ";;" ]]; then 
+			 	printf "[+] %-10s : %-35s %s \n" "Found" "$finished_sub.$domain" " → $trim"
+                          	((found++))
+                	fi 
+		 fi
 
 
 
@@ -150,7 +155,7 @@ begin(){
 
 	end=$(date +%s%N)
 	elasped=$((end - start))
-	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+	in_sec=$(awk -v t="$elapsed"  'BEGIN {printf \"%.2f\", $elapsed / 1000000000}')
 	final_report "$found" "$attempts" "$in_sec" 
 }
 final_report(){
