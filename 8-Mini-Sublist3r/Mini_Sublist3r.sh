@@ -155,7 +155,7 @@ begin(){
 
 	end=$(date +%s%N)
 	elasped=$((end - start))
-	in_sec=$(awk -v t="$elapsed"  'BEGIN {printf \"%.2f\", $elapsed / 1000000000}')
+	in_sec=$(awk -v t="$elapsed"  'BEGIN {printf "%.2f", $elapsed / 1000000000}')
 	final_report "$found" "$attempts" "$in_sec" 
 }
 final_report(){
