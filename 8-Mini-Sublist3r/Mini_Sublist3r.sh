@@ -164,7 +164,7 @@ final_report(){
 	tsted="$2"
 	_time="$3"
 
-	printf "\n======================================\n"
+	printf "\n\n======================================\n"
 	printf "[*] %-10s : %s\n" "Found"  "$found"
 	printf "[*] %-10s : %s\n" "Tested" "$tsted"
 	printf "[*] %-10s : %ss\n" "Time"   "$_time"
