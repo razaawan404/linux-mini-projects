@@ -77,6 +77,9 @@ begin(){
 	_sub=""
 	found=0
 
+	mkdir -p /tmp/dig
+	trap 'rm -rf /tmp/dig/*' EXIT
+
 	declare -A jobs
 
 	while read -r subs
@@ -125,6 +128,7 @@ begin(){
 
 
 		fi
+
 	done < "$wlist"
 
 	while (( ${#jobs[@]} > 0 ));
