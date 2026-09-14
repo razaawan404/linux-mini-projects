@@ -35,6 +35,8 @@ execution_inline(){
 	printf "=======================================\n\n"
 
 
+	start=$(date +%s%N)
+
 	echo -e "[*] Fetching target...\n\n"
 
 	echo -e "[HEADERS]"
@@ -43,6 +45,14 @@ execution_inline(){
 
 	echo "[TECHNOLOGIES]"
 	ext_technologies "$url"
+
+	echo "[MISSING SECURITY HEADERS]"
+	ext_missing_sec_headers "$url"
+
+	end=$(date +%s%N)
+
+	elapsed=((end - start))
+
 }
 ext_header(){
 
@@ -64,6 +74,11 @@ ext_header(){
 
 }
 ext_technologies(){
+
+	url="$1"
+}
+
+ext_missing_sec_headers(){
 
 	url="$1"
 }
