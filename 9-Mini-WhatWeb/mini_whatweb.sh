@@ -33,6 +33,25 @@ execution_inline(){
 	printf "%5s %-10s : %s\n" " " "Target" "$url"
 	printf "%5s %-10s : %s\n" " " "Date" "$_date"
 	printf "=======================================\n\n"
+
+
+	echo -e "[*] Fetching target...\n\n"
+
+	echo -e "[HEADERS]"
+
+	curl -sI "$url" | awk -F: '{ 
+                                                if ($1 == "Server")
+                                                {
+							server_string = server_string $2 ", "
+                                         #count++
+                                         #server[count] = $2
+}                                    }
+END { 
+
+	print "[SERVER] : "  server_string
+
+}'
+
 }
 while getopts ":u:" opts
 do
