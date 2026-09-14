@@ -18,7 +18,7 @@ main(){
 
 	if ! v_url=$(validate_url "$url"); then
 		echo "$v_url"
-	fi	
+	fi
 
 	execution_inline "$v_url"	
 }
@@ -39,6 +39,10 @@ execution_inline(){
 
 	echo -e "[HEADERS]"
 	ext_header "$url"
+
+
+	echo "[TECHNOLOGIES]"
+	ext_technologies "$url"
 }
 ext_header(){
 
@@ -58,6 +62,10 @@ ext_header(){
 	}'
 
 
+}
+ext_technologies(){
+
+	url="$1"
 }
 while getopts ":u:" opts
 do
