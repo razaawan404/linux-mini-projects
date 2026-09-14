@@ -10,7 +10,6 @@ validate_url(){
 		echo "Invalid Url: Correct Format (http(s)//target.com)"
 		return 1
 	fi
-	echo "in validation"
 	echo "$url"
 }
 main(){
@@ -21,7 +20,19 @@ main(){
 		echo "$v_url"
 	fi	
 
-	echo "$v_url"	
+	execution_inline "$v_url"	
+}
+
+execution_inline(){
+
+	url="$1"
+	_date=$(date +"%Y-%m-%d %H:%M")
+
+	printf "\n======================================\n"
+	printf "%18s\n" "Mini WhatWeb"
+	printf "%5s %-10s : %s\n" " " "Target" "$url"
+	printf "%5s %-10s : %s\n" " " "Date" "$_date"
+	printf "=======================================\n\n"
 }
 while getopts ":u:" opts
 do
