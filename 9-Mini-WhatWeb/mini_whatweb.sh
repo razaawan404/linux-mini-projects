@@ -82,6 +82,12 @@ ext_missing_sec_headers(){
 
 	url="$1"
 }
+
+final_report(){
+
+	echo "Found"
+	echo "Time"
+}
 while getopts ":u:" opts
 do
 
