@@ -38,19 +38,25 @@ execution_inline(){
 	echo -e "[*] Fetching target...\n\n"
 
 	echo -e "[HEADERS]"
+	ext_header "$url"
+}
+ext_header(){
 
-	curl -sI "$url" | awk -F: '{ 
+	urt="$1"
+
+	 curl -sI "$url" | awk -F: '{ 
                                                 if ($1 == "Server")
                                                 {
-							server_string = server_string $2 ", "
-                                         #count++
-                                         #server[count] = $2
-}                                    }
-END { 
+                                                        server_string = server_string $2 ", "
 
-	print "[SERVER] : "  server_string
+						}
+        }
+	END { 
 
-}'
+        	print "[SERVER] : "  server_string
+
+	}'
+
 
 }
 while getopts ":u:" opts
