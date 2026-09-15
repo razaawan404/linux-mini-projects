@@ -42,10 +42,10 @@ execution_inline(){
 	ext_header "$url"
 
 
-	echo "[TECHNOLOGIES]"
+	echo -e  "\n\n[TECHNOLOGIES]"
 	ext_technologies "$url"
 
-	echo "[MISSING SECURITY HEADERS]"
+	echo -e "\n\n[MISSING SECURITY HEADERS]"
 	ext_missing_sec_headers "$url"
 
 	end=$(date +%s%N)
@@ -78,9 +78,9 @@ ext_header(){
 			        }
 	END {
 
-		printf "[+] %-10s : %s\n", "Server", server
-		printf "[+] %-10s : %s\n", "Powered-By", poweredby
-		printf "[+] %-10s : %s\n", "Cookie", cookies
+		printf "[+] %-14s : %s\n", "Server", server
+		printf "[+] %-14s : %s\n", "Powered-By", poweredby
+		printf "[+] %-14s : %s\n", "Cookie", cookies
 
 	}'
 
@@ -89,6 +89,34 @@ ext_header(){
 ext_technologies(){
 
 	url="$1"
+
+	curl -sI "$url" | awk ' BEGIN {
+
+					 FS = ": "
+
+					 tech_keywords["Apache"]      = 1
+					 tech_keywords["Werkzeug"]    = 1
+					 tech_keywords["Python"]      = 1
+   					 tech_keywords["PHP"]	      = 1
+					 tech_keywords["PHPSESSID"]   = 1
+					 tech_keywords["wp-content"]  = 1
+					 tech_keywords["__VIEWSTATE"] = 1
+					 tech_keywords["jquery"]      = 1
+
+				     }
+
+				{
+
+					for (key in tech_keywords) {
+
+						if ($0 ~ key){
+
+						    printf "[+] %-14s %s\n", key, "detected"
+
+						}
+
+					}
+				}'
 }
 
 ext_missing_sec_headers(){
