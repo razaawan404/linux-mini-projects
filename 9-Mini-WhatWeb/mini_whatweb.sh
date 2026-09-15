@@ -58,17 +58,29 @@ execution_inline(){
 ext_header(){
 
 	urt="$1"
+	server=()
+	pwrby=()
+	cookie=()
 
-	 curl -sI "$url" | awk -F: '{
+	curl -sI "$url" | awk -F: '{
                                                 if ($1 == "Server")
                                                 {
-                                                        server_string = server_string $2 ", "
+                                              	   server = $2
+						}
+						else if ($1 == "X-Powered-By"){
 
+						   poweredby = $2
+						}
+						else if ($1 == "Set-Cookie"){
+
+						  cookies = $2
 						}
 			        }
 	END {
 
-        	print "[SERVER] : "  server_string
+		printf "[+] %-10s : %s\n", "Server", server
+		printf "[+] %-10s : %s\n", "Powered-By", poweredby
+		printf "[+] %-10s : %s\n", "Cookie", cookies
 
 	}'
 
