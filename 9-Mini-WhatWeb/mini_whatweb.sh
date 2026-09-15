@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 validate_url(){
 
 	url="$1"
@@ -20,7 +19,7 @@ main(){
 		echo "$v_url"
 	fi
 
-	execution_inline "$v_url"	
+	execution_inline "$v_url"
 }
 
 execution_inline(){
@@ -51,21 +50,23 @@ execution_inline(){
 
 	end=$(date +%s%N)
 
-	elapsed=((end - start))
+	elapsed=$((end - start))
+
+	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
 
 }
 ext_header(){
 
 	urt="$1"
 
-	 curl -sI "$url" | awk -F: '{ 
+	 curl -sI "$url" | awk -F: '{
                                                 if ($1 == "Server")
                                                 {
                                                         server_string = server_string $2 ", "
 
 						}
-        }
-	END { 
+			        }
+	END {
 
         	print "[SERVER] : "  server_string
 
