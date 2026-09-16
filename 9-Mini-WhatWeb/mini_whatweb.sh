@@ -27,11 +27,11 @@ execution_inline(){
 	url="$1"
 	_date=$(date +"%Y-%m-%d %H:%M")
 
-	printf "\n======================================\n"
+	printf "\n===========================================\n"
 	printf "%18s\n" "Mini WhatWeb"
 	printf "%5s %-10s : %s\n" " " "Target" "$url"
 	printf "%5s %-10s : %s\n" " " "Date" "$_date"
-	printf "=======================================\n\n"
+	printf "============================================\n\n"
 
 
 	start=$(date +%s%N)
@@ -122,6 +122,38 @@ ext_technologies(){
 ext_missing_sec_headers(){
 
 	url="$1"
+
+	curl -sI "$url" | awk ' BEGIN {
+
+					 FS = ": "
+
+					 missing_techs["X-Frame-Options"]      	     = 1
+                                         missing_techs["Content-Security-Policy"]    = 1
+                                         missing_techs["Strict-Transport-Security"]  = 1
+                                         missing_techs["X-Content-Type-Options"]     = 1
+                                         missing_techs["Referrer-Policy"]   	     = 1
+
+					}
+
+				{
+
+					for(keys in missing_techs){
+
+						if( $0 ~ keys ){
+
+						  	delete missing_techs[key]
+						}
+					} 
+				}
+
+			       END {
+
+						for(keys in missing_techs){
+
+
+							printf "[!] %-25s : %s\n", keys, "missing"
+						}
+				}'
 }
 
 final_report(){
