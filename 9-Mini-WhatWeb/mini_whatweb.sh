@@ -111,24 +111,24 @@ ext_technologies(){
 
 
 					total_found = 0
-				     }
-				{
+				    }
+			            {
 
-					for (key in tech_keywords) {
+					for (key in tech_keywords)
+				        {
 
-						if ($0 ~ key){
-
+						if ($0 ~ key)
+						{
 						    printf "[+] %-14s %s\n", key, "detected"
 
 						    total_found++
 						}
-
 					}
-				}
+				    }
 			   END {
 
-				 print total_found
-			}')
+					 print total_found
+			       }')
 
 	echo "$output" | sed '$d'
 
