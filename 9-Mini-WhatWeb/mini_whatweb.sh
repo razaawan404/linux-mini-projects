@@ -151,26 +151,27 @@ ext_missing_sec_headers(){
                                          missing_techs["Referrer-Policy"]   	     = 1
 
 					}
+					   {
 
-				{
+						for(keys in missing_techs)
+						{
 
-					for(keys in missing_techs){
+							if( $0 ~ keys )
+							{
 
-						if( $0 ~ keys ){
-
-						  	delete missing_techs[key]
+						  		delete missing_techs[key]
+							}
 						}
-					} 
-				}
+					    }
 
-			       END {
+			       		END {
 
 						for(keys in missing_techs){
 
 
 							printf "[!] %-25s : %s\n", keys, "missing"
 						}
-				}'
+					}'
 }
 
 final_report(){
