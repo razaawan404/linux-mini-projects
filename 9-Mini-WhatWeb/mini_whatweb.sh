@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+TOTAL_TECH_COUNT=0
+
 validate_url(){
 
 	url="$1"
@@ -54,6 +56,7 @@ execution_inline(){
 
 	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
 
+	final_report "$in_sec"
 }
 ext_header(){
 
@@ -90,7 +93,7 @@ ext_technologies(){
 
 	url="$1"
 
-	curl -sI "$url" | awk ' BEGIN {
+	output=$(curl -sI "$url" | awk ' BEGIN {
 
 					 FS = ": "
 
@@ -103,8 +106,9 @@ ext_technologies(){
 					 tech_keywords["__VIEWSTATE"] = 1
 					 tech_keywords["jquery"]      = 1
 
-				     }
 
+					total_found = 0
+				     }
 				{
 
 					for (key in tech_keywords) {
@@ -113,10 +117,20 @@ ext_technologies(){
 
 						    printf "[+] %-14s %s\n", key, "detected"
 
+						    total_found++
 						}
 
 					}
-				}'
+				}
+			   END {
+
+				 print total_found
+			}')
+
+	echo "$output" | sed '$d'
+
+	final_count=$(echo "$output" | tail -n 1)
+	TOTAL_TECH_COUNT=$((final_count + 0))
 }
 
 ext_missing_sec_headers(){
@@ -158,8 +172,15 @@ ext_missing_sec_headers(){
 
 final_report(){
 
-	echo "Found"
-	echo "Time"
+	_time="$1"
+	count="$TOTAL_TECH_COUNT"
+
+	printf "\n\n=================================\n"
+
+	printf "[*] %-10s : %s technologies\n" "Total Found" "$count"
+	printf "[*] %-10s : %ss\n" "Time" "$_time"
+
+	printf "================================="
 }
 while getopts ":u:" opts
 do
