@@ -66,26 +66,29 @@ ext_header(){
 	cookie=()
 
 	curl -sI "$url" | awk -F: '{
-                                                if ($1 == "Server")
-                                                {
-                                              	   server = $2
-						}
-						else if ($1 == "X-Powered-By"){
 
-						   poweredby = $2
-						}
-						else if ($1 == "Set-Cookie"){
+					if ($1 == "Server")
+                                        {
+                                             server = $2
+					}
+					else if ($1 == "X-Powered-By")
+					{
 
-						  cookies = $2
-						}
+					     poweredby = $2
+					}
+					else if ($1 == "Set-Cookie")
+					{
+
+					      cookies = $2
+					}
 			        }
-	END {
+		END {
 
-		printf "[+] %-14s : %s\n", "Server", server
-		printf "[+] %-14s : %s\n", "Powered-By", poweredby
-		printf "[+] %-14s : %s\n", "Cookie", cookies
+			printf "[+] %-14s : %s\n", "Server", server
+			printf "[+] %-14s : %s\n", "Powered-By", poweredby
+			printf "[+] %-14s : %s\n", "Cookie", cookies
 
-	}'
+		}'
 
 
 }
