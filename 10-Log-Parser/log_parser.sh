@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
 
-echo "Log Parser"
+while getopts ":f:t:" as opts
+do
 
+	case "$opts" in
+
+		f) log_file="$OPTARG" ;;
+		t) 
