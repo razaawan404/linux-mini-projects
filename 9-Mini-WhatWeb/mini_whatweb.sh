@@ -19,6 +19,7 @@ main(){
 
 	if ! v_url=$(validate_url "$url"); then
 		echo "$v_url"
+		exit 1    
 	fi
 
 	execution_inline "$v_url"
@@ -60,7 +61,7 @@ execution_inline(){
 }
 ext_header(){
 
-	urt="$1"
+	url="$1"
 	server=()
 	pwrby=()
 	cookie=()
@@ -159,7 +160,7 @@ ext_missing_sec_headers(){
 							if( $0 ~ keys )
 							{
 
-						  		delete missing_techs[key]
+						  		delete missing_techs[keys]
 							}
 						}
 					    }
