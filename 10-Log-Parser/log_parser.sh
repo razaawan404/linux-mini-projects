@@ -2,12 +2,28 @@
 
 validate_file(){
 
+	file="$1"
 
+	if [[ ! -f "$file" ]]; then
+
+		echo "File not exist"
+		return 1
+	fi
+
+	echo "$file"
 }
 
 validate_type(){
 
+	type="$1"
 
+	if [[ ! "${type,,}" == @(apache|nginx|ssh) ]]; then
+
+		echo "Error: type not found"
+		return 1
+	fi
+
+	echo "$type" 
 }
 main(){
 
@@ -16,17 +32,17 @@ main(){
 
 	if ! v_file=$(validate_file "$file"); then
 
-		echo "v_file"
+		echo "$v_file"
 		exit 1
 
 	elif ! v_type=$(validate_type "$type"); then
 
-		echo "v_type"
+		echo "$v_type"
 		exit 1
 	fi
 
 	echo "$v_file"
-	echo "$t_file" 
+	echo "$v_type" 
 
 }
 while getopts ":f:t:" opts
