@@ -59,7 +59,7 @@ main(){
 
         elif [[ "${v_type,,}" == "ssh" ]]; then
 
-                echo "$v_type"
+                run_ssh "$v_file" "$v_type"
 
         elif [[ "${v_type ,,}" == "nginx" ]]; then
 
@@ -81,6 +81,22 @@ run_apache(){
 	printf "%-10s : %s\n" "Lines" "$lines"
 	printf "%-10s : %s\n" "Date"  "$_date"
 	printf "==================================\n"
+}
+run_ssh(){
+
+	file="$1"
+        type="$2"
+
+        lines=$(wc -l "$file" | awk '{print $1}')
+        _date=$(date +"%Y-%m-%d %H:%M")
+
+        printf "==================================\n"
+        printf "%-10s : %s\n" "File" "$file"
+        printf "%-10s : %s\n" "Type" "$type"
+        printf "%-10s : %s\n" "Lines" "$lines"
+        printf "%-10s : %s\n" "Date"  "$_date"
+        printf "==================================\n"
+
 }
 while getopts ":f:t:" opts
 do
