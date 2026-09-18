@@ -61,9 +61,9 @@ main(){
 
                 run_ssh "$v_file" "$v_type"
 
-        elif [[ "${v_type ,,}" == "nginx" ]]; then
+        elif [[ "${v_type,,}" == "nginx" ]]; then
 
-                echo "$v_type"
+                run_nginx "$v_file" "$v_type"
         fi
 
 }
@@ -81,6 +81,9 @@ run_apache(){
 	printf "%-10s : %s\n" "Lines" "$lines"
 	printf "%-10s : %s\n" "Date"  "$_date"
 	printf "==================================\n"
+
+
+	echo 
 }
 run_ssh(){
 
