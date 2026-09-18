@@ -79,9 +79,9 @@ run_apache(){
 	printf "==================================\n\n"
 
 
-	extracting_ip "$file"
+	extracting_data "$file"
 }
-extracting_ip(){
+extracting_data(){
 
 	file="$1"
 
@@ -90,6 +90,11 @@ extracting_ip(){
 	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | sort | uniq -c)
 
 	echo "$ips" | sort -n -r | awk '{printf "%-7s %s\n", $1, $2}' | head -n 5
+
+	#extracting status
+	echo -e "\n\n[STATUS CODES]"
+	status_codes=$(cat "$file" | grep -Eo '(200|201|204|301|302|304|400|401|403|404|405|429|500|502|503|504)' | sort | uniq -c)
+
 }
 run_ssh(){
 
