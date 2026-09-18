@@ -53,7 +53,7 @@ main(){
 
 	#run "$v_file" "$v_type"
 
-	if [[ "${v_type,,}" == "apache" ]]; then
+	if [[ "${v_type,,}" =~ apache|nginx ]]; then
 
                 run_apache "$v_file" "$v_type"
 
@@ -61,11 +61,7 @@ main(){
 
                 run_ssh "$v_file" "$v_type"
 
-        elif [[ "${v_type,,}" == "nginx" ]]; then
-
-                run_nginx "$v_file" "$v_type"
-        fi
-
+	fi
 }
 run_apache(){
 
@@ -80,10 +76,20 @@ run_apache(){
 	printf "%-10s : %s\n" "Type" "$type"
 	printf "%-10s : %s\n" "Lines" "$lines"
 	printf "%-10s : %s\n" "Date"  "$_date"
-	printf "==================================\n"
+	printf "==================================\n\n"
 
 
-	echo 
+	extracting_ip "$file"
+}
+extracting_ip(){
+
+	file="$1"
+
+	#extracting ips
+	echo "[TOP 5 IPs]"
+	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | sort | uniq -c)
+
+	echo "$ips" | sort -n -r | awk '{printf "%-7s %s\n", $1, $2}' | head -n 5
 }
 run_ssh(){
 
