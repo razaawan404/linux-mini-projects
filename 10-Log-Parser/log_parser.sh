@@ -4,7 +4,12 @@ validate_file(){
 
 	file="$1"
 
-	if [[ ! -f "$file" ]]; then
+	if [[ -z "$file" ]]; then
+
+		echo "./log_parser.sh: option requires an argument -- f"
+		return 1
+
+	elif [[ ! -f "$file" ]]; then
 
 		echo "File not exist"
 		return 1
@@ -17,7 +22,12 @@ validate_type(){
 
 	type="$1"
 
-	if [[ ! "${type,,}" == @(apache|nginx|ssh) ]]; then
+	if [[ -z "$type" ]]; then
+
+		echo "./log_parser.sh: option requires an argument -- t"
+		return 1
+
+	elif [[ ! "${type,,}" == @(apache|nginx|ssh) ]]; then
 
 		echo "Error: type not found"
 		return 1
@@ -45,6 +55,7 @@ main(){
 	echo "$v_type" 
 
 }
+
 while getopts ":f:t:" opts
 do
 
