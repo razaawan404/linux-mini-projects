@@ -33,7 +33,7 @@ validate_type(){
 		return 1
 	fi
 
-	echo "$type" 
+	echo "$type"
 }
 main(){
 
@@ -51,11 +51,37 @@ main(){
 		exit 1
 	fi
 
-	echo "$v_file"
-	echo "$v_type" 
+	#run "$v_file" "$v_type"
+
+	if [[ "${v_type,,}" == "apache" ]]; then
+
+                run_apache "$v_file" "$v_type"
+
+        elif [[ "${v_type,,}" == "ssh" ]]; then
+
+                echo "$v_type"
+
+        elif [[ "${v_type ,,}" == "nginx" ]]; then
+
+                echo "$v_type"
+        fi
 
 }
+run_apache(){
 
+	file="$1"
+	type="$2"
+
+	lines=$(wc -l "$file" | awk '{print $1}')
+	_date=$(date +"%Y-%m-%d %H:%M")
+
+	printf "==================================\n"
+	printf "%-10s : %s\n" "File" "$file"
+	printf "%-10s : %s\n" "Type" "$type"
+	printf "%-10s : %s\n" "Lines" "$lines"
+	printf "%-10s : %s\n" "Date"  "$_date"
+	printf "==================================\n"
+}
 while getopts ":f:t:" opts
 do
 
