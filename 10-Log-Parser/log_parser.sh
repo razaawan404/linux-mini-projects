@@ -95,6 +95,7 @@ extracting_data(){
 	echo -e "\n\n[STATUS CODES]"
 	status_codes=$(cat "$file" | grep -Eo '(200|201|204|301|302|304|400|401|403|404|405|429|500|502|503|504)' | sort | uniq -c)
 
+	echo "$status_codes" | sort -n -r | awk '{printf "%-7s %s\n", $1, $2}'
 }
 run_ssh(){
 
