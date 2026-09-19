@@ -103,6 +103,18 @@ extracting_data(){
 	endpoints=$(cat "$file" | grep -Eo '(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS) /[^ ]+' | awk '{print $2}' | sort -n | uniq -c)
 
 	echo "$endpoints" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
+
+	#extracting suspicious activities
+
+	echo -e "\n\n[SUSPICIOUS ACTIVITY]"
+	activities "$file"
+}
+activites(){
+
+	file=$"1"
+
+	
+
 }
 run_ssh(){
 
