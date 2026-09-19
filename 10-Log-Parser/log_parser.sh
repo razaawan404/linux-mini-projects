@@ -72,10 +72,10 @@ run_apache(){
 	_date=$(date +"%Y-%m-%d %H:%M")
 
 	printf "==================================\n"
-	printf "%-10s : %s\n" "File" "$file"
-	printf "%-10s : %s\n" "Type" "$type"
-	printf "%-10s : %s\n" "Lines" "$lines"
-	printf "%-10s : %s\n" "Date"  "$_date"
+	printf "%2s %-10s : %s\n" " " "File" "$file"
+	printf "%2s %-10s : %s\n" " " "Type" "$type"
+	printf "%2s %-10s : %s\n" " " "Lines" "$lines"
+	printf "%2s %-10s : %s\n" " " "Date"  "$_date"
 	printf "==================================\n\n"
 
 
@@ -86,16 +86,23 @@ extracting_data(){
 	file="$1"
 
 	#extracting ips
+
 	echo "[TOP 5 IPs]"
 	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | sort | uniq -c)
-
-	echo "$ips" | sort -n -r | awk '{printf "%-7s %s\n", $1, $2}' | head -n 5
+	echo "$ips" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
 
 	#extracting status
+
 	echo -e "\n\n[STATUS CODES]"
 	status_codes=$(cat "$file" | grep -Eo '(200|201|204|301|302|304|400|401|403|404|405|429|500|502|503|504)' | sort | uniq -c)
+	echo "$status_codes" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}'
 
-	echo "$status_codes" | sort -n -r | awk '{printf "%-7s %s\n", $1, $2}'
+	#extracting endpoints
+
+	echo -e "\n\n[TOP 5 ENDPOINTS]"
+	endpoints=$(cat "$file" | grep -Eo '(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS) /[^ ]+' | awk '{print $2}' | sort -n | uniq -c)
+
+	echo "$endpoints" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
 }
 run_ssh(){
 
@@ -105,13 +112,12 @@ run_ssh(){
         lines=$(wc -l "$file" | awk '{print $1}')
         _date=$(date +"%Y-%m-%d %H:%M")
 
-        printf "==================================\n"
-        printf "%-10s : %s\n" "File" "$file"
-        printf "%-10s : %s\n" "Type" "$type"
-        printf "%-10s : %s\n" "Lines" "$lines"
-        printf "%-10s : %s\n" "Date"  "$_date"
-        printf "==================================\n"
-
+	printf "==================================\n"
+        printf "%2s %-10s : %s\n" " " "File" "$file"
+        printf "%2s %-10s : %s\n" " " "Type" "$type"
+        printf "%2s %-10s : %s\n" " " "Lines" "$lines"
+        printf "%2s %-10s : %s\n" " " "Date"  "$_date"
+        printf "==================================\n\n"
 }
 while getopts ":f:t:" opts
 do
