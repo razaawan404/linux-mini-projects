@@ -107,14 +107,30 @@ extracting_data(){
 	#extracting suspicious activities
 
 	echo -e "\n\n[SUSPICIOUS ACTIVITY]"
-	activities "$file"
+	activites "$file"
 }
 activites(){
 
-	file=$"1"
+	file="$1"
+	count=0
+	ips=()
 
-	
+	while read -r line;
+	do
 
+		if [[ "$line" == *"/admin"* ]]; then
+
+
+			ip=$(echo "$line" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+[0-9]+')
+			ips+=("$ip")
+			((count++))
+		fi
+	done < "$file"
+
+	for ip in "${!ips[@]}";
+	do
+	    echo "$ip $[ips[$ip]}" 
+	done
 }
 run_ssh(){
 
