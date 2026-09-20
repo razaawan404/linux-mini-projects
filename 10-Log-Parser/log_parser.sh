@@ -112,7 +112,12 @@ extracting_data(){
 activites(){
 
 	file="$1"
-	count=0
+
+	#Most repeated ip for all time
+
+	
+
+	#Most repeated ips for /admin endpoints
 	ips=()
 
 	while read -r line;
@@ -123,14 +128,15 @@ activites(){
 
 			ip=$(echo "$line" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+[0-9]+')
 			ips+=("$ip")
-			((count++))
 		fi
 	done < "$file"
 
-	for ip in "${!ips[@]}";
-	do
-	    echo "$ip $[ips[$ip]}" 
-	done
+
+	most_repeated_ip=$(printf '%s\n' "${ips[@]}" | sort | uniq -c | awk '{print $1, $2}' | sort -n -r | head -n 1)
+	count=$(echo "$most_repeated_ip" | awk '{print $1}')
+
+	printf "[!] %-10s → %s\n" "$most_repeated_ip" "$count requests to /admin — brute force suspected"
+
 }
 run_ssh(){
 
