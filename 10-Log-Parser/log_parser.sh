@@ -107,16 +107,19 @@ extracting_data(){
 	#extracting suspicious activities
 
 	echo -e "\n\n[SUSPICIOUS ACTIVITY]"
-	activites "$file"
+	activites "$file" "$ips"
 }
 activites(){
 
 	file="$1"
+	all_ips="$2"
 
 	#Most repeated ip for all time
 
-	
+	top_ip=$(echo "$all_ips" | sort -n -r | awk '{print $2}'| head -n 1)
+	top_ip_count=$(echo "$all_ips" | sort -n -r | awk '{print $1}' | head -n 1)
 
+	printf "[!] %-15s → %s\n" "$top_ip" "$top_ip_count requests — possible scanner" 
 	#Most repeated ips for /admin endpoints
 	ips=()
 
@@ -135,7 +138,7 @@ activites(){
 	most_repeated_ip=$(printf '%s\n' "${ips[@]}" | sort | uniq -c | awk '{print $1, $2}' | sort -n -r | head -n 1)
 	count=$(echo "$most_repeated_ip" | awk '{print $1}')
 
-	printf "[!] %-10s → %s\n" "$most_repeated_ip" "$count requests to /admin — brute force suspected"
+	printf "[!] %-15s → %s\n" "$most_repeated_ip" "$count requests to /admin — brute force suspected"
 
 }
 run_ssh(){
