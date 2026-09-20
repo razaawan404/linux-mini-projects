@@ -118,8 +118,8 @@ activites(){
 
 	top_ip=$(echo "$all_ips" | sort -n -r | awk '{print $2}'| head -n 1)
 	top_ip_count=$(echo "$all_ips" | sort -n -r | awk '{print $1}' | head -n 1)
-
 	printf "[!] %-15s → %s\n" "$top_ip" "$top_ip_count requests — possible scanner" 
+
 	#Most repeated ips for /admin endpoints
 	ips=()
 
@@ -140,6 +140,16 @@ activites(){
 
 	printf "[!] %-15s → %s\n" "$most_repeated_ip" "$count requests to /admin — brute force suspected"
 
+
+	#Accessed count of ./env
+
+	env_count=$(cat "$file" | grep -Ec '/\.env')
+	printf "[!] %-15s → %s\n" "/.env" "accessed $env_count times — sensitive file probe"
+
+	#Accessed count of /wp-admin
+
+	wp_count=$(cat "$file" | grep -Ec '/wp-admin')
+	printf "[!] %-15s → %s\n" "/wp-admin" "accessed $wp_count times — times — WordPress attack"
 }
 run_ssh(){
 
