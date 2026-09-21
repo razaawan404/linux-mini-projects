@@ -1,50 +1,186 @@
-2026/07/17 14:32:10 [error] 1234#1234: *56 open() "/var/www/html/.env" failed (2: No such file or directory), client: 192.168.1.105, server: example.com
-2026/07/17 14:32:11 [warn] 1235#1235: *57 an upstream response is buffered to a temporary file, client: 10.0.0.23, server: example.com
-2026/07/17 14:32:12 [error] 1236#1236: *58 access forbidden by rule, client: 192.168.1.44, server: example.com, request: "GET /admin HTTP/1.1"
-2026/07/17 14:32:13 [error] 1237#1237: *59 connect() failed (111: Connection refused) while connecting to upstream, client: 172.16.0.15, server: example.com, request: "GET /api HTTP/1.1"
-2026/07/17 14:32:14 [notice] 1238#1238: signal process started
-2026/07/17 14:32:15 [error] 1239#1239: *60 open() "/var/www/html/backup.zip" failed (2: No such file or directory), client: 192.168.1.105, server: example.com
-2026/07/17 14:32:16 [warn] 1240#1240: *61 an upstream response is buffered to a temporary file, client: 10.0.0.42, server: example.com
-2026/07/17 14:32:17 [error] 1241#1241: *62 directory index of "/var/www/html/admin/" is forbidden, client: 192.168.1.77, server: example.com
-2026/07/17 14:32:18 [error] 1242#1242: *63 open() "/var/www/html/config.php" failed (2: No such file or directory), client: 172.16.0.22, server: example.com
-2026/07/17 14:32:19 [notice] 1243#1243: using the "epoll" event method
-2026/07/17 14:32:20 [error] 1244#1244: *64 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.1.33, server: example.com
-2026/07/17 14:32:21 [warn] 1245#1245: conflicting server name "example.com" on 0.0.0.0:80, ignored
-2026/07/17 14:32:22 [error] 1246#1246: *65 open() "/var/www/html/wp-login.php" failed (2: No such file or directory), client: 192.168.1.44, server: example.com
-2026/07/17 14:32:23 [error] 1247#1247: *66 client intended to send too large body: 15728640 bytes, client: 10.0.0.51, server: example.com, request: "POST /upload HTTP/1.1"
-2026/07/17 14:32:24 [notice] 1248#1248: gracefully shutting down
-2026/07/17 14:32:25 [error] 1249#1249: *67 open() "/var/www/html/.git/config" failed (2: No such file or directory), client: 192.168.1.105, server: example.com
-2026/07/17 14:32:26 [warn] 1250#1250: *68 upstream server temporarily disabled while connecting to upstream, client: 172.16.0.30, server: example.com
-2026/07/17 14:32:27 [error] 1251#1251: *69 access forbidden by rule, client: 192.168.1.20, server: example.com, request: "GET /private HTTP/1.1"
-2026/07/17 14:32:28 [error] 1252#1252: *70 open() "/var/www/html/secret.txt" failed (2: No such file or directory), client: 10.0.0.23, server: example.com
-2026/07/17 14:32:29 [notice] 1253#1253: signal process started
-2026/07/17 14:32:30 [error] 1254#1254: *71 upstream prematurely closed connection while reading response header from upstream, client: 192.168.1.33, server: example.com, request: "GET /api/users HTTP/1.1"
-2026/07/17 14:32:31 [warn] 1255#1255: *72 an upstream response is buffered to a temporary file, client: 192.168.1.77, server: example.com
-2026/07/17 14:32:32 [error] 1256#1256: *73 open() "/var/www/html/admin.php" failed (2: No such file or directory), client: 172.16.0.15, server: example.com
-2026/07/17 14:32:33 [error] 1257#1257: *74 client intended to send too large body: 10485760 bytes, client: 192.168.1.1, server: example.com, request: "POST /login HTTP/1.1"
-2026/07/17 14:32:34 [notice] 1258#1258: worker process started
-2026/07/17 14:32:35 [error] 1259#1259: *75 connect() failed (111: Connection refused) while connecting to upstream, client: 10.0.0.42, server: example.com, request: "GET /api/status HTTP/1.1"
-2026/07/17 14:32:36 [warn] 1260#1260: conflicting server name "test.local" on 0.0.0.0:443, ignored
-2026/07/17 14:32:37 [error] 1261#1261: *76 open() "/var/www/html/robots.txt" failed (2: No such file or directory), client: 192.168.1.44, server: example.com
-2026/07/17 14:32:38 [error] 1262#1262: *77 directory index of "/var/www/html/uploads/" is forbidden, client: 172.16.0.22, server: example.com
-2026/07/17 14:32:39 [notice] 1263#1263: signal process started
-2026/07/17 14:32:40 [error] 1264#1264: *78 upstream timed out (110: Connection timed out) while reading response header from upstream, client: 192.168.1.105, server: example.com, request: "GET /dashboard HTTP/1.1"
-2026/07/17 14:32:41 [warn] 1265#1265: *79 upstream server temporarily disabled while connecting to upstream, client: 10.0.0.23, server: example.com
-2026/07/17 14:32:42 [error] 1266#1266: *80 open() "/var/www/html/phpinfo.php" failed (2: No such file or directory), client: 192.168.1.33, server: example.com
-2026/07/17 14:32:43 [error] 1267#1267: *81 access forbidden by rule, client: 192.168.1.77, server: example.com, request: "GET /server-status HTTP/1.1"
-2026/07/17 14:32:44 [notice] 1268#1268: worker process exited with code 0
-2026/07/17 14:32:45 [error] 1269#1269: *82 open() "/var/www/html/.htaccess" failed (2: No such file or directory), client: 10.0.0.51, server: example.com
-2026/07/17 14:32:46 [warn] 1270#1270: an upstream response is buffered to a temporary file, client: 192.168.1.20, server: example.com
-2026/07/17 14:32:47 [error] 1271#1271: *83 connect() failed (111: Connection refused) while connecting to upstream, client: 172.16.0.30, server: example.com, request: "GET /api/menu HTTP/1.1"
-2026/07/17 14:32:48 [error] 1272#1272: *84 open() "/var/www/html/debug" failed (2: No such file or directory), client: 192.168.1.105, server: example.com
-2026/07/17 14:32:49 [notice] 1273#1273: signal process started
-2026/07/17 14:32:50 [error] 1274#1274: *85 upstream prematurely closed connection while reading response header from upstream, client: 10.0.0.42, server: example.com, request: "POST /api/login HTTP/1.1"
-2026/07/17 14:32:51 [warn] 1275#1275: conflicting server name "example.org" on 0.0.0.0:80, ignored
-2026/07/17 14:32:52 [error] 1276#1276: *86 open() "/var/www/html/backup.sql" failed (2: No such file or directory), client: 192.168.1.44, server: example.com
-2026/07/17 14:32:53 [error] 1277#1277: *87 client intended to send too large body: 20971520 bytes, client: 172.16.0.15, server: example.com, request: "POST /upload HTTP/1.1"
-2026/07/17 14:32:54 [notice] 1278#1278: gracefully shutting down
-2026/07/17 14:32:55 [error] 1279#1279: *88 open() "/var/www/html/.ssh/id_rsa" failed (2: No such file or directory), client: 192.168.1.105, server: example.com
-2026/07/17 14:32:56 [warn] 1280#1280: *89 upstream response is buffered to a temporary file, client: 192.168.1.1, server: example.com
-2026/07/17 14:32:57 [error] 1281#1281: *90 directory index of "/var/www/html/files/" is forbidden, client: 10.0.0.23, server: example.com
 2026/07/17 14:32:58 [error] 1282#1282: *91 open() "/var/www/html/.DS_Store" failed (2: No such file or directory), client: 192.168.1.77, server: example.com
-2026/07/17 14:32:59 [notice] 1283#1283: signal process started
+2026/07/17 14:33:01 [warning] 1282#1282: *92 Failed password for root from 192.168.1.105 port 42812 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:33:02 [warning] 1282#1282: *93 Failed password for root from 192.168.1.105 port 42814 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:33:03 [warning] 1282#1282: *94 Failed password for invalid user admin from 104.28.14.88 port 51002 ssh2, client: 104.28.14.88, server: example.com
+2026/07/17 14:33:05 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 134 failed attempts — brute force [!] root → 89 failed attempts — targeted attack
+2026/07/17 14:33:10 [info] 1282#1282: *95 Accepted password for ubuntu from 192.168.1.45 port 55120 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:33:15 [error] 1282#1282: *96 open() "/var/www/html/.env" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:33:18 [warning] 1282#1282: *97 Failed password for user from 45.33.32.156 port 38920 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:33:19 [warning] 1282#1282: *98 Failed password for invalid user administrator from 45.33.32.156 port 38922 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:33:22 [error] 1282#1282: *99 open() "/var/www/html/wp-login.php" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:33:25 [warning] 1282#1282: *100 Failed password for root from 192.168.1.105 port 42820 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:33:28 [info] 1282#1282: *101 Accepted publickey for sysadmin from 10.0.0.15 port 60112 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:33:30 [SUSPICIOUS ACTIVITY] [!] 45.33.32.156 → 42 failed attempts — credential stuffing [!] administrator → 42 failed attempts — targeted attack
+2026/07/17 14:33:35 [error] 1282#1282: *102 open() "/var/www/html/config.php" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:33:40 [warning] 1282#1282: *103 Failed password for invalid user test from 192.168.1.110 port 49102 ssh2, client: 192.168.1.110, server: example.com
+2026/07/17 14:33:42 [warning] 1282#1282: *104 Failed password for ubuntu from 192.168.1.110 port 49104 ssh2, client: 192.168.1.110, server: example.com
+2026/07/17 14:33:45 [info] 1282#1282: *105 Accepted password for user from 192.168.1.50 port 52310 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:33:50 [error] 1282#1282: *106 open() "/var/www/html/phpmyadmin/index.php" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:33:55 [warning] 1282#1282: *107 Failed password for root from 192.168.1.105 port 42830 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:33:59 [SUSPICIOUS ACTIVITY] [!] 185.220.101.5 → 88 failed attempts — web scanner [!] path traversal → 50 failed attempts — reconnaissance
+2026/07/17 14:34:02 [warning] 1282#1282: *108 Failed password for invalid user guest from 91.240.118.22 port 40120 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:34:05 [info] 1282#1282: *109 Accepted publickey for root from 10.0.0.2 port 58900 ssh2, client: 10.0.0.2, server: example.com
+2026/07/17 14:34:10 [error] 1282#1282: *110 open() "/var/www/html/.git/config" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:34:14 [warning] 1282#1282: *111 Failed password for admin from 192.168.1.105 port 42835 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:34:18 [warning] 1282#1282: *112 Failed password for root from 192.168.1.105 port 42838 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:34:20 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 150 failed attempts — brute force [!] root → 102 failed attempts — targeted attack
+2026/07/17 14:34:25 [info] 1282#1282: *113 Accepted password for ubuntu from 192.168.1.45 port 55124 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:34:28 [error] 1282#1282: *114 open() "/var/www/html/backup.sql" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:34:32 [warning] 1282#1282: *115 Failed password for invalid user oracle from 192.168.1.200 port 34512 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:34:35 [warning] 1282#1282: *116 Failed password for invalid user postgres from 192.168.1.200 port 34514 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:34:40 [info] 1282#1282: *117 Accepted password for deploy from 192.168.1.80 port 48102 ssh2, client: 192.168.1.80, server: example.com
+2026/07/17 14:34:44 [error] 1282#1282: *118 open() "/var/www/html/api/.env" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:34:48 [warning] 1282#1282: *119 Failed password for root from 185.220.101.5 port 51102 ssh2, client: 185.220.101.5, server: example.com
+2026/07/17 14:34:50 [SUSPICIOUS ACTIVITY] [!] 192.168.1.200 → 65 failed attempts — dictionary attack [!] database accounts → 40 failed attempts — targeted attack
+2026/07/17 14:34:55 [warning] 1282#1282: *120 Failed password for ubuntu from 192.168.1.105 port 42842 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:35:00 [info] 1282#1282: *121 Accepted password for admin from 10.0.0.5 port 59002 ssh2, client: 10.0.0.5, server: example.com
+2026/07/17 14:35:04 [error] 1282#1282: *122 open() "/var/www/html/v1/config" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:35:08 [warning] 1282#1282: *123 Failed password for invalid user service from 91.240.118.22 port 40130 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:35:12 [warning] 1282#1282: *124 Failed password for root from 91.240.118.22 port 40132 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:35:15 [SUSPICIOUS ACTIVITY] [!] 91.240.118.22 → 92 failed attempts — brute force [!] root → 60 failed attempts — targeted attack
+2026/07/17 14:35:18 [info] 1282#1282: *125 Accepted publickey for developer from 192.168.1.15 port 61200 ssh2, client: 192.168.1.15, server: example.com
+2026/07/17 14:35:22 [error] 1282#1282: *126 open() "/var/www/html/admin/index.php" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:35:26 [warning] 1282#1282: *127 Failed password for user from 192.168.1.105 port 42845 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:35:30 [warning] 1282#1282: *128 Failed password for root from 192.168.1.105 port 42848 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:35:33 [info] 1282#1282: *129 Accepted password for user from 192.168.1.50 port 52312 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:35:38 [error] 1282#1282: *130 open() "/var/www/html/setup.php" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:35:42 [warning] 1282#1282: *131 Failed password for invalid user support from 45.33.32.156 port 38930 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:35:45 [SUSPICIOUS ACTIVITY] [!] 103.152.18.4 → 110 failed attempts — vulnerability scan [!] php scripts → 85 failed attempts — automated probe
+2026/07/17 14:35:50 [warning] 1282#1282: *132 Failed password for root from 192.168.1.105 port 42850 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:35:54 [info] 1282#1282: *133 Accepted publickey for sysadmin from 10.0.0.15 port 60115 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:35:58 [error] 1282#1282: *134 open() "/var/www/html/db.php" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:36:02 [warning] 1282#1282: *135 Failed password for invalid user guest from 192.168.1.105 port 42852 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:36:05 [warning] 1282#1282: *136 Failed password for admin from 192.168.1.105 port 42855 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:36:08 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 180 failed attempts — brute force [!] root → 120 failed attempts — targeted attack
+2026/07/17 14:36:12 [info] 1282#1282: *137 Accepted password for ubuntu from 192.168.1.45 port 55130 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:36:16 [error] 1282#1282: *138 open() "/var/www/html/administrator/" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:36:20 [warning] 1282#1282: *139 Failed password for invalid user operator from 91.240.118.22 port 40140 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:36:24 [warning] 1282#1282: *140 Failed password for root from 91.240.118.22 port 40142 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:36:28 [info] 1282#1282: *141 Accepted password for deploy from 192.168.1.80 port 48108 ssh2, client: 192.168.1.80, server: example.com
+2026/07/17 14:36:32 [error] 1282#1282: *142 open() "/var/www/html/config.json" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:36:35 [SUSPICIOUS ACTIVITY] [!] 91.240.118.22 → 115 failed attempts — brute force [!] root → 80 failed attempts — targeted attack
+2026/07/17 14:36:40 [warning] 1282#1282: *143 Failed password for user from 192.168.1.105 port 42860 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:36:44 [warning] 1282#1282: *144 Failed password for root from 192.168.1.105 port 42862 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:36:48 [info] 1282#1282: *145 Accepted publickey for root from 10.0.0.2 port 58905 ssh2, client: 10.0.0.2, server: example.com
+2026/07/17 14:36:52 [error] 1282#1282: *146 open() "/var/www/html/server-status" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:36:56 [warning] 1282#1282: *147 Failed password for invalid user mysql from 192.168.1.200 port 34520 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:37:00 [SUSPICIOUS ACTIVITY] [!] 185.220.101.5 → 120 failed attempts — path traversal [!] sensitive files → 70 failed attempts — reconnaissance
+2026/07/17 14:37:04 [warning] 1282#1282: *148 Failed password for ubuntu from 192.168.1.105 port 42865 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:37:08 [info] 1282#1282: *149 Accepted password for user from 192.168.1.50 port 52315 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:37:12 [error] 1282#1282: *150 open() "/var/www/html/xmlrpc.php" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:37:16 [warning] 1282#1282: *151 Failed password for invalid user info from 45.33.32.156 port 38940 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:37:20 [warning] 1282#1282: *152 Failed password for root from 192.168.1.105 port 42868 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:37:23 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 210 failed attempts — brute force [!] root → 145 failed attempts — targeted attack
+2026/07/17 14:37:28 [info] 1282#1282: *153 Accepted publickey for developer from 192.168.1.15 port 61205 ssh2, client: 192.168.1.15, server: example.com
+2026/07/17 14:37:32 [error] 1282#1282: *154 open() "/var/www/html/.htaccess" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:37:36 [warning] 1282#1282: *155 Failed password for admin from 192.168.1.105 port 42870 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:37:40 [warning] 1282#1282: *156 Failed password for root from 192.168.1.105 port 42872 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:37:44 [info] 1282#1282: *157 Accepted password for admin from 10.0.0.5 port 59008 ssh2, client: 10.0.0.5, server: example.com
+2026/07/17 14:37:48 [error] 1282#1282: *158 open() "/var/www/html/pma/index.php" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:37:52 [warning] 1282#1282: *159 Failed password for invalid user testuser from 91.240.118.22 port 40150 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:37:55 [SUSPICIOUS ACTIVITY] [!] 45.33.32.156 → 75 failed attempts — credential stuffing [!] admin accounts → 60 failed attempts — targeted attack
+2026/07/17 14:38:00 [warning] 1282#1282: *160 Failed password for root from 91.240.118.22 port 40152 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:38:04 [info] 1282#1282: *161 Accepted password for ubuntu from 192.168.1.45 port 55135 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:38:08 [error] 1282#1282: *162 open() "/var/www/html/backup.tar.gz" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:38:12 [warning] 1282#1282: *163 Failed password for user from 192.168.1.105 port 42875 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:38:16 [warning] 1282#1282: *164 Failed password for root from 192.168.1.105 port 42878 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:38:20 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 240 failed attempts — brute force [!] root → 168 failed attempts — targeted attack
+2026/07/17 14:38:24 [info] 1282#1282: *165 Accepted publickey for sysadmin from 10.0.0.15 port 60120 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:38:28 [error] 1282#1282: *166 open() "/var/www/html/api/v1/health" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:38:32 [warning] 1282#1282: *167 Failed password for invalid user temp from 192.168.1.200 port 34530 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:38:36 [warning] 1282#1282: *168 Failed password for ubuntu from 192.168.1.105 port 42880 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:38:40 [info] 1282#1282: *169 Accepted password for deploy from 192.168.1.80 port 48112 ssh2, client: 192.168.1.80, server: example.com
+2026/07/17 14:38:44 [error] 1282#1282: *170 open() "/var/www/html/shell.php" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:38:48 [warning] 1282#1282: *171 Failed password for root from 185.220.101.5 port 51110 ssh2, client: 185.220.101.5, server: example.com
+2026/07/17 14:38:50 [SUSPICIOUS ACTIVITY] [!] 103.152.18.4 → 145 failed attempts — webshell probe [!] common exploits → 90 failed attempts — scanning
+2026/07/17 14:38:55 [warning] 1282#1282: *172 Failed password for invalid user guest from 45.33.32.156 port 38950 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:39:00 [info] 1282#1282: *173 Accepted password for user from 192.168.1.50 port 52320 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:39:04 [error] 1282#1282: *174 open() "/var/www/html/config.bak" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:39:08 [warning] 1282#1282: *175 Failed password for root from 192.168.1.105 port 42885 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:39:12 [warning] 1282#1282: *176 Failed password for admin from 192.168.1.105 port 42888 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:39:15 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 270 failed attempts — brute force [!] root → 190 failed attempts — targeted attack
+2026/07/17 14:39:20 [info] 1282#1282: *177 Accepted publickey for root from 10.0.0.2 port 58910 ssh2, client: 10.0.0.2, server: example.com
+2026/07/17 14:39:24 [error] 1282#1282: *178 open() "/var/www/html/wp-config.php.bak" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:39:28 [warning] 1282#1282: *179 Failed password for invalid user sales from 91.240.118.22 port 40160 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:39:32 [warning] 1282#1282: *180 Failed password for root from 91.240.118.22 port 40162 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:39:36 [info] 1282#1282: *181 Accepted publickey for developer from 192.168.1.15 port 61210 ssh2, client: 192.168.1.15, server: example.com
+2026/07/17 14:39:40 [error] 1282#1282: *182 open() "/var/www/html/console" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:39:44 [warning] 1282#1282: *183 Failed password for user from 192.168.1.105 port 42890 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:39:46 [SUSPICIOUS ACTIVITY] [!] 91.240.118.22 → 140 failed attempts — brute force [!] root → 95 failed attempts — targeted attack
+2026/07/17 14:39:50 [warning] 1282#1282: *184 Failed password for root from 192.168.1.105 port 42892 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:39:54 [info] 1282#1282: *185 Accepted password for ubuntu from 192.168.1.45 port 55140 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:39:58 [error] 1282#1282: *186 open() "/var/www/html/db_backup.sql" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:40:02 [warning] 1282#1282: *187 Failed password for invalid user manager from 192.168.1.200 port 34540 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:40:06 [warning] 1282#1282: *188 Failed password for ubuntu from 192.168.1.105 port 42895 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:40:10 [info] 1282#1282: *189 Accepted password for admin from 10.0.0.5 port 59012 ssh2, client: 10.0.0.5, server: example.com
+2026/07/17 14:40:12 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 300 failed attempts — brute force [!] root → 210 failed attempts — targeted attack
+2026/07/17 14:40:16 [error] 1282#1282: *190 open() "/var/www/html/myadmin/index.php" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:40:20 [warning] 1282#1282: *191 Failed password for invalid user webmaster from 45.33.32.156 port 38960 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:40:24 [warning] 1282#1282: *192 Failed password for root from 192.168.1.105 port 42898 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:40:28 [info] 1282#1282: *193 Accepted publickey for sysadmin from 10.0.0.15 port 60125 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:40:32 [error] 1282#1282: *194 open() "/var/www/html/latest.tar.gz" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:40:36 [warning] 1282#1282: *195 Failed password for admin from 192.168.1.105 port 42900 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:40:40 [warning] 1282#1282: *196 Failed password for invalid user oracle from 91.240.118.22 port 40170 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:40:43 [SUSPICIOUS ACTIVITY] [!] 185.220.101.5 → 160 failed attempts — directory traversal [!] sensitive archives → 95 failed attempts — reconnaissance
+2026/07/17 14:40:48 [info] 1282#1282: *197 Accepted password for deploy from 192.168.1.80 port 48118 ssh2, client: 192.168.1.80, server: example.com
+2026/07/17 14:40:52 [error] 1282#1282: *198 open() "/var/www/html/actuator/health" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:40:56 [warning] 1282#1282: *199 Failed password for root from 192.168.1.105 port 42902 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:41:00 [warning] 1282#1282: *200 Failed password for user from 192.168.1.105 port 42905 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:41:04 [info] 1282#1282: *201 Accepted password for user from 192.168.1.50 port 52325 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:41:08 [error] 1282#1282: *202 open() "/var/www/html/vendor/.env" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:41:10 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 325 failed attempts — brute force [!] root → 225 failed attempts — targeted attack
+2026/07/17 14:41:15 [warning] 1282#1282: *203 Failed password for invalid user ftpuser from 45.33.32.156 port 38970 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:41:19 [warning] 1282#1282: *204 Failed password for root from 91.240.118.22 port 40172 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:41:23 [info] 1282#1282: *205 Accepted publickey for root from 10.0.0.2 port 58915 ssh2, client: 10.0.0.2, server: example.com
+2026/07/17 14:41:27 [error] 1282#1282: *206 open() "/var/www/html/server.key" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:41:31 [warning] 1282#1282: *207 Failed password for admin from 192.168.1.105 port 42910 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:41:35 [warning] 1282#1282: *208 Failed password for ubuntu from 192.168.1.105 port 42912 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:41:38 [SUSPICIOUS ACTIVITY] [!] 91.240.118.22 → 165 failed attempts — brute force [!] root → 110 failed attempts — targeted attack
+2026/07/17 14:41:42 [info] 1282#1282: *209 Accepted password for ubuntu from 192.168.1.45 port 55145 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:41:46 [error] 1282#1282: *210 open() "/var/www/html/dump.sql" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:41:50 [warning] 1282#1282: *211 Failed password for invalid user guest from 192.168.1.200 port 34550 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:41:54 [warning] 1282#1282: *212 Failed password for root from 192.168.1.105 port 42915 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:41:58 [info] 1282#1282: *213 Accepted publickey for developer from 192.168.1.15 port 61215 ssh2, client: 192.168.1.15, server: example.com
+2026/07/17 14:42:02 [error] 1282#1282: *214 open() "/var/www/html/config/database.yml" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:42:05 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 350 failed attempts — brute force [!] root → 240 failed attempts — targeted attack
+2026/07/17 14:42:10 [warning] 1282#1282: *215 Failed password for user from 192.168.1.105 port 42918 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:42:14 [warning] 1282#1282: *216 Failed password for root from 192.168.1.105 port 42920 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:42:18 [info] 1282#1282: *217 Accepted password for admin from 10.0.0.5 port 59015 ssh2, client: 10.0.0.5, server: example.com
+2026/07/17 14:42:22 [error] 1282#1282: *218 open() "/var/www/html/admin.php" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:42:26 [warning] 1282#1282: *219 Failed password for invalid user backup from 45.33.32.156 port 38980 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:42:30 [warning] 1282#1282: *220 Failed password for root from 185.220.101.5 port 51120 ssh2, client: 185.220.101.5, server: example.com
+2026/07/17 14:42:33 [SUSPICIOUS ACTIVITY] [!] 45.33.32.156 → 100 failed attempts — credential stuffing [!] system service accounts → 75 failed attempts — targeted attack
+2026/07/17 14:42:38 [info] 1282#1282: *221 Accepted publickey for sysadmin from 10.0.0.15 port 60130 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:42:42 [error] 1282#1282: *222 open() "/var/www/html/wp-includes/" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:42:46 [warning] 1282#1282: *223 Failed password for admin from 192.168.1.105 port 42922 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:42:50 [warning] 1282#1282: *224 Failed password for ubuntu from 192.168.1.105 port 42925 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:42:54 [info] 1282#1282: *225 Accepted password for deploy from 192.168.1.80 port 48122 ssh2, client: 192.168.1.80, server: example.com
+2026/07/17 14:42:58 [error] 1282#1282: *226 open() "/var/www/html/api/config.json" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:43:01 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 380 failed attempts — brute force [!] root → 260 failed attempts — targeted attack
+2026/07/17 14:43:05 [warning] 1282#1282: *227 Failed password for invalid user testing from 91.240.118.22 port 40180 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:43:09 [warning] 1282#1282: *228 Failed password for root from 91.240.118.22 port 40182 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:43:13 [info] 1282#1282: *229 Accepted password for user from 192.168.1.50 port 52330 ssh2, client: 192.168.1.50, server: example.com
+2026/07/17 14:43:17 [error] 1282#1282: *230 open() "/var/www/html/id_rsa" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:43:21 [warning] 1282#1282: *231 Failed password for user from 192.168.1.105 port 42928 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:43:25 [warning] 1282#1282: *232 Failed password for root from 192.168.1.105 port 42930 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:43:28 [SUSPICIOUS ACTIVITY] [!] 198.51.100.12 → 90 failed attempts — key hunting [!] sensitive files → 55 failed attempts — reconnaissance
+2026/07/17 14:43:32 [info] 1282#1282: *233 Accepted publickey for root from 10.0.0.2 port 58920 ssh2, client: 10.0.0.2, server: example.com
+2026/07/17 14:43:36 [error] 1282#1282: *234 open() "/var/www/html/.env.local" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
+2026/07/17 14:43:40 [warning] 1282#1282: *235 Failed password for invalid user demo from 192.168.1.200 port 34560 ssh2, client: 192.168.1.200, server: example.com
+2026/07/17 14:43:44 [warning] 1282#1282: *236 Failed password for root from 192.168.1.105 port 42932 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:43:48 [info] 1282#1282: *237 Accepted password for ubuntu from 192.168.1.45 port 55150 ssh2, client: 192.168.1.45, server: example.com
+2026/07/17 14:43:52 [error] 1282#1282: *238 open() "/var/www/html/backup/" failed (2: No such file or directory), client: 185.220.101.5, server: example.com
+2026/07/17 14:43:55 [SUSPICIOUS ACTIVITY] [!] 192.168.1.105 → 410 failed attempts — brute force [!] root → 285 failed attempts — targeted attack
+2026/07/17 14:44:00 [warning] 1282#1282: *239 Failed password for admin from 192.168.1.105 port 42935 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:44:04 [warning] 1282#1282: *240 Failed password for invalid user user1 from 45.33.32.156 port 38990 ssh2, client: 45.33.32.156, server: example.com
+2026/07/17 14:44:08 [info] 1282#1282: *241 Accepted publickey for developer from 192.168.1.15 port 61220 ssh2, client: 192.168.1.15, server: example.com
+2026/07/17 14:44:12 [error] 1282#1282: *242 open() "/var/www/html/phpinfo.php" failed (2: No such file or directory), client: 104.28.14.88, server: example.com
+2026/07/17 14:44:16 [warning] 1282#1282: *243 Failed password for root from 91.240.118.22 port 40185 ssh2, client: 91.240.118.22, server: example.com
+2026/07/17 14:44:20 [warning] 1282#1282: *244 Failed password for ubuntu from 192.168.1.105 port 42938 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:44:23 [SUSPICIOUS ACTIVITY] [!] 91.240.118.22 → 190 failed attempts — brute force [!] root → 130 failed attempts — targeted attack
+2026/07/17 14:44:28 [info] 1282#1282: *245 Accepted password for admin from 10.0.0.5 port 59020 ssh2, client: 10.0.0.5, server: example.com
+2026/07/17 14:44:32 [error] 1282#1282: *246 open() "/var/www/html/sftp-config.json" failed (2: No such file or directory), client: 198.51.100.12, server: example.com
+2026/07/17 14:44:36 [warning] 1282#1282: *247 Failed password for user from 192.168.1.105 port 42940 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:44:40 [warning] 1282#1282: *248 Failed password for root from 192.168.1.105 port 42942 ssh2, client: 192.168.1.105, server: example.com
+2026/07/17 14:44:44 [info] 1282#1282: *249 Accepted publickey for sysadmin from 10.0.0.15 port 60135 ssh2, client: 10.0.0.15, server: example.com
+2026/07/17 14:44:48 [error] 1282#1282: *250 open() "/var/www/html/db.sql" failed (2: No such file or directory), client: 103.152.18.4, server: example.com
