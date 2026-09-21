@@ -80,7 +80,7 @@ run_apache(){
 
 	start_time=$(date +%s%N)
 
-	extracting_data "$file"
+	apache_extracting_data "$file"
 	uniq_ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq | wc -l)
 
 	end_time=$(date +%s%N)
@@ -96,7 +96,7 @@ run_apache(){
 	printf "====================================\n"
 
 }
-extracting_data(){
+apache_extracting_data(){
 
 	file="$1"
 
@@ -137,9 +137,9 @@ extracting_data(){
 	#extracting suspicious activities
 
 	echo -e "\n\n[SUSPICIOUS ACTIVITY]"
-	activites "$file" "$ips"
+	apache_activites "$file" "$ips"
 }
-activites(){
+apache_activites(){
 
 	file="$1"
 	all_ips="$2"
@@ -199,6 +199,8 @@ run_ssh(){
 
 	start_time=$(date +%s%N)
 
+	ssh_extractions "$1"
+
 	end_time=$(date +%s%N)
 
         elapsed=$(( end_time - start_time ))
@@ -210,6 +212,14 @@ run_ssh(){
         printf "[*] %-12s : %ss\n" "Time" "$in_sec"
         printf "====================================\n"
 
+}
+ssh_extractions(){
+
+	file="$1"
+	echo "[FAILED LOGINS]"
+
+	account=$(cat "$file" | grep -Eio 'failed.*root|failed.*admin|failed.*user|failed.*ubuntu' | sort | uniq -c | awk '{printf "%-10s %s\n", $1, $5}' | sort -nr)
+	echo "$account"
 }
 while getopts ":f:t:" opts
 do
