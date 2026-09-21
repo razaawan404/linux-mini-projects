@@ -80,6 +80,12 @@ run_apache(){
 
 
 	extracting_data "$file"
+	uniq_ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq | wc -l)
+
+	printf "\n====================================\n"
+	printf "[*] %-10s : %s\n" "Total lines" "$lines"
+	printf "[*] %-10s : %s\n" "Unique Ips" "$uniq_ips" 
+
 }
 extracting_data(){
 
@@ -150,6 +156,7 @@ activites(){
 
 	wp_count=$(cat "$file" | grep -Ec '/wp-admin')
 	printf "[!] %-15s → %s\n" "/wp-admin" "accessed $wp_count times — times — WordPress attack"
+
 }
 run_ssh(){
 
@@ -160,8 +167,8 @@ run_ssh(){
         _date=$(date +"%Y-%m-%d %H:%M")
 
 	printf "==================================\n"
-        printf "%2s %-10s : %s\n" " " "File" "$file"
-        printf "%2s %-10s : %s\n" " " "Type" "$type"
+        printf "%2s %-10s : %s\n" " " "File"  "$file"
+        printf "%2s %-10s : %s\n" " " "Type"  "$type"
         printf "%2s %-10s : %s\n" " " "Lines" "$lines"
         printf "%2s %-10s : %s\n" " " "Date"  "$_date"
         printf "==================================\n\n"
