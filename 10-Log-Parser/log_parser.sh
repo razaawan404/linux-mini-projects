@@ -78,13 +78,22 @@ run_apache(){
 	printf "%2s %-10s : %s\n" " " "Date"  "$_date"
 	printf "==================================\n\n"
 
+	start_time=$(date +%s%N)
 
 	extracting_data "$file"
 	uniq_ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq | wc -l)
 
+	end_time=$(date +%s%N)
+
+	elapsed=$(( end_time - start_time ))
+#	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+	in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
 	printf "\n====================================\n"
-	printf "[*] %-10s : %s\n" "Total lines" "$lines"
-	printf "[*] %-10s : %s\n" "Unique Ips" "$uniq_ips" 
+	printf "[*] %-12s : %s\n" "Total lines" "$lines"
+	printf "[*] %-12s : %s\n" "Unique Ips" "$uniq_ips"
+	printf "[*] %-12s : %ss\n" "Time" "$in_sec"
+	printf "====================================\n"
 
 }
 extracting_data(){
@@ -97,11 +106,21 @@ extracting_data(){
 	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | sort | uniq -c)
 	echo "$ips" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
 
+	if [[ -z "$ips" ]]; then
+
+		echo "[!] NO DATA FOUND"
+	fi
+
 	#extracting status
 
 	echo -e "\n\n[STATUS CODES]"
 	status_codes=$(cat "$file" | grep -Eo '(200|201|204|301|302|304|400|401|403|404|405|429|500|502|503|504)' | sort | uniq -c)
 	echo "$status_codes" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}'
+
+	if [[ -z "$status_codes" ]]; then
+
+		echo "[!] NO DATA FOUND"
+	fi
 
 	#extracting endpoints
 
@@ -109,6 +128,11 @@ extracting_data(){
 	endpoints=$(cat "$file" | grep -Eo '(GET|POST|PUT|DELETE|PATCH|HEAD|OPTIONS) /[^ ]+' | awk '{print $2}' | sort -n | uniq -c)
 
 	echo "$endpoints" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
+
+	if [[ -z "$endpoints" ]]; then
+
+		echo "[!] NO DATA FOUND"
+	fi
 
 	#extracting suspicious activities
 
@@ -172,6 +196,20 @@ run_ssh(){
         printf "%2s %-10s : %s\n" " " "Lines" "$lines"
         printf "%2s %-10s : %s\n" " " "Date"  "$_date"
         printf "==================================\n\n"
+
+	start_time=$(date +%s%N)
+
+	end_time=$(date +%s%N)
+
+        elapsed=$(( end_time - start_time ))
+        in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+        printf "\n====================================\n"
+        printf "[*] %-12s : %s\n" "Total lines" "$lines"
+        printf "[*] %-12s : %s\n" "Unique Ips" "$uniq_ips"
+        printf "[*] %-12s : %ss\n" "Time" "$in_sec"
+        printf "====================================\n"
+
 }
 while getopts ":f:t:" opts
 do
