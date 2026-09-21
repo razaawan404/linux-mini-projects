@@ -226,6 +226,10 @@ ssh_extractions(){
 	echo -e "\n[TOP ATTACKER IPs]"
 	most_rep_ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort -n | uniq -c | sort -nr | head -n 3 | awk '{printf "%-7s %s\n", $1, $2}')
 	echo "$most_rep_ips"
+
+	#successful login
+	success_data=$(cat "$file" | grep -Eoi 'accepted.*(password|publickey|login).*(user|root|ubuntu|guest|admin).*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq -c | sort -nr | head -n 5)
+	echo "$success" 
 }
 while getopts ":f:t:" opts
 do
