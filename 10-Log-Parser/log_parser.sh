@@ -239,6 +239,15 @@ ssh_extractions(){
 	else
 		 echo "[!] user: [NO DATA FOUND]"
 	fi
+
+	#failed attempts
+	echo -e "\nSUSPICIOUS ACTIVITY]"
+
+	sus_ips=$(grep -Eio 'failed.*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" |
+        sort | uniq -c | sort -n -r | head -n 1 |
+	awk '{printf "[!] %-7s → %s %s\n", $NF, $1, " failed attempts — targeted attack"}')
+	echo "$sus_ips"
+
 }
 while getopts ":f:t:" opts
 do
