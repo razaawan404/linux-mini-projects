@@ -103,7 +103,7 @@ apache_extracting_data(){
 	#extracting ips
 
 	echo "[TOP 5 IPs]"
-	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]' | sort | uniq -c)
+	ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq -c)
 	echo "$ips" | sort -n -r | awk '{printf "%1s %-7s %s\n", " ", $1, $2}' | head -n 5
 
 	if [[ -z "$ips" ]]; then
@@ -159,7 +159,7 @@ apache_activites(){
 		if [[ "$line" == *"/admin"* ]]; then
 
 
-			ip=$(echo "$line" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+[0-9]+')
+			ip=$(echo "$line" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+')
 			ips+=("$ip")
 		fi
 	done < "$file"
@@ -167,8 +167,9 @@ apache_activites(){
 
 	most_repeated_ip=$(printf '%s\n' "${ips[@]}" | sort | uniq -c | awk '{print $1, $2}' | sort -n -r | head -n 1)
 	count=$(echo "$most_repeated_ip" | awk '{print $1}')
+	ip_only=$(echo "$most_repeated_ip" | awk '{print $2}')
 
-	printf "[!] %-15s → %s\n" "$most_repeated_ip" "$count requests to /admin — brute force suspected"
+	printf "[!] %-15s → %s\n" "$ip_only" "$count requests to /admin — brute force suspected"
 
 
 	#Accessed count of ./env
@@ -205,6 +206,9 @@ run_ssh(){
 
         elapsed=$(( end_time - start_time ))
         in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+	#calculating unique ip
+	uniq_ips=$(grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" | sort -u | wc -l)
 
         printf "\n====================================\n"
         printf "[*] %-12s : %s\n" "Total lines" "$lines"
@@ -243,7 +247,7 @@ ssh_extractions(){
 	fi
 
 	#failed attempts
-	echo -e "\nSUSPICIOUS ACTIVITY]"
+	echo -e "\n[SUSPICIOUS ACTIVITY]"
 
 	sus_ips=$(grep -Eio 'failed.*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" |
         sort | uniq -c | sort -n -r | head -n 1 |
