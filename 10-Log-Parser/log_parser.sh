@@ -228,8 +228,20 @@ ssh_extractions(){
 	echo "$most_rep_ips"
 
 	#successful login
-	success_data=$(cat "$file" | grep -Eoi 'accepted.*(password|publickey|login).*(user|root|ubuntu|guest|admin).*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort | uniq -c | sort -nr | head -n 5)
-	echo "$success" 
+	echo -e "\n[SUCCESSFUL LOGINS]"
+	success_data=$(grep -Eoi 'accepted.*(password|publickey|login).*(user|root|ubuntu|guest|admin).*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" | 
+		       sort      |
+		       uniq -c   |
+		       sort -nr  |
+		       head -n 5 |
+		       awk '{printf "[+] user: %-6s %s %s\n", $5, $6, $7}')
+
+	if [[ ! -z "$success_data" ]]; then
+
+		 echo "$success_data"
+	else
+		 echo "[!] user: [NO DATA FOUND]"
+	fi
 }
 while getopts ":f:t:" opts
 do
