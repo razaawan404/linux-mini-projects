@@ -230,11 +230,8 @@ ssh_extractions(){
 	#successful login
 	echo -e "\n[SUCCESSFUL LOGINS]"
 	success_data=$(grep -Eoi 'accepted.*(password|publickey|login).*(user|root|ubuntu|guest|admin).*[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" | 
-		       sort      |
-		       uniq -c   |
-		       sort -nr  |
-		       head -n 5 |
-		       awk '{printf "[+] user: %-6s %s %s\n", $5, $6, $7}')
+		       awk '{printf "[+] user: %-6s %s %s\n", $4, $5, $6}' |
+		       awk '!seen[$3]++')
 
 	if [[ ! -z "$success_data" ]]; then
 
