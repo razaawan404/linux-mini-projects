@@ -219,12 +219,14 @@ ssh_extractions(){
 
 	#failed login for every user
 	echo -e "\n[FAILED LOGINS]"
-	account=$(cat "$file" | grep -Eio 'failed.*root|failed.*admin|failed.*user|failed.*ubuntu' | sort | uniq -c | awk '{printf "%-7s %s\n", $1, $5}' | sort -nr)
+	account=$(grep -Eio 'failed.*root|failed.*admin|failed.*user|failed.*ubuntu' "$file" | 
+		  sort | uniq -c | awk '{printf "%-7s %s\n", $1, $5}' | sort -nr)
 	echo "$account"
 
 	#most repeated ip
 	echo -e "\n[TOP ATTACKER IPs]"
-	most_rep_ips=$(cat "$file" | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | sort -n | uniq -c | sort -nr | head -n 3 | awk '{printf "%-7s %s\n", $1, $2}')
+	most_rep_ips=$(grep -Eo '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' "$file" |
+		      sort -n | uniq -c | sort -nr | head -n 3 | awk '{printf "%-7s %s\n", $1, $2}')
 	echo "$most_rep_ips"
 
 	#successful login
