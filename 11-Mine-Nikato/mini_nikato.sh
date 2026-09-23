@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
 
-echo "Mini Nikato"
+while getopts ":u:" opts;
+do
+	case "$opts" in 
+		u)  url="$OPTARG"
+		;;
+	esac
+done
 
+echo "$url"
