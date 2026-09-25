@@ -21,12 +21,13 @@ main(){
 
 	url="$1"
 
-	if ! validation_url "$url"; then
+	if ! v_url=$(validation_url "$url"); then
 
-		echo "$url"
+		echo "$v_url"
+		return 1
 	fi
 
-	echo "$url"
+	echo "$v_url"
 }
 while getopts ":u:" opts;
 do
