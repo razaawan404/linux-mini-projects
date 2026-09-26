@@ -27,7 +27,20 @@ main(){
 		return 1
 	fi
 
-	echo "$v_url"
+	run "$v_url"
+}
+run(){
+
+	url="$1"
+
+	_date=$(date +"%Y-%m-%d %H-%M")
+
+	printf "\n=========================================\n\n"
+	printf "%7s %s\n" " " "Mine Nikato"
+	printf "%7s %-7s : %s\n" " " "Target" "$url"
+	printf "%7s %-7s : %s\n" " " "Date" "$_date"
+	printf "\n=========================================\n\n"
+
 }
 while getopts ":u:" opts;
 do
