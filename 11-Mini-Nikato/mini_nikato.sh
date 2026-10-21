@@ -45,6 +45,7 @@ run(){
        echo -e "[*] Starting scan..\n\n"
        server_info "$url"
 
+       expose_file "$url"
 }
 server_info(){
 
@@ -55,6 +56,12 @@ server_info(){
 	header=$(curl -sI "$url" |  grep -Ei 'server|powered-by' | awk -F: '{printf "[+] %-12s : %s\n", $1, $2}')
 
 	echo "$header" 
+}
+expose_file(){
+
+	url="$1"
+
+	
 }
 while getopts ":u:" opts;
 do
