@@ -52,7 +52,7 @@ server_info(){
 
 	echo "[SERVER INFO]"
 
-	header=$(curl -sI "$url")
+	header=$(curl -sI "$url" |  grep -Ei 'server|powered-by' | awk -F: '{printf "[+] %-12s : %s\n", $1, $2}')
 
 	echo "$header" 
 }
