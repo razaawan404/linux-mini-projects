@@ -76,6 +76,16 @@ expose_file(){
 			elif [[ "$paths" =~ backup\. ]]; then
 
 				printf "[HIGH] %-20s → %s backup file exposed\n" "$paths" "$status"
+
+			elif [[ "$paths" =~ /admin ]]; then
+
+				printf "[MED] %-20s → %s admin panel accessible\n" "$paths" "$status"
+
+			elif [[ "$path" =~ /php ]]; then
+
+				printf "[MED] %-20s → %s PHP info exposed" "$paths" "$status"
+			else
+				printf "[LOW] %-20s → %s found\n" "$paths" "$status"
 			fi
 		fi
 
