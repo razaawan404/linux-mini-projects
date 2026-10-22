@@ -61,7 +61,25 @@ expose_file(){
 
 	url="$1"
 
-	
+	echo -e "\n\n[EXPOSED FILES]"
+	while read -r paths;
+	do
+
+		status=$(curl -sI "$url$paths" | grep -Eo '200')
+
+		if [[ "$status" == 200 ]]; then
+
+			if [[ "$paths" =~ \.env ]]; then
+
+				printf "[HIGH] %-20s → %s sensitive file exposed\n" "$paths" "$status"
+
+			elif [[ "$paths" =~ backup\. ]]; then
+
+				printf "[HIGH] %-20s → %s backup file exposed\n" "$paths" "$status"
+			fi
+		fi
+
+	done < path_names.txt
 }
 while getopts ":u:" opts;
 do
@@ -72,3 +90,4 @@ do
 done
 
 main "$url"
+	
