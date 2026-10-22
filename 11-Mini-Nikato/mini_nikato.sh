@@ -71,21 +71,21 @@ expose_file(){
 
 			if [[ "$paths" =~ \.env ]]; then
 
-				printf "[HIGH] %-20s → %s sensitive file exposed\n" "$paths" "$status"
+				printf "%-7s %-20s → %s sensitive file exposed\n" "[HIGH]" "$paths" "$status"
 
 			elif [[ "$paths" =~ backup\. ]]; then
 
-				printf "[HIGH] %-20s → %s backup file exposed\n" "$paths" "$status"
+				printf "%-7s %-20s → %s backup file exposed\n" "[HIGH]" "$paths" "$status"
 
 			elif [[ "$paths" =~ /admin ]]; then
 
-				printf "[MED] %-20s → %s admin panel accessible\n" "$paths" "$status"
+				printf "%-7s %-20s → %s admin panel accessible\n" "[MED]" "$paths" "$status"
 
 			elif [[ "$path" =~ /php ]]; then
 
-				printf "[MED] %-20s → %s PHP info exposed" "$paths" "$status"
+				printf "%-7s %-20s → %s PHP info exposed" "[MED]" "$paths" "$status"
 			else
-				printf "[LOW] %-20s → %s found\n" "$paths" "$status"
+				printf "%-7s %-20s → %s found\n" "[LOW]" "$paths" "$status"
 			fi
 		fi
 
