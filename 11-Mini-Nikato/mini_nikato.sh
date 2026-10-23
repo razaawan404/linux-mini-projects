@@ -81,9 +81,9 @@ expose_file(){
 
 				printf "%-7s %-20s → %s admin panel accessible\n" "[MED]" "$paths" "$status"
 
-			elif [[ "$path" =~ /php ]]; then
+			elif [[ "$paths" =~ /php ]]; then
 
-				printf "%-7s %-20s → %s PHP info exposed" "[MED]" "$paths" "$status"
+				printf "%-7s %-20s → %s PHP info exposed\n" "[MED]" "$paths" "$status"
 			else
 				printf "%-7s %-20s → %s found\n" "[LOW]" "$paths" "$status"
 			fi
