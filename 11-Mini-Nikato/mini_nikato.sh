@@ -46,6 +46,8 @@ run(){
        server_info "$url"
 
        expose_file "$url"
+
+       collecting_dngrs_methods "$url"
 }
 server_info(){
 
@@ -90,6 +92,10 @@ expose_file(){
 		fi
 
 	done < path_names.txt
+}
+collecting_dngrs_methods(){
+
+	echo -e "\n\n[DANGEROUS METHODS]"
 }
 while getopts ":u:" opts;
 do
