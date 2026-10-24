@@ -95,7 +95,40 @@ expose_file(){
 }
 collecting_dngrs_methods(){
 
+	url="$1"
+
 	echo -e "\n\n[DANGEROUS METHODS]"
+
+	while read -r line;
+	do
+
+		put_method=$(curl -sI -X PUT "$url$line" | grep -Eo 200)
+		del_method=$(curl -sI -X DELETE "$url$line" | grep -Eo 200)
+		post_method=$(curl -sI -X POST "$url$line" | grep -Eo 200)
+		get_method=$(curl -sI -X GET "$url$line" | grep -Eo 200)
+		trace_method=$(curl -sI -X TRACE "$url$line" | grep -Eo 200)
+
+		if [[ ! -z "$put_method" ]]; then
+
+			printf "[!] %-7s %-20s → %s\n" "[HIGH" "PUT" "enabled — file upload possible"
+
+		elif [[ ! -z "$del_method" ]]; then
+
+			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "DELETE" "enabled — file deletion possible"
+
+		elif [[ ! -z "$post_method" ]]; then
+
+			printf "[!] %-7s %-20s → %s\n" "[HIGH" "POST" "enabled — file upload possible"
+
+		elif [[ ! -z "get_method" ]]; then
+
+			printf "[!] %-7s %-20s → %s\n" "[MED]" "GET" "enabled — file upload possible"
+		else
+
+			printf "[!] %-7s %-20s → %s\n" "[MED]" "TRACE" "enabled — XST attack possible"
+
+		fi
+	done < path_names.txt
 }
 while getopts ":u:" opts;
 do
@@ -106,4 +139,3 @@ do
 done
 
 main "$url"
-	
