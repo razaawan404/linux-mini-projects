@@ -110,7 +110,7 @@ collecting_dngrs_methods(){
 
 		if [[ ! -z "$put_method" ]]; then
 
-			printf "[!] %-7s %-20s → %s\n" "[HIGH" "PUT" "enabled — file upload possible"
+			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "PUT" "enabled — file upload possible"
 
 		elif [[ ! -z "$del_method" ]]; then
 
@@ -118,7 +118,7 @@ collecting_dngrs_methods(){
 
 		elif [[ ! -z "$post_method" ]]; then
 
-			printf "[!] %-7s %-20s → %s\n" "[HIGH" "POST" "enabled — file upload possible"
+			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "POST" "enabled — file upload possible"
 
 		elif [[ ! -z "get_method" ]]; then
 
