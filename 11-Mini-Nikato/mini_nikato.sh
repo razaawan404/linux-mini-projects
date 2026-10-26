@@ -48,6 +48,8 @@ run(){
        expose_file "$url"
 
        collecting_dngrs_methods "$url"
+
+       miss_config "$url"
 }
 server_info(){
 
@@ -129,6 +131,11 @@ collecting_dngrs_methods(){
 
 		fi
 	done < path_names.txt
+}
+miss_config(){
+
+	url="$1"
+	echo -e "\n\n[MISCONFIGS]"
 }
 while getopts ":u:" opts;
 do
