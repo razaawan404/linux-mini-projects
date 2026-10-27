@@ -132,10 +132,14 @@ collecting_dngrs_methods(){
 		fi
 	done < path_names.txt
 }
-miss_config(){
+final_report(){
 
-	url="$1"
-	echo -e "\n\n[MISCONFIGS]"
+
+	echo -e "\n=========================="
+
+
+
+	echo "=========================="
 }
 while getopts ":u:" opts;
 do
