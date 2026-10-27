@@ -49,7 +49,7 @@ run(){
 
        collecting_dngrs_methods "$url"
 
-       miss_config "$url"
+       final_report
 }
 server_info(){
 
@@ -137,7 +137,9 @@ final_report(){
 
 	echo -e "\n=========================="
 
-
+	printf "%-10s : %s\n" "[HIGH]" "" 
+	printf "%-10s : %s\n" "[MED]" ""
+	printf "%-10s : %s\n" "[LOW]" ""
 
 	echo "=========================="
 }
