@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+HIGHT_COUNT=0
+MED_COUNT=0
+LOW_COUNT=0
+
 validation_url(){
 
 	url="$1"
@@ -76,20 +80,25 @@ expose_file(){
 			if [[ "$paths" =~ \.env ]]; then
 
 				printf "%-7s %-20s → %s sensitive file exposed\n" "[HIGH]" "$paths" "$status"
+				((HIGH_COUNT += 1))
 
 			elif [[ "$paths" =~ backup\. ]]; then
 
 				printf "%-7s %-20s → %s backup file exposed\n" "[HIGH]" "$paths" "$status"
+				((HIGH_COUNT += 1))
 
 			elif [[ "$paths" =~ /admin ]]; then
 
 				printf "%-7s %-20s → %s admin panel accessible\n" "[MED]" "$paths" "$status"
+				((MED_COUNT += 1))
 
 			elif [[ "$paths" =~ /php ]]; then
 
 				printf "%-7s %-20s → %s PHP info exposed\n" "[MED]" "$paths" "$status"
+				((MED_COUNT += 1))
 			else
 				printf "%-7s %-20s → %s found\n" "[LOW]" "$paths" "$status"
+				((LOW_COUNT += 1))
 			fi
 		fi
 
@@ -113,22 +122,27 @@ collecting_dngrs_methods(){
 		if [[ ! -z "$put_method" ]]; then
 
 			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "PUT" "enabled — file upload possible"
+			((HIGH_COUNT += 1))
 
 		elif [[ ! -z "$del_method" ]]; then
 
 			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "DELETE" "enabled — file deletion possible"
+			((HIGH_COUNT += 1))
 
 		elif [[ ! -z "$post_method" ]]; then
 
 			printf "[!] %-7s %-20s → %s\n" "[HIGH]" "POST" "enabled — file upload possible"
+			((HIGH_COUNT += 1))
 
 		elif [[ ! -z "get_method" ]]; then
 
 			printf "[!] %-7s %-20s → %s\n" "[MED]" "GET" "enabled — file upload possible"
+			((MED_COUNT += 1))
+
 		else
 
 			printf "[!] %-7s %-20s → %s\n" "[MED]" "TRACE" "enabled — XST attack possible"
-
+			((MED_COUNT += 1))
 		fi
 	done < path_names.txt
 }
@@ -137,9 +151,9 @@ final_report(){
 
 	echo -e "\n=========================="
 
-	printf "%-10s : %s\n" "[HIGH]" "" 
-	printf "%-10s : %s\n" "[MED]" ""
-	printf "%-10s : %s\n" "[LOW]" ""
+	printf "%-10s : %s\n" "[HIGH]" "$HIGH_COUNT" 
+	printf "%-10s : %s\n" "[MED]" "$MED_COUNT"
+	printf "%-10s : %s\n" "[LOW]" "$LOW_COUNT"
 
 	echo "=========================="
 }
