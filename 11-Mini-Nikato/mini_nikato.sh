@@ -38,6 +38,7 @@ run(){
 	url="$1"
 
 	_date=$(date +"%Y-%m-%d %H-%M")
+	start=$(date +%s%N)
 
 	printf "\n============================================\n\n"
 	printf "%7s %s\n" " " "Mine Nikato"
@@ -53,7 +54,13 @@ run(){
 
        collecting_dngrs_methods "$url"
 
-       final_report
+       end=$(date +%s%N)
+
+       elapsed=$((end - start))
+
+       in_sec=$(awk "BEGIN {printf \"%.2f\", $elapsed / 1000000000}")
+
+       final_report "$in_sec"
 }
 server_info(){
 
@@ -148,13 +155,13 @@ collecting_dngrs_methods(){
 }
 final_report(){
 
-
+	_time="$1"
 	echo -e "\n=========================="
 
 	printf "%-10s : %s\n" "[HIGH]" "$HIGH_COUNT" 
 	printf "%-10s : %s\n" "[MED]" "$MED_COUNT"
 	printf "%-10s : %s\n" "[LOW]" "$LOW_COUNT"
-
+	printf "%-10s : %ss\n" "[*] Time" "$_time"
 	echo "=========================="
 }
 while getopts ":u:" opts;
