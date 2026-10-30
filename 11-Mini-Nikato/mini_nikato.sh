@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HIGHT_COUNT=0
+HIGH_COUNT=0
 MED_COUNT=0
 LOW_COUNT=0
 
