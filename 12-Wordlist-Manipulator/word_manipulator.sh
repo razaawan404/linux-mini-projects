@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 
+while getopts ":f:p:o" opts;
+do
 
-echo "Word Manipulator"
+	case "$opts" in
+
+		f) file="$OPTARG" ;;
+		p) ops="$OPTARG" ;;
+		o) output="$OPTARG" ;;
+	esac
+done
+
+
