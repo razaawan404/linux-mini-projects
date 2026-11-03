@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
 
+
+main(){
+
+	file="$1"
+	ops="$2"
+	output="$3"
+
+
+
+}
 while getopts ":f:p:o:" opts;
 do
 
@@ -11,6 +21,4 @@ do
 	esac
 done
 
-echo "$file"
-echo "${ops[@]}"
-echo "$output"
+main "$file" "$ops" "$output"
