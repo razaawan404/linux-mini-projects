@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
+validate_file(){
 
+}
+
+validate_ops(){
+
+
+}
+
+validate_output(){
+
+
+}
 main(){
 
 	file="$1"
