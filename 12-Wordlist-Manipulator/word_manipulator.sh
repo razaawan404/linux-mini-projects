@@ -2,16 +2,26 @@
 
 validate_file(){
 
+	file="$1"
+
+	if [[ -z "$file" ]]; then
+
+		echo "./word_manipulator.sh: option requires an argument -- f"
+		return 1
+	fi
+
+	echo "$file"
 }
 
 validate_ops(){
 
+	ops="$1"
 
 }
 
 validate_output(){
 
-
+	output="$1"
 }
 main(){
 
@@ -19,7 +29,9 @@ main(){
 	ops="$2"
 	output="$3"
 
+	if ! validate_file "$file";
 
+		 
 
 }
 while getopts ":f:p:o:" opts;
