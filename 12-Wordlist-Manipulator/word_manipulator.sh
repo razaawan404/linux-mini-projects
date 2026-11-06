@@ -8,6 +8,11 @@ validate_file(){
 
 		echo "./word_manipulator.sh: option requires an argument -- f"
 		return 1
+
+	elif [[ ! -f "$file" ]]; then
+
+		echo "Error! File not exist"
+		return 1
 	fi
 
 	echo "$file"
@@ -29,9 +34,12 @@ main(){
 	ops="$2"
 	output="$3"
 
-	if ! validate_file "$file";
+	if ! v_file=$(validate_file "$file"); then
 
-		 
+		echo "$v_file"
+		return 1
+	fi
+ 
 
 }
 while getopts ":f:p:o:" opts;
