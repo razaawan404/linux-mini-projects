@@ -52,7 +52,11 @@ main(){
 		echo "$v_file"
 		return 1
 	fi
- 
+
+	if ! v_ops=$(validate_ops "$ops"); then
+
+		echo "$v_ops"
+	fi 
 
 }
 while getopts ":f:p:o:" opts;
