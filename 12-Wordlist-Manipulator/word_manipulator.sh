@@ -22,6 +22,19 @@ validate_ops(){
 
 	ops="$1"
 
+	if [[ -z "$ops" ]]; then
+
+		echo "./word_manipulator.sh: option requires an argument -- ops or o p s"
+		return 1
+	fi
+
+	if [[ ! "$ops" =~ upper|lower|cap|reverse|leet|dedupe|prepend:*|append:*|length:*:* ]]; then
+
+		echo "Error: invalid demand for ops: (upper,lower,cap,reverse,leet,dedupe,prepend:x,append:x,lenght:min:max) are allowed"
+		return 1
+	fi 
+
+	echo "$ops" 
 }
 
 validate_output(){
