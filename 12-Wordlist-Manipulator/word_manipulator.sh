@@ -28,11 +28,17 @@ validate_ops(){
 		return 1
 	fi
 
-	if [[ ! "$ops" =~ upper|lower|cap|reverse|leet|dedupe|prepend:*|append:*|length:*:* ]]; then
+	case "$ops" in
 
-		echo "Error: invalid demand for ops: (upper,lower,cap,reverse,leet,dedupe,prepend:x,append:x,lenght:min:max) are allowed"
-		return 1
-	fi 
+		upper|lower|cap|reverse|leet|dedupe) ;;
+		prepend:*|append:*)                  ;;
+        	length:*:*)			     ;;
+		*)
+		 echo "Error: unknown operation '$op'"
+           	 return 1
+        ;;
+
+	esac
 
 	echo "$ops" 
 }
@@ -40,6 +46,8 @@ validate_ops(){
 validate_output(){
 
 	output="$1"
+
+	
 }
 main(){
 
@@ -56,7 +64,8 @@ main(){
 	if ! v_ops=$(validate_ops "$ops"); then
 
 		echo "$v_ops"
-	fi 
+		return 1
+	fi
 
 }
 while getopts ":f:p:o:" opts;
