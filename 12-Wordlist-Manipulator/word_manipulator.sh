@@ -18,29 +18,29 @@ validate_file(){
 	echo "$file"
 }
 
-validate_ops(){
+validate_proc(){
 
-	ops="$1"
+	proc="$1"
 
-	if [[ -z "$ops" ]]; then
+	if [[ -z "$proc" ]]; then
 
-		echo "./word_manipulator.sh: option requires an argument -- ops or o p s"
+		echo "./word_manipulator.sh: option requires an argument -- p"
 		return 1
 	fi
 
-	case "$ops" in
+	case "$proc" in
 
 		upper|lower|cap|reverse|leet|dedupe) ;;
 		prepend:*|append:*)                  ;;
         	length:*:*)			     ;;
 		*)
-		 echo "Error: unknown operation '$op'"
+		 echo "Error: unknown operation proc"
            	 return 1
         ;;
 
 	esac
 
-	echo "$ops" 
+	echo "$proc" 
 }
 
 validate_output(){
@@ -52,7 +52,7 @@ validate_output(){
 main(){
 
 	file="$1"
-	ops="$2"
+	proc="$2"
 	output="$3"
 
 	if ! v_file=$(validate_file "$file"); then
@@ -61,7 +61,7 @@ main(){
 		return 1
 	fi
 
-	if ! v_ops=$(validate_ops "$ops"); then
+	if ! v_proc=$(validate_proc "$proc"); then
 
 		echo "$v_ops"
 		return 1
