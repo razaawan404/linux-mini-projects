@@ -74,9 +74,10 @@ do
 	case "$opts" in
 
 		f) file="$OPTARG" ;;
-		p) ops+=("$OPTARG") ;;
+		p) proc+=("$OPTARG") ;;
 		o) output="$OPTARG" ;;
 	esac
 done
 
-main "$file" "$ops" "$output"
+echo "${proc[@]}"
+#main "$file" "$proc" "$output"
