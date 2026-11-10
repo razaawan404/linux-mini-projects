@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+OUTPUT_STATUS=0
+
 validate_file(){
 
 	file="$1"
@@ -43,12 +45,6 @@ validate_proc(){
 	echo "$proc" 
 }
 
-validate_output(){
-
-	output="$1"
-
-	
-}
 main(){
 
 	file="$1"
@@ -63,9 +59,17 @@ main(){
 
 	if ! v_proc=$(validate_proc "$proc"); then
 
-		echo "$v_ops"
+		echo "$v_proc"
 		return 1
 	fi
+
+
+	run "$v_file" "$v_proc"
+}
+run(){
+
+
+
 
 }
 while getopts ":f:p:o:" opts;
@@ -79,5 +83,10 @@ do
 	esac
 done
 
-echo "${proc[@]}"
-#main "$file" "$proc" "$output"
+if [[ ! -z "$o" ]]; then
+
+	OUTPUT_STATUS=1
+fi
+
+echo "$OUTPUT_STATUS"
+main "$file" "$proc" 
