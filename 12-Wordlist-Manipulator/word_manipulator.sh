@@ -68,7 +68,7 @@ main(){
 }
 run(){
 
-
+	"Its run method"
 
 
 }
@@ -83,7 +83,7 @@ do
 	esac
 done
 
-if [[ ! -z "$o" ]]; then
+if [[ ! -z "$output" ]]; then
 
 	OUTPUT_STATUS=1
 fi
