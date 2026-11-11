@@ -68,8 +68,14 @@ main(){
 }
 run(){
 
-	"Its run method"
-
+	printf "\n=================================\n"
+	printf "%-10s\n" "Wordlist Manipulator"
+	printf "%-10s :\n" "File"
+	printf "%-10s :\n" "Output"
+	printf "%-10s :\n" "Ops"
+	printf "%-10s :\n" "Words"
+	printf "%-10s :\n" "Date"
+	printf "\n=================================\n"
 
 }
 while getopts ":f:p:o:" opts;
