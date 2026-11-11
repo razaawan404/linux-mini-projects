@@ -69,14 +69,15 @@ main(){
 run(){
 
 	printf "\n=================================\n"
-	printf "%-10s\n" "Wordlist Manipulator"
-	printf "%-10s :\n" "File"
-	printf "%-10s :\n" "Output"
-	printf "%-10s :\n" "Ops"
-	printf "%-10s :\n" "Words"
-	printf "%-10s :\n" "Date"
+	printf "%5s %-10s\n" " " "Wordlist Manipulator"
+	printf "%5s %-10s :\n" " " "File"
+	printf "%5s %-10s :\n" " " "Output"
+	printf "%5s %-10s :\n" " " "Ops"
+	printf "%5s %-10s :\n" " " "Words"
+	printf "%5s %-10s :\n" " " "Date"
 	printf "\n=================================\n"
 
+	
 }
 while getopts ":f:p:o:" opts;
 do
