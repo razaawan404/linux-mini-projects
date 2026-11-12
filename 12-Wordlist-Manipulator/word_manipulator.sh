@@ -44,7 +44,19 @@ validate_proc(){
 
 	echo "$proc" 
 }
+validate_output(){
 
+	output="$1"
+
+	if [[ -z "$output" ]]; then
+
+		echo "./word_manipulator.sh: option requires an argument -- o"
+		return 1
+	else
+
+		$OUTPUT_STATUS=1
+	fi
+}
 main(){
 
 	file="$1"
@@ -63,16 +75,30 @@ main(){
 		return 1
 	fi
 
+	if ! v_o=$(validate_output "$output"); then
 
-	run "$v_file" "$v_proc"
+		echo "$v_o"
+		return 1
+	fi
+
+	if [[ "$OUTPUT_STATUS" -eq 1 ]]; then
+
+		run "$v_file" "$v_proc" "v_o"
+	else
+		run "$v_file" "$v_proce" "No Output"
+	fi
 }
 run(){
 
+	file="$1"
+	proc="$2"
+	output="$3"
+
 	printf "\n=================================\n"
 	printf "%5s %-10s\n" " " "Wordlist Manipulator"
-	printf "%5s %-10s :\n" " " "File"
-	printf "%5s %-10s :\n" " " "Output"
-	printf "%5s %-10s :\n" " " "Ops"
+	printf "%5s %-10s : %s\n" " " "File" "$file"
+	printf "%5s %-10s : %s\n" " " "Output" "$output"
+	printf "%5s %-10s :\n" " " "Ops" "$proc"
 	printf "%5s %-10s :\n" " " "Words"
 	printf "%5s %-10s :\n" " " "Date"
 	printf "\n=================================\n"
@@ -90,10 +116,4 @@ do
 	esac
 done
 
-if [[ ! -z "$output" ]]; then
-
-	OUTPUT_STATUS=1
-fi
-
-echo "$OUTPUT_STATUS"
-main "$file" "$proc" 
+main "$file" "$proc" "$proc"
