@@ -100,9 +100,9 @@ run(){
 	printf "%5s %-10s\n" " " "Wordlist Manipulator"
 	printf "%5s %-10s : %s\n" " " "File" "$file"
 	printf "%5s %-10s : %s\n" " " "Output" "$output"
-	printf "%5s %-10s :\n" " " "Ops" "$proc"
-	printf "%5s %-10s :\n" " " "Words"
-	printf "%5s %-10s :\n" " " "Date"
+	printf "%5s %-10s : %s\n" " " "Ops" "${proc[@]}"
+	printf "%5s %-10s : %s\n" " " "Words" "NAN"
+	printf "%5s %-10s : %s\n" " " "Date" "NAN"
 	printf "\n=================================\n"
 
 	
