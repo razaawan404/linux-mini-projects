@@ -52,10 +52,8 @@ validate_output(){
 
 		echo "./word_manipulator.sh: option requires an argument -- o"
 		return 1
-	else
-
-		$OUTPUT_STATUS=1
 	fi
+
 }
 main(){
 
@@ -79,8 +77,12 @@ main(){
 
 		echo "$v_o"
 		return 1
+	else
+
+		OUTPUT_STATUS=1
 	fi
 
+	echo "Output status: $OUTPUT_STATUS"
 	if [[ "$OUTPUT_STATUS" -eq 1 ]]; then
 
 		run "$v_file" "$v_proc" "v_o"
@@ -116,4 +118,4 @@ do
 	esac
 done
 
-main "$file" "$proc" "$proc"
+main "$file" "$proc" "$output"
