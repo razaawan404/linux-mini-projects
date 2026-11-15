@@ -22,28 +22,28 @@ validate_file(){
 
 validate_proc(){
 
-	proc="$1"
+	local proc=("$@")
 
-	if [[ -z "$proc" ]]; then
+	if [[ ${#proc[@]} -eq 0 || -z "${proc[0]}" ]]; then
 
 		echo "./word_manipulator.sh: option requires an argument -- p"
 		return 1
 	fi
 
-	if [[ "${proc[@]}" -eq 1 ]]; then
+#	if [[ "${proc[@]}" -eq 1 ]]; then
 
-		case "$proc" in
+#		case "$proc" in
 
-			upper|lower|cap|reverse|leet|dedupe) ;;
-			prepend:*|append:*)                  ;;
-        		length:*:*)			     ;;
-			*)
-		 	echo "Error: unknown operation proc"
-           	 	return 1
-        	;;
-		esac
+#			upper|lower|cap|reverse|leet|dedupe) ;;
+#			prepend:*|append:*)                  ;;
+ #       		length:*:*)			     ;;
+#			*)
+#		 	echo "Error: unknown operation proc"
+#           	 	return 1
+#       	;;
+#		esac
 
-	elif [[ "${proc[@]}" -gt 1 ]]; then
+#	elif [[ "${proc[@]}" -gt 1 ]]; then
 
 		for item in "${proc[@]}"; do
 
@@ -58,9 +58,9 @@ validate_proc(){
                 ;;
                 esac
 		done
-	fi
+#	fi
 
-	echo "$proc" 
+	echo "${proc[@]}" 
 }
 validate_output(){
 
@@ -103,7 +103,7 @@ main(){
 	echo "Output status: $OUTPUT_STATUS"
 	if [[ "$OUTPUT_STATUS" -eq 1 ]]; then
 
-		run "$v_file" "$v_proc" "v_o"
+		run "$v_file" "$v_proc" "$v_o"
 	else
 		run "$v_file" "$v_proce" "No Output"
 	fi
