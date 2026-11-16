@@ -114,12 +114,14 @@ run(){
 	proc="$2"
 	output="$3"
 
+	count=$(wc -l "$file" | awk '{print $1}')
+
 	printf "\n=================================\n"
 	printf "%5s %-10s\n" " " "Wordlist Manipulator"
 	printf "%5s %-10s : %s\n" " " "File" "$file"
 	printf "%5s %-10s : %s\n" " " "Output" "$output"
 	printf "%5s %-10s : %s\n" " " "Ops" "${proc[@]}"
-	printf "%5s %-10s : %s\n" " " "Words" "NAN"
+	printf "%5s %-10s : %s\n" " " "Words" "$count"
 	printf "%5s %-10s : %s\n" " " "Date" "NAN"
 	printf "\n=================================\n"
 
