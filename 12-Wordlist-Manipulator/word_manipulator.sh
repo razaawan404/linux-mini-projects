@@ -30,20 +30,20 @@ validate_proc(){
 		return 1
 	fi
 
-#	if [[ "${proc[@]}" -eq 1 ]]; then
+	if [[ ${#proc[@]} -eq 1 ]]; then
 
-#		case "$proc" in
+		case "$proc" in
 
-#			upper|lower|cap|reverse|leet|dedupe) ;;
-#			prepend:*|append:*)                  ;;
- #       		length:*:*)			     ;;
-#			*)
-#		 	echo "Error: unknown operation proc"
-#           	 	return 1
-#       	;;
-#		esac
+			upper|lower|cap|reverse|leet|dedupe) ;;
+			prepend:*|append:*)                  ;;
+        		length:*:*)			     ;;
+			*)
+		 	echo "Error: unknown operation proc"
+           	 	return 1
+       	;;
+		esac
 
-#	elif [[ "${proc[@]}" -gt 1 ]]; then
+	elif [[ ${#proc[@]} -gt 1 ]]; then
 
 		for item in "${proc[@]}"; do
 
@@ -58,7 +58,7 @@ validate_proc(){
                 ;;
                 esac
 		done
-#	fi
+	fi
 
 	echo "${proc[@]}" 
 }
