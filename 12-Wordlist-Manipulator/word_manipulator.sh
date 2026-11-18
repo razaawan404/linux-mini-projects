@@ -74,40 +74,38 @@ validate_output(){
 
 }
 main(){
-
-	file="$1"
-	proc="$2"
-	output="$3"
+	local file="$1"
+	local output="$2"
+	shift 2
+	local proc=("$@")
 
 	if ! v_file=$(validate_file "$file"); then
-
 		echo "$v_file"
 		return 1
 	fi
 
-	if ! v_proc=$(validate_proc "$proc"); then
-
+	# Fix 1: Pass the full array using "${proc[@]}"
+	if ! v_proc=$(validate_proc "${proc[@]}"); then
 		echo "$v_proc"
 		return 1
 	fi
 
-	if ! v_o=$(validate_output "$output"); then
-
-		echo "$v_o"
-		return 1
-	else
-
+	# Fix 2: Set OUTPUT_STATUS without exiting early if output is optional
+	if v_o=$(validate_output "$output"); then
 		OUTPUT_STATUS=1
+	else
+		OUTPUT_STATUS=0
 	fi
 
 	echo "Output status: $OUTPUT_STATUS"
 	if [[ "$OUTPUT_STATUS" -eq 1 ]]; then
-
 		run "$v_file" "$v_proc" "$v_o"
 	else
-		run "$v_file" "$v_proce" "No Output"
+		# Fix 3: Corrected typo from $v_proce to $v_proc
+		run "$v_file" "$v_proc" "No Output"
 	fi
 }
+
 run(){
 
 	file="$1"
@@ -138,4 +136,4 @@ do
 	esac
 done
 
-main "$file" "$proc" "$output"
+main "$file" "$output" "${proc[@]}"
