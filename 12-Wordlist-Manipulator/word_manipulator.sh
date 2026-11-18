@@ -19,49 +19,31 @@ validate_file(){
 
 	echo "$file"
 }
-
 validate_proc(){
-
 	local proc=("$@")
 
 	if [[ ${#proc[@]} -eq 0 || -z "${proc[0]}" ]]; then
-
 		echo "./word_manipulator.sh: option requires an argument -- p"
 		return 1
 	fi
 
-	if [[ ${#proc[@]} -eq 1 ]]; then
-
-		case "$proc" in
-
+	# A single loop handles 1 item or multiple items
+	for item in "${proc[@]}"; do
+		case "$item" in
 			upper|lower|cap|reverse|leet|dedupe) ;;
 			prepend:*|append:*)                  ;;
-        		length:*:*)			     ;;
+			length:*:*)                          ;;
 			*)
-		 	echo "Error: unknown operation proc"
-           	 	return 1
-       	;;
+				echo "Error: unknown operation proc: $item"
+				return 1
+				;;
 		esac
+	done
 
-	elif [[ ${#proc[@]} -gt 1 ]]; then
-
-		for item in "${proc[@]}"; do
-
-			case "$item" in
-
-                        upper|lower|cap|reverse|leet|dedupe) ;;
-                        prepend:*|append:*)                  ;;
-                        length:*:*)                          ;;
-                        *)
-                        echo "Error: unknown operation proc"
-                        return 1
-                ;;
-                esac
-		done
-	fi
-
-	echo "${proc[@]}" 
+	# Print each element on its own line so spaces inside items don't break
+	printf "%s\n" "${proc[@]}"
 }
+
 validate_output(){
 
 	output="$1"
