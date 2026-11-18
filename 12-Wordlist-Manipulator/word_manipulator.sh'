@@ -60,7 +60,7 @@ main(){
 	fi 
 
 }
-while getopts ":f:p:o:" opts;
+while getopts ":f:p:o" opts;
 do
 
 	case "$opts" in

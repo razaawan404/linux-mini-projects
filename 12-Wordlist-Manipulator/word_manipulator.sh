@@ -20,15 +20,29 @@ validate_file(){
 	echo "$file"
 }
 validate_proc(){
-	local proc=("$@")
+	local raw_proc=("$@")
+	local expanded_proc=()
 
-	if [[ ${#proc[@]} -eq 0 || -z "${proc[0]}" ]]; then
+	if [[ ${#raw_proc[@]} -eq 0 || -z "${raw_proc}" ]]; then
 		echo "./word_manipulator.sh: option requires an argument -- p"
 		return 1
 	fi
 
-	# A single loop handles 1 item or multiple items
-	for item in "${proc[@]}"; do
+	# Split any comma-separated items into individual elements
+	for raw_item in "${raw_proc[@]}"; do
+		IFS=',' read -ra split_items <<< "$raw_item"
+		for item in "${split_items[@]}"; do
+			# Catch trailing/double commas like "lower,,upper"
+			if [[ -z "$item" ]]; then
+				echo "Error: empty operation in -p"
+				return 1
+			fi
+			expanded_proc+=("$item")
+		done
+	done
+
+	# Validate every individual operation
+	for item in "${expanded_proc[@]}"; do
 		case "$item" in
 			upper|lower|cap|reverse|leet|dedupe) ;;
 			prepend:*|append:*)                  ;;
@@ -40,13 +54,14 @@ validate_proc(){
 		esac
 	done
 
-	# Print each element on its own line so spaces inside items don't break
-	printf "%s\n" "${proc[@]}"
+	# Print each validated operation on its own line
+	printf -v ops_str "%s," "${expanded_proc[@]}"
+	echo "${ops_str%,}"
 }
 
 validate_output(){
 
-	output="$1"
+	local output="$1"
 
 	if [[ -z "$output" ]]; then
 
@@ -77,6 +92,8 @@ main(){
 		OUTPUT_STATUS=1
 	else
 		OUTPUT_STATUS=0
+		echo "$v_o"
+		return 1
 	fi
 
 	echo "Output status: $OUTPUT_STATUS"
