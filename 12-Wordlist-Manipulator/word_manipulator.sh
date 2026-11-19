@@ -74,6 +74,8 @@ validate_output(){
 		echo "Error: File already exist"
 		return 1
 	fi
+
+	echo "$output"
 }
 main(){
 	local file="$1"
