@@ -103,7 +103,7 @@ main(){
 		return 1
 	fi
 
-	echo "Output status: $OUTPUT_STATUS"
+#	echo "Output status: $OUTPUT_STATUS"
 	if [[ "$OUTPUT_STATUS" -eq 1 ]]; then
 		run "$v_file" "$v_proc" "$v_o"
 	else
@@ -127,7 +127,7 @@ run(){
 	printf "%5s %-10s : %s\n" " " "Ops" "${proc[@]}"
 	printf "%5s %-10s : %s\n" " " "Words" "$count"
 	printf "%5s %-10s : %s\n" " " "Date" "NAN"
-	printf "\n=================================\n"
+	printf "=================================\n"
 
 	
 }
