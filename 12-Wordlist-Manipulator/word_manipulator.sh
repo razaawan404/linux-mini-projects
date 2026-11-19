@@ -69,6 +69,11 @@ validate_output(){
 		return 1
 	fi
 
+	if [[ -f "$output" ]]; then
+
+		echo "Error: File already exist"
+		return 1
+	fi
 }
 main(){
 	local file="$1"
