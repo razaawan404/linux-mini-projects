@@ -119,6 +119,7 @@ run(){
 	output="$3"
 
 	count=$(wc -l "$file" | awk '{print $1}')
+	date_=$(date +%Y-%m-%d %H:%M)
 
 	printf "\n=================================\n"
 	printf "%5s %-10s\n" " " "Wordlist Manipulator"
@@ -126,10 +127,12 @@ run(){
 	printf "%5s %-10s : %s\n" " " "Output" "$output"
 	printf "%5s %-10s : %s\n" " " "Ops" "${proc[@]}"
 	printf "%5s %-10s : %s\n" " " "Words" "$count"
-	printf "%5s %-10s : %s\n" " " "Date" "NAN"
+	printf "%5s %-10s : %s\n" " " "Date" "$date_"
 	printf "=================================\n"
 
-	
+	printf "\n"
+	printf "[*] %s...\n" "Applying Operation"
+
 }
 while getopts ":f:p:o:" opts;
 do
