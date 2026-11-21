@@ -133,6 +133,14 @@ run(){
 	printf "\n"
 	printf "[*] %s...\n" "Applying Operation"
 
+	operations "$proc"
+}
+operations(){
+
+	ops="$1"
+
+	echo "Operations: $ops"
+
 }
 while getopts ":f:p:o:" opts;
 do
