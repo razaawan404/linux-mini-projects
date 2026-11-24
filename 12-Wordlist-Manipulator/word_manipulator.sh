@@ -154,6 +154,10 @@ operations(){
                 esac
         done
 
+	if [[ "${ops[@]}" == "upper" ]]; then
+
+		echo "[+] upper"
+	fi
 }
 while getopts ":f:p:o:" opts;
 do
