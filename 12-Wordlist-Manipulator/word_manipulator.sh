@@ -154,14 +154,6 @@ operations(){
                 esac
         done
 
-	if [[ "${ops[@]}" == "upper" ]]; then
-
-		echo "[+] upper"
-
-	elif [[ "${ops[@]}" == "lower" ]]; then
-
-		echo "[+] lower"
-	fi
 	
 }
 while getopts ":f:p:o:" opts;
