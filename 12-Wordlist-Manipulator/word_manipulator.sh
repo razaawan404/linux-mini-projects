@@ -142,16 +142,9 @@ operations(){
 	echo -e "\n"
 	echo "Operations: $ops"
 
-	        for item in "${expanded_proc[@]}"; do
-                case "$item" in
-                        upper|lower|cap|reverse|leet|dedupe) ;;
-                        prepend:*|append:*)                  ;;
-                        length:*:*)                          ;;
-                        *)
-                                echo "Error: unknown operation proc: $item"
-                                return 1
-                                ;;
-                esac
+	        for item in "${ops[@]}"; do
+
+			echo "$item"
         done
 
 	
